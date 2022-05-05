@@ -10,3 +10,9 @@ function listenToClick() {
         })
     })
 }
+
+function setup() {
+    listenToClick();
+}
+
+$(document).ready(setup)
