@@ -1,27 +1,61 @@
-const express = require('express')
-const app = express()
+const mysql = require("mysql");
+const express = require("express");
 
-var session = require("express-session")
+const app = express();
 
-const bodyparser = require("body-parser");
-app.use(bodyparser.urlencoded({
-  extended: true
-}));
+const connection = mysql.createConnection({
+  host:"localhost",
+  user:"root",
+  password:"yourpasswd",
+  database:"nodejs"
+});
 
-const cors = require('cors');
-app.use(cors())
+connection.connect(function(error){
+  if(error) throw error
+  else console.log("connected to the database successfully!")
+})
+
+app.get("/",function(req,res){
+  res.sendFile(_dirname + "/index.html");
+})
+
+app.post("/",function(req,res){
+  connection.query("select * from loginuser where user_name = ? and user_pass = ?",function(error,results,fields){
+    if(results.length> 0){
+      res.redirect("/welcome");
+    } else {
+      res.redirect("/");
+    }
+    res.end();
+  })
+})
+
+app.get("/welcome",function(req,res){
+  res.sendFile(__dirname + "/welcome.html")
+})
 
 app.listen(5005, function (err) {
-    if (err) console.log(err);
+  if (err) console.log(err);
 })
 
-app.use(express.static("../public"));
 
-app.post("/login", function (req, res) {
-    console.log("recieved1")
-    user_credential = {"username": req.body.name, "password": req.body.password}
-    res.send(user_credential)
-})
+//var session = require("express-session")
+
+//const bodyparser = require("body-parser");
+// app.use(bodyparser.urlencoded({
+//   extended: true
+// }));
+
+// const cors = require('cors');
+// app.use(cors())
+
+// app.use(express.static("../public"));
+
+// app.post("/login", function (req, res) {
+//     console.log("recieved1")
+//     user_credential = {"username": req.body.name, "password": req.body.password}
+//     res.send(user_credential)
+// })
 
 // app.get('/', function (req, res) {
 //     if (req.session.authenticated) {
