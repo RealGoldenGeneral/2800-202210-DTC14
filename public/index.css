@@ -1,0 +1,177 @@
+#home_img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+
+#login_form{
+    text-align: center;
+}
+
+#username{
+    width: 15%;
+}
+
+#password{
+    width: 15%;
+
+}
+
+.login_button{
+    top: 40px;
+    width: 150px
+}
+
+.signUp_button{
+    top: 40px;
+    width: 150px;
+}
+
+.login_button{
+      appearance: none;
+      background-color: #2ea44f;
+      border: 1px solid rgba(27, 31, 35, .15);
+      border-radius: 6px;
+      box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+      box-sizing: border-box;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      padding: 6px 16px;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+
+
+.login_button:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.login_button:hover {
+  background-color: #2c974b;
+}
+
+.login_button:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.login_button:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.login_button:active {
+  background-color: #298e46;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
+    .signUp_button{
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+
+
+.signUp_button:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.signUp_button:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.signUp_button:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.signUp_button:focus {
+  outline: 1px transparent;
+}
+
+.signUp_button:before {
+  display: none;
+}
+
+.signUp_button:-webkit-details-marker {
+  display: none;
+}
+
+.fonts{
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    
+}
+
+body{
+    background-color: ghostwhite;
+}
+
+@media screen and (max-width: 600px) {
+    #home_img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    #username{
+        width: 43%;
+        margin-right: 43px;
+    }
+    
+    #password{
+        width: 43%;
+        margin-right: 40px;
+    }
+}
+
+
+
+
+    
+    
+   
