@@ -6,7 +6,7 @@ const app = express();
 const connection = mysql.createConnection({
   host:"localhost",
   user:"root",
-  password:"yourpasswd",
+  password:"",
   database:"nodejs"
 });
 
@@ -34,8 +34,35 @@ app.get("/welcome",function(req,res){
   res.sendFile(__dirname + "/welcome.html")
 })
 
+async function createDB() {
+  const connection = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    multipleStatements: true
+  })
+  const createDBandTables = await connection.query(`CREATE DATABASE IF NOT EXISTS nodejs;
+  use nodejs;
+  CREATE TABLE IF NOT EXISTS user
+  NameID int NOT NULL AUTO INCREMENT
+  name varchar(30)
+  password varchar(30)
+  PRIMARY KEY (NameID)`)
+
+  await connection.query(createDBandTables);
+
+  const [user_rows, user_fields] = await connection.query("SELECT * FROM user");
+
+  if (user_rows.length == 0) {
+    let sqlQuery = "INSERT INTO user (name, password) values ?"
+    let userRecord = [["Roy", "roypassword"]];
+    await connection.query(sqlQuery, [userRecord]);
+  }
+}
+
 app.listen(5005, function (err) {
   if (err) console.log(err);
+  else createDB();
 })
 
 
