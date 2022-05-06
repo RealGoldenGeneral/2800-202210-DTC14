@@ -1,8 +1,9 @@
 function listenToClick() {
+    console.log("loaded")
     $("#login").click(function() {
         $.ajax({
             type: "POST",
-            url: "./server/server.js",
+            url: "https://localhost:5005/login2",
             data: {
                 name: $("#username:text").val(),
                 password: $("#password:text").val()
@@ -10,3 +11,5 @@ function listenToClick() {
         })
     })
 }
+
+$(document).ready(listenToClick)

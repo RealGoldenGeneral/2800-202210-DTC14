@@ -3,25 +3,24 @@ const app = express()
 
 var session = require("express-session")
 
-app.use(session({
-    secret: "ssshhhhh",
-    saveUninitialized: true,
-    resave: true
-}))
+const bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({
+  extended: true
+}));
 
-users = {
-    "user1": "pass1",
-    "user2": "pass2"
-}
+const cors = require('cors');
+app.use(cors())
 
 app.listen(5005, function (err) {
     if (err) console.log(err);
 })
 
-// app.use(express.static("/index.html"));
+app.use(express.static("../public"));
 
-app.get("/login", function (req, res) {
-    res.sendFile(_dirname + "../index.html")
+app.post("/login", function (req, res) {
+    console.log("recieved1")
+    user_credential = {"username": req.body.name, "password": req.body.password}
+    res.send(user_credential)
 })
 
 // app.get('/', function (req, res) {
