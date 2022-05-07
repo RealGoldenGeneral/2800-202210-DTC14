@@ -1,33 +1,69 @@
-const mysql = require("mysql");
+// const mysql = require("mysql");
 const express = require("express");
-
 const app = express();
 
-const connection = mysql.createConnection({
-  host:"localhost",
-  user:"root",
-  password:"yourpasswd",
-  database:"nodejs"
-});
+const bodyparser = require("body-parser");
+app.use(bodyparser.urlencoded({
+  extended: true
+}));
 
-connection.connect(function(error){
-  if(error) throw error
-  else console.log("connected to the database successfully!")
-})
+const cors = require('cors');
+app.use(cors())
 
-app.get("/",function(req,res){
-  res.sendFile(_dirname + "/index.html");
-})
+// const cors = require('cors');
+// app.use(cors())
 
-app.post("/",function(req,res){
-  connection.query("select * from loginuser where user_name = ? and user_pass = ?",function(error,results,fields){
-    if(results.length> 0){
-      res.redirect("/welcome");
-    } else {
-      res.redirect("/");
+// const connection = mysql.createConnection({
+//   host:"localhost",
+//   user:"root",
+//   password:"yourpasswd",
+//   database:"nodejs"
+// });
+
+// connection.connect(function(error){
+//   if(error) throw error
+//   else console.log("connected to the database successfully!")
+// })
+
+app.use(express.static("./public"));
+
+function filter_password(data) {
+  return data.password
+}
+
+app.post("/login", function(req, res) {
+  console.log("post request recieved")
+  console.log(req.body.name, req.body.password)
+  username = req.body.name
+  pass = req.body.password
+  // const user = new userModel({
+  //   name: req.body.name,
+  //   password: req.body.password
+  // })
+  // user.save(function(err, user) {
+  //   if (err) {
+  //     console.log(err)
+  //   }else {
+  //     console.log("welcome back", user.name)
+  //     console.log(user)
+  //   }
+  // })
+  userModel.find({name: username}, function(err, user) {
+    console.log(`entered: ${pass}, in db: ${user}`)
+    var full_info = user
+    if (err) {
+      console.log(err)
+    }else {
+      user = user.map(filter_password)
+      console.log(user[0])
+      if (req.body.password == user[0]) {
+        res.send(full_info)
+      }else {
+        res.send("incorrect information")
+      }
     }
-    res.end();
   })
+  // res.send({"stuff": username, "stuff2": pass})
 })
 
 app.get("/welcome",function(req,res){
@@ -38,6 +74,15 @@ app.listen(5005, function (err) {
   if (err) console.log(err);
 })
 
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
+ {useNewUrlParser: true, useUnifiedTopology: true});
+const userSchema = new mongoose.Schema({
+    name: String,
+    password: String,
+});
+const userModel = mongoose.model("users", userSchema);
 
 //var session = require("express-session")
 

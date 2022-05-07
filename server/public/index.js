@@ -3,14 +3,13 @@ function process_response(data) {
 }
 
 function listenToClick() {
-    console.log("loaded")
     $("#login").click(function() {
         $.ajax({
             type: "POST",
-            url: "https://localhost:5005/",
+            url: "http://localhost:5005/login",
             data: {
-                name: $("#username:text").val(),
-                password: $("#password:text").val()
+                name: $("#username").val(),
+                password: $("#password").val()
             },
             success: process_response
         })
