@@ -1,3 +1,7 @@
+function hide_error_message() {
+    $("#incorrect-login").hide()
+}
+
 function process_response(data) {
     $("#incorrect-login").hide()
     console.log(data)
@@ -5,6 +9,7 @@ function process_response(data) {
         location.href = "http://localhost:5005/welcome"
     } else {
         $("#incorrect-login").show()
+        setTimeout(hide_error_message, 3000)
     }
 }
 
