@@ -11,6 +11,7 @@ app.use(cors())
 
 app.use(express.static("./public"));
 app.use('/css', express.static("./css"))
+app.use('/js', express.static("./js"))
 
 function filter_password(data) {
   return data.password
