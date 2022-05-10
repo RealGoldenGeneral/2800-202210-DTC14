@@ -25,6 +25,7 @@ Images used for our projects
 
 ## References (Code Snippets)
 Code snippets used and found online or from previous assignments
+* [Highlighting the current tab](https://www.w3schools.com/howto/howto_js_tabs.asp)
 
 
 ## Content
