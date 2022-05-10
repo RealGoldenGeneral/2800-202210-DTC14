@@ -2,7 +2,7 @@ function process_response(data) {
     console.log(data)
 }
 
-// This code snippet was a portion the W3Schools Horizontal Tabs How-To
+// This code snippet was a portion from the W3Schools Horizontal Tabs How-To.
 // Adds a class (the class is defined the index.css under the navbar section) 
 // that will change the background colour to give the effect of showing the current tab.
 // You can find it here: https://www.w3schools.com/howto/howto_js_tabs.asp
