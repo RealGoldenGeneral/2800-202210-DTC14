@@ -13,7 +13,6 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5vh;
     min-height:100vh;
     background:linear-gradient(-45deg,#2ea44f,#fff);
 }
@@ -35,6 +34,9 @@ body{
   grid-template-columns: 25% 25% 25% 25%;
   justify-items: center;
   background-color: rgb(202, 202, 202);
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
   width: 100%
 }
 
