@@ -37,6 +37,12 @@ function setup() {
     $("#quizToggle").click(() => {
         fillScoreboardQuiz();
     })
+
+    $("#submit").click(() => {
+        if ($("#search").val() == "Roy Cheng") {
+            fillScoreboardGame();
+        }
+    })
 }
 
 $(document).ready(setup)
