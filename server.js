@@ -41,6 +41,10 @@ app.get("/welcome",function(req,res){
   res.sendFile(__dirname + "/welcome.html")
 })
 
+app.get("/leaderboard", function (req, res){
+  res.sendFile(__dirname + "/leaderboard.html")
+})
+
 app.listen(5005, function (err) {
   if (err) console.log(err);
 })
