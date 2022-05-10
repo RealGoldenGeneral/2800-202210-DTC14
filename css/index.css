@@ -188,7 +188,7 @@ main {
 .real-news-container {
   background-color: rgb(163, 163, 163);
   width: 90%;
-  margin: 5% auto;
+  margin: 50px auto 0 auto;
   height: 90%;
   overflow: auto;
   border-radius: 20px;
