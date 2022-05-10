@@ -9,10 +9,19 @@
 
 <body>
     <header>
-
+        <h1 id="title">Scores</h1>
     </header>
     <div class="box">
-        <h3>Scores</h3>
+        <div id="selectOptions">
+            <div id="buttons">
+                <button type="button" id="gameToggle">Game</button>
+                <button type="button" id="quizToggle">Quiz</button>
+            </div>
+            <div id="searchUsername">
+                <label for="search">Search username:</label>
+                <input type="text" id="search" name="search" pattern="[A-Za-z0-9_-]" title="Username:">
+            </div>
+        </div>
         <div id="leaderboard">
 
         </div>
