@@ -4,6 +4,19 @@ function confirm_days_update(data) {
     console.log(data)
 }
 
+function update_days_in_collection(days_difference) {
+    $.ajax(
+        {
+            "url": `http://localhost:5005/updateDaysCollection`,
+            "type": "POST",
+            "success": confirm_days_update,
+            "data": {
+                "days_difference": days_difference
+            }
+        }
+    )
+}
+
 function determine_daily_update(data) {
     console.log(data[0])
     current_days = Math.floor(date.getTime() / 86400000)
