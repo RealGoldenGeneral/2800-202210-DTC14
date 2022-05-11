@@ -1,5 +1,9 @@
 const date = new Date()
 
+function confirm_article_insertion(data) {
+    console.log(data)
+}
+
 function confirm_days_update(data) {
     console.log(data)
 }
@@ -7,7 +11,7 @@ function confirm_days_update(data) {
 function update_days_in_collection(days_difference) {
     $.ajax(
         {
-            "url": `http://localhost:5005/updateDaysCollection`,
+            "url": `https://co-vention.herokuapp.com/updateDaysCollection`,
             "type": "POST",
             "success": confirm_days_update,
             "data": {
@@ -17,9 +21,41 @@ function update_days_in_collection(days_difference) {
     )
 }
 
+function process_news_response(data) {
+    for (i = 0; i < data.articles.length; i++) {
+        console.log(data.articles[i])
+        $.ajax(
+            {
+                "url": `https://co-vention.herokuapp.com/add_article`,
+                "type": "POST",
+                "data": {
+                    "title": data.articles[i].title,
+                    "url": data.articles[i].url,
+                    "img_url": data.articles[i].urlToImage,
+                    "description": data.articles[i].description,
+                    "content": data.articles[i].content
+                },
+                "success": confirm_article_insertion 
+            }
+        )
+    }
+}
+
+function get_daily_news() {
+    $.ajax(
+        {
+            "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=popularity&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
+            "type": "GET",
+            "success": process_news_response,
+        }
+    )
+}
+
 function determine_daily_update(data) {
     console.log(data[0])
     current_days = Math.floor(date.getTime() / 86400000)
+    console.log("exact days", date.getTime() / 86400000)
+    console.log("Current total days", current_days)
     if (current_days > data[0].days_since_1970) {
         days_difference = current_days - data[0].days_since_1970
         get_daily_news()
@@ -51,7 +87,7 @@ async function determine_new_day() {
     // )
     $.ajax(
         {
-            "url": `http://localhost:5005/day`,
+            "url": `https://co-vention.herokuapp.com/day`,
             "type": "GET",
             "success": determine_daily_update
         }

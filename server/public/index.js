@@ -6,7 +6,7 @@ function process_response(data) {
     $("#incorrect-login").hide()
     console.log(data)
     if (data != "incorrect information") {
-        location.href = "http://localhost:5005/welcome"
+        location.href = "https://co-vention.herokuapp.com/welcome"
     } else {
         $("#incorrect-login").show()
         setTimeout(hide_error_message, 3000)
@@ -18,7 +18,7 @@ function listenToClick() {
     $("#login").click(function() {
         $.ajax({
             type: "POST",
-            url: "http://localhost:5005/login",
+            url: "https://co-vention.herokuapp.com/login",
             data: {
                 name: $("#username").val(),
                 password: $("#password").val()
