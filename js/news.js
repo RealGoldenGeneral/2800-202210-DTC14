@@ -1,5 +1,8 @@
 const date = new Date()
 
+function confirm_article_insertion(data) {
+    console.log(data)
+}
 
 function confirm_days_update(data) {
     console.log(data)
@@ -16,6 +19,26 @@ function update_days_in_collection(days_difference) {
             }
         }
     )
+}
+
+function process_news_response(data) {
+    for (i = 0; i < data.articles.length; i++) {
+        console.log(data.articles[i])
+        $.ajax(
+            {
+                "url": `/add_article`,
+                "type": "POST",
+                "data": {
+                    "title": data.articles[i].title,
+                    "url": data.articles[i].url,
+                    "img_url": data.articles[i].urlToImage,
+                    "description": data.articles[i].description,
+                    "content": data.articles[i].content
+                },
+                "success": confirm_article_insertion 
+            }
+        )
+    }
 }
 
 function get_daily_news() {
