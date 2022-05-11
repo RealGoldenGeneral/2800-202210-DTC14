@@ -1,8 +1,3 @@
-function process_response(data) {
-    console.log(data)
-}
-
-
 // This code snippet was a portion the W3Schools Horizontal Tabs How-To
 // Adds a class (the class is defined the index.css under the navbar section) 
 // that will change the background colour to give the effect of showing the current tab.
@@ -13,6 +8,7 @@ function show_active_nav_item() {
     // Adds the class to the recently clicked navbar item
     $(this).addClass("active")
 }
+//
 
 function return_to_normal_position() {
     // Reset the y-position and box-shadow values back to their default
@@ -30,6 +26,21 @@ function show_click_effect() {
     setTimeout(return_to_normal_position, 150)
 }
 
+function hide_error_message() {
+    $("#incorrect-login").hide()
+}
+
+function process_response(data) {
+    $("#incorrect-login").hide()
+    console.log(data)
+    if (data != "incorrect information") {
+        location.href = "/welcome"
+    } else {
+        $("#incorrect-login").show()
+        setTimeout(hide_error_message, 3000)
+    }
+}
+
 function listenToClick() {
     console.log("loaded")
     $(".news-card").click(show_click_effect)
@@ -37,10 +48,10 @@ function listenToClick() {
     $("#login").click(function() {
         $.ajax({
             type: "POST",
-            url: "https://localhost:5005/",
+            url: "/login",
             data: {
-                name: $("#username:text").val(),
-                password: $("#password:text").val()
+                name: $("#username").val(),
+                password: $("#password").val()
             },
             success: process_response
         })
