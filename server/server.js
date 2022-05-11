@@ -70,6 +70,18 @@ app.get("/welcome",function(req,res){
   res.sendFile(__dirname + "/welcome.html")
 })
 
+app.get("/day", function(req, res) {
+  console.log("request recieved to get the days")
+  dayModel.find({}, function(err, total_days) {
+    if (err) {
+      console.log("Err" + err)
+    }else {
+      console.log("Data" + total_days)
+      res.json(total_days)
+    }
+  })
+})
+
 app.listen(5005, function (err) {
   if (err) console.log(err);
 })
@@ -83,6 +95,13 @@ const userSchema = new mongoose.Schema({
     password: String,
 });
 const userModel = mongoose.model("users", userSchema);
+
+mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
+ {useNewUrlParser: true, useUnifiedTopology: true});
+const daySchema = new mongoose.Schema({
+    days_since_1970: Number,
+});
+const dayModel = mongoose.model("days", daySchema);
 
 //var session = require("express-session")
 
