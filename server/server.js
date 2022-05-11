@@ -82,6 +82,18 @@ app.get("/day", function(req, res) {
   })
 })
 
+app.post("/updateDaysCollection", function(req, res) {
+  console.log(req.body.days_difference)
+  dayModel.updateOne({}, {$inc: {days_since_1970: req.body.days_difference}}, function(err, update) {
+    if (err) {
+      console.log("Err" + err)
+    }else {
+      console.log("Data" + update)
+      res.send("successful update")
+    }
+  })
+})
+
 app.listen(5005, function (err) {
   if (err) console.log(err);
 })
