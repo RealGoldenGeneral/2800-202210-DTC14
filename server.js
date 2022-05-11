@@ -16,6 +16,10 @@ function filter_password(data) {
   return data.password
 }
 
+app.get("/", function(req, res) {
+  res.sendFile(__dirname + "/index.html")
+})
+
 app.post("/login", function(req, res) {
   console.log("post request recieved")
   console.log(req.body.name, req.body.password)
