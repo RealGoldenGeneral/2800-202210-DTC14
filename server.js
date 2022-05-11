@@ -9,7 +9,6 @@ app.use(bodyparser.urlencoded({
 const cors = require('cors');
 app.use(cors())
 
-app.use(express.static("./public"));
 app.use('/css', express.static("./css"))
 app.use('/js', express.static("./js"))
 
