@@ -47,7 +47,7 @@ app.get("/leaderboard", function (req, res){
   res.sendFile(__dirname + "/leaderboard.html")
 })
 
-app.listen(5005, function (err) {
+app.listen(process.env.PORT || 5005, function (err) {
   if (err) console.log(err);
 })
 
