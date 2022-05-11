@@ -189,10 +189,12 @@ main {
 .real-news-container {
   background-color: rgb(163, 163, 163);
   width: 90%;
-  margin: 50px auto 0 auto;
+  margin: 30px auto 0 auto;
   height: 90%;
   overflow: auto;
   border-radius: 20px;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 /*  */
 
@@ -223,8 +225,9 @@ main {
   height: 100%;
 }
 
-.navbar > div {
-  /* padding-top: 15px; */
+.navbar a {
+  text-decoration: none;
+  color: black;
 }
 
 .navbar-item:hover {
@@ -254,6 +257,12 @@ from regular navbar background colour */
 @media screen and (max-width: 1200px) {
   .navbar-item {
     font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .real-news-container {
+    grid-template-columns: 100%;
   }
 }
 
