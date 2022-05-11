@@ -134,25 +134,24 @@ const userSchema = new mongoose.Schema({
     name: String,
     password: String,
 });
-const userModel = mongoose.model("users", userSchema);
 
-mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
- {useNewUrlParser: true, useUnifiedTopology: true});
 const daySchema = new mongoose.Schema({
     days_since_1970: Number,
 });
-const dayModel = mongoose.model("days", daySchema);
 
-mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
- {useNewUrlParser: true, useUnifiedTopology: true});
 const newsSchema = new mongoose.Schema({
-    title: String,
-    url: String,
-    img_url: String,
-    description: String,
-    content: String
+  title: String,
+  url: String,
+  img_url: String,
+  description: String,
+  content: String
 });
+
+const userModel = mongoose.model("users", userSchema);
+const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
+
+
 
 //var session = require("express-session")
 
