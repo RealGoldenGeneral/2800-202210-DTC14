@@ -1,3 +1,12 @@
+function redirect_to_page() {
+    if ($(this).attr("id") == "home-tab") {
+        location.href = "/welcome"
+    }
+    if ($(this).attr("id") == "news-tab") {
+        location.href = "/news"
+    }
+}
+
 // This code snippet was a portion the W3Schools Horizontal Tabs How-To
 // Adds a class (the class is defined the index.css under the navbar section) 
 // that will change the background colour to give the effect of showing the current tab.
@@ -44,6 +53,7 @@ function process_response(data) {
 function listenToClick() {
     console.log("loaded")
     $(".news-card").click(show_click_effect)
+    $(".navbar-item").click(redirect_to_page)
     $("body").on("click", ".navbar-item", show_active_nav_item)
     $("#login").click(function() {
         $.ajax({
