@@ -1,5 +1,22 @@
 const date = new Date()
 
+function confirm_days_update(data) {
+    console.log(data)
+}
+
+function determine_daily_update(data) {
+    console.log(data[0])
+    current_days = Math.floor(date.getTime() / 86400000)
+    if (current_days > data[0].days_since_1970) {
+        days_difference = current_days - data[0].days_since_1970
+        get_daily_news()
+        update_days_in_collection(days_difference)
+    }else {
+        console.log("24 hours have not passed yet")
+
+    }
+}
+
 async function determine_new_day() {
     // how to determine if a day has passed 
     // store the current amount of days in db so it can always be referenced
