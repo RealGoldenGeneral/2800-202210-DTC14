@@ -38,7 +38,7 @@ function listenToClick() {
     $("#login").click(function() {
         $.ajax({
             type: "POST",
-            url: "https://co-vention.herokuapp.com/login",
+            url: "/login",
             data: {
                 name: $("#username:text").val(),
                 password: $("#password:text").val()
