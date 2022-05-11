@@ -72,7 +72,7 @@ app.post("/login", function(req, res) {
 })
 
 app.get("/welcome", function(req, res) {
-  res.sendFile(__dirname + "/news.html")
+  res.sendFile(__dirname + "/welcome.html")
 })
 
 app.get("/day", function(req, res) {
