@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./index.css">
+    <title>Co-Vention</title>
+    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -17,7 +14,7 @@
                 <i class="fa-solid fa-arrow-left back-button"></i>
             </div>
             <div>
-                <h2>Welcome User</h2>
+                <h2>Latest News</h2>
             </div>
             <div>
                 <i class="fa-solid fa-bars profile-icon"></i>
@@ -35,36 +32,39 @@
                 </div>
             </div>
         </div>
-        <div style="background-color: rgb(221, 221, 221); height:100%; border-radius: 50px 50px 0 0;">
-            <p>Some random content</p>
+        <div class="news-container">
+            <div id="real-news-container">
+                <template id="news-article">
+                    <div class="news-card">
+                        <img src="./covention_logo.png" width="150px" height="100px">
+                        <h4>Title</h4>
+                    </div>
+                </template>
+            </div>
         </div>
         <div class="navbar">
-
             <div class="navbar-item" id="home-tab">
                 <i class="fa-solid fa-house"></i>
                 <p>Home</p>
             </div>
-
-            <div class="navbar-item" id="news-tab">
-                <i class="fa-solid fa-newspaper"></i>
+            <div class="navbar-item">
+                <i class="fa-solid fa-newspaper" id="news-tab"></i>
                 <p>News</p>
             </div>
-
-
-            <div class="navbar-item" id="scores-tab">
-                <i class="fa-solid fa-trophy"></i>
-                <p>Scores</p>
+            <div class="navbar-item">
+                <i class="fa-solid fa-trophy" id="scores-tab"></i>
+                <p>Scoreboard</p>
             </div>
-
-
             <div class="navbar-item">
                 <i class="fa-solid fa-user" id="profile-tab"></i>
                 <p>Profile</p>
             </div>
         </div>
     </main>
+    <!-- <img src="./img/covention_logov2.png" id="home_img"> -->
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./index.js"></script>
-<!-- <script src="./news.js"></script> -->
+<script src="./news.js"></script>
+
 </html>
