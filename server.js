@@ -146,7 +146,7 @@ app.post("/add_article", function(req, res) {
   })
 })
 
-app.listen(proess.env.PORT || 5000, function (err) {
+app.listen(process.env.PORT || 5005, function (err) {
   if (err)
       console.log(err);
 })
