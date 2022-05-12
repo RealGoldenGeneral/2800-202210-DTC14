@@ -35,7 +35,7 @@ function listenToClick() {
     console.log("loaded")
     $(".news-card").click(show_click_effect)
     $("body").on("click", ".navbar-item", show_active_nav_item)
-    $("#login").click(function() {
+    $(".login_button").click(function() {
         $.ajax({
             type: "POST",
             url: "/login",
