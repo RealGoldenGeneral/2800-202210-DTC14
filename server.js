@@ -35,7 +35,7 @@ app.post("/login", function(req, res) {
       user = user.map(filter_password)
       console.log(user[0])
       if (req.body.password == user[0]) {
-        res.send(full_info)
+        res.redirect('/welcome')
       }else {
         res.send("incorrect information")
       }
