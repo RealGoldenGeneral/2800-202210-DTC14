@@ -180,7 +180,7 @@ main {
 
 #full_menu {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   position: absolute;
   top: 7%;
   right: 0;
