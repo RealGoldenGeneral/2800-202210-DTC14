@@ -11,6 +11,7 @@ app.use(cors())
 
 app.use('/css', express.static("./css"))
 app.use('/js', express.static("./js"))
+app.use('/img', express.static("./img"))
 
 function filter_password(data) {
   return data.password
