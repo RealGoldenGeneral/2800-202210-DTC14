@@ -179,6 +179,8 @@ main {
  }
 
 #full_menu {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 7%;
   right: 0;
