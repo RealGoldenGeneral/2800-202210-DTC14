@@ -146,8 +146,9 @@ app.post("/add_article", function(req, res) {
   })
 })
 
-app.listen(5005, function (err) {
-  if (err) console.log(err);
+app.listen(proess.env.PORT || 5000, function (err) {
+  if (err)
+      console.log(err);
 })
 
 const mongoose = require('mongoose');
