@@ -1,5 +1,14 @@
 const date = new Date()
 
+function load_news_cards() {
+    // defining a template
+    template = document.getElementById("news-article");
+    for (i = 0; i < 10; i++) {
+        var clone = template.content.cloneNode(true);
+        document.getElementById("real-news-container").appendChild(clone)
+    }
+}
+
 function confirm_article_insertion(data) {
     console.log(data)
 }
@@ -97,6 +106,7 @@ async function determine_new_day() {
 
 function setup() {
     determine_new_day()
+    load_news_cards()
     // $("#news-tab").click(determine_new_day)
 }
 
