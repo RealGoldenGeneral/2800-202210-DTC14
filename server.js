@@ -7,6 +7,11 @@ app.use(bodyparser.urlencoded({
   extended: true
 }));
 
+var session = require('express-session')
+
+// To use the session middleware
+app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
+
 const cors = require('cors');
 app.use(cors())
 
@@ -59,12 +64,17 @@ app.post("/login", function(req, res) {
     var full_info = user
     if (err) {
       console.log(err)
-    }else {
+    }
+    else {
       user = user.map(filter_password)
       console.log(user[0])
       if (req.body.password == user[0]) {
-        res.send(full_info)
-      }else {
+        req.session.real_user = full_info
+        req.session.authenticated = true
+        res.send(req.session.real_user)
+      }
+      else {
+        req.session.authenticated = false
         res.send("incorrect information")
       }
     }
@@ -72,8 +82,18 @@ app.post("/login", function(req, res) {
   // res.send({"stuff": username, "stuff2": pass})
 })
 
+app.get("/signOut", function(req, res) {
+  req.session.authenticated = false
+  res.send("Signed out successfully!")
+})
+
 app.get("/welcome", function(req, res) {
-  res.sendFile(__dirname + "/welcome.html")
+  if (req.session.authenticated) {
+    res.sendFile(__dirname + "/welcome.html")
+  }
+  else {
+    res.redirect("/")
+  }
 })
 
 app.get("/news", function(req, res) {
@@ -85,7 +105,8 @@ app.get("/day", function(req, res) {
   dayModel.find({}, function(err, total_days) {
     if (err) {
       console.log("Err" + err)
-    }else {
+    }
+    else {
       console.log("Data" + total_days)
       res.json(total_days)
     }
@@ -97,7 +118,8 @@ app.post("/updateDaysCollection", function(req, res) {
   dayModel.updateOne({}, {$inc: {days_since_1970: req.body.days_difference}}, function(err, update) {
     if (err) {
       console.log("Err" + err)
-    }else {
+    }
+    else {
       console.log("Data" + update)
       res.send("successful update")
     }
@@ -116,7 +138,8 @@ app.post("/add_article", function(req, res) {
   article.save(function(err, article) {
     if (err) {
       console.log("Err" + err)
-    }else {
+    }
+    else {
       console.log("Data" + article)
       res.send("successfully added articles in collection")
     }

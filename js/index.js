@@ -1,3 +1,13 @@
+function show_full_menu() {
+    console.log($("#full_menu").css("display"))
+    if ($("#full_menu").css("display") == "none") {
+        $("#full_menu").css("display", "flex")
+    }
+    else {
+        $("#full_menu").css("display", "none")
+    }
+}
+
 function redirect_to_page() {
     if ($(this).attr("id") == "home-tab") {
         location.href = "/welcome"
@@ -35,6 +45,21 @@ function show_click_effect() {
     setTimeout(return_to_normal_position, 150)
 }
 
+function sign_out_confirmation(data) {
+    console.log(data)
+    location.href = "/welcome"
+}
+
+function sign_out_user() {
+    $.ajax(
+        {
+            "url": "/signOut",
+            "type": "GET",
+            "success": sign_out_confirmation
+        }
+    )
+}
+
 function hide_error_message() {
     $("#incorrect-login").hide()
 }
@@ -51,11 +76,13 @@ function process_response(data) {
 }
 
 function listenToClick() {
+    $("#sign_out").click(sign_out_user)
     $("#incorrect-login").hide()
     console.log("loaded")
     $("body").on("click", ".news-card", show_click_effect)
     $(".navbar-item").click(redirect_to_page)
     $("body").on("click", ".navbar-item", show_active_nav_item)
+    $(".profile-icon").click(show_full_menu)
     $("#login").click(function() {
         $.ajax({
             type: "POST",
@@ -69,4 +96,5 @@ function listenToClick() {
     })
 }
 
+$("#menu-content").hide()
 $(document).ready(listenToClick)
