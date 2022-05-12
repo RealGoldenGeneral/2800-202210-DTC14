@@ -1,12 +1,25 @@
 const express = require('express')
 const app = express()
-
+const mongoose = require("mongoose")
 var session = require("express-session")
 
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({
   extended: true
 }));
+
+const mongoose = require('mongoose')
+
+mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
+  UseNewURLParser: true, useUnifiedTopology:true});
+const userSchema = new mongoose.Schema({
+    _id: Object,
+    name: String,
+    email: String,
+    username: String,
+    phone: String
+})
+
 
 const cors = require('cors');
 app.use(cors())
