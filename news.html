@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./index.css">
+    <title>Co-Vention</title>
+    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main>
+        <div class="title">
+            <div>
+                <i class="fa-solid fa-arrow-left back-button"></i>
+            </div>
+            <div>
+                <h2>Latest News</h2>
+            </div>
+            <div>
+                <i class="fa-solid fa-bars profile-icon"></i>
+            </div>
+            <div id="full_menu">
+                <div id="sign_out">
+                    <div>
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign Out</span>
+                    </div>
+                </div>
+                <div id="settings">
+                    <div>
+                        <i class="fa-solid fa-gear"></i><span>Settings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="news-container">
+            <div id="real-news-container">
+                <template id="news-article">
+                    <div class="news-card">
+                        <img src="./covention_logo.png" width="150px" height="100px">
+                        <h4>Title</h4>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="navbar">
+            <div class="navbar-item" id="home-tab">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </div>
+            <div class="navbar-item">
+                <i class="fa-solid fa-newspaper" id="news-tab"></i>
+                <p>News</p>
+            </div>
+            <div class="navbar-item">
+                <i class="fa-solid fa-trophy" id="scores-tab"></i>
+                <p>Scoreboard</p>
+            </div>
+            <div class="navbar-item">
+                <i class="fa-solid fa-user" id="profile-tab"></i>
+                <p>Profile</p>
+            </div>
+        </div>
+    </main>
+    <!-- <img src="./img/covention_logov2.png" id="home_img"> -->
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="./index.js"></script>
+<script src="./news.js"></script>
+
+</html>
