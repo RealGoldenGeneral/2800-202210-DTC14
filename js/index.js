@@ -51,8 +51,9 @@ function process_response(data) {
 }
 
 function listenToClick() {
+    $("#incorrect-login").hide()
     console.log("loaded")
-    $(".news-card").click(show_click_effect)
+    $("body").on("click", ".news-card", show_click_effect)
     $(".navbar-item").click(redirect_to_page)
     $("body").on("click", ".navbar-item", show_active_nav_item)
     $("#login").click(function() {
