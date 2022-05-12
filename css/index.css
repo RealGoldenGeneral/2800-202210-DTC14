@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #home_img{
   display: block;
   margin-left: auto;
@@ -148,6 +149,28 @@ display: none;
 
 body{
   background-color: ghostwhite;
+=======
+/* Login Page */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Roboto',sans-serif;
+  outline: none;
+  border: none;
+}
+
+body{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  min-height:100vh;
+  background-color: #449372;
+  font-size: 100%;
+  /* background-color: #8dc1ac; */
+  /* background:linear-gradient(-45deg,#d7eee4,#449372); */
+>>>>>>> 0d6c091c734f769b407f284525a35daed82fa3ea
 }
 
 @media screen and (max-width: 600px) {
@@ -168,3 +191,283 @@ body{
       margin-right: 40px;
   }
 }
+<<<<<<< HEAD
+=======
+.design div:first-child{
+  width: 190px;
+  height: 90px;
+  border-radius:50px;
+  background:linear-gradient(-90deg,#7f379b,#ff6a85);
+  transform:rotate(45deg);
+  position:absolute;
+  top:-40px;
+  left:120px;
+}
+
+.design div:nth-child(2){
+  width: 450px;
+  height: 230px;
+  border-radius:200px;
+  background:linear-gradient(-90deg,#7f379b,#ff6a85);
+  transform:rotate(45deg);
+  position:absolute;
+  top:0;
+  left: -163px;
+  border: 25px solid #e2c4e0;
+}
+.design div:nth-child(3){
+  width:190px;
+  height:70px;
+  border-radius: 50px;
+  background:linear-gradient(-90deg,#7f379b,#ff92a6);
+  transform: rotate(45deg);
+  position:absolute;
+  bottom:70px;
+  left:-100px;
+}
+.design div:last-child{
+  width:190px;
+  height: 70px;
+  border-radius: 50px;
+  background:linear-gradient(-90deg,#7f379b,#ffa26c);
+  transform: rotate(45deg);
+  position:absolute;
+  bottom:-50px;
+  left:100px;
+}
+
+.form{
+  width:50%;
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 75px;
+}
+
+.form h2{
+  margin-bottom: 15px;
+}
+
+.input-field{
+  width:90.5%;
+  height: 40px;
+  border-radius: 5px;
+  margin:10px 0;
+  padding:15px;
+  font-size:1em;
+  color:#000;
+  background-color: #e2c4e0;
+}
+.input-field:placeholder{
+  color:#303030;
+}
+.btn{
+  width:60%;
+  height:40px;
+  background-color:#7f379b;
+  color:#fff;
+  letter-spacing: 1px;
+  font-size:1em;
+  margin-top:15px;
+  border-radius: 5px;
+}
+/*  */
+
+/* News Page */
+
+/* Whole Page: Applied to all HTML on news.html */
+main {
+  display: grid;
+  height: 100vh;
+  width: 100%;
+  grid-template-columns: 100%;
+  grid-template-rows: 15% 77% 8%;
+  align-items: center;
+  text-align: center;
+}
+/*  */
+
+/* Header Section */
+.title {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  height: 100%;
+}
+
+.title div:nth-child(1) {
+  justify-self: flex-start;
+  margin: 10px 0 0 10px;
+}
+
+.back-button {
+  font-size: xx-large;
+}
+
+.title div:nth-child(2) {
+  justify-self: flex-start;
+  align-self: flex-end;
+  padding-bottom: 20px;
+}
+
+.title div:nth-child(3) {
+  display: grid;
+  grid-template-areas: "profile"
+                       "menu";
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 50%;
+}
+/*  */
+
+/* Profile Icon  */
+.profile-icon {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+  justify-self: center;
+  align-self: center;
+  grid-area: profile;
+  border-radius: 360px;
+  margin: 20px 0 0 0;
+  /* background-color: rgb(208, 208, 208); */
+ }
+
+#full_menu {
+  position: absolute;
+  top: 7%;
+  right: 0;
+  width: 125px;
+  height: 80px;
+  background-color: rgb(90, 90, 90);
+  z-index: 1000;
+  justify-content: center;
+}
+
+/* #full_menu > div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+} */
+
+#menu-content > div {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#menu-content {
+  width: 100%;
+  margin: 0;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+#menu-content > div:hover {
+  background-color: rgb(216, 216, 216);
+  color: rgb(53, 53, 53);
+}
+/*  */
+
+/* Container for news articles */
+.news-container {
+  opacity: 80%;
+  height: 100%;
+  background-color: rgb(221, 221, 221);
+  border-radius: 40px 40px 0 0;
+}
+
+#real-news-container {
+  background-color: rgb(163, 163, 163);
+  width: 90%;
+  margin: 30px auto 0 auto;
+  height: 90%;
+  overflow: auto;
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+/*  */
+
+/* Card for news */
+.news-card {
+  padding: 20px;
+  height: 30vh;
+  width: 90%;
+  margin: 2% auto;
+  background-color: rgb(205, 205, 205);
+  border-radius: inherit;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+/*  */
+
+/*  */
+
+/* Navbar */
+.navbar-placeholder {
+  height: 100%;
+  /* background-color: #8dc1ac;; */
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  background-color: #8dc1ac;
+  height: 100%;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-item:hover {
+  background-color: #449372;
+}
+
+.navbar-item {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  align-items: center;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  font-size: 1em;
+  /* padding: ; */
+}
+
+/* The active class defined here to change background colour
+from regular navbar background colour */
+.navbar .navbar-item.active {
+  background-color: #449372;
+}
+/*  */
+
+/* Media Queries */
+@media screen and (max-width: 1200px) {
+  .navbar-item {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #real-news-container {
+    grid-template-columns: 100%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .navbar-item p {
+    display: none;
+  }
+}
+
+/*  */
+>>>>>>> 0d6c091c734f769b407f284525a35daed82fa3ea
