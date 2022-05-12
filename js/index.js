@@ -42,8 +42,7 @@ function listenToClick() {
             data: {
                 name: $("#username:text").val(),
                 password: $("#password:text").val()
-            },
-            success: process_response
+            }
         })
     })
 }
