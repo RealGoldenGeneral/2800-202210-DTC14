@@ -67,6 +67,22 @@ body{
   background-color: rgb(170, 170, 170);
 }
 
+#selectOptions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+button {
+  border-style: solid;
+  border-color: #000000;
+  border-width: 2px;
+}
+
+button:hover {
+  background-color: darkgray;
+}
+
 @media screen and (max-width: 550px) {
   .navbar p {
     display: none;
