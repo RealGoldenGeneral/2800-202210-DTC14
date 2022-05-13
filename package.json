@@ -1,0 +1,22 @@
+{
+  "name": "2800-202210-dtc14",
+  "version": "1.0.0",
+  "description": "profilePage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RealGoldenGeneral/2800-202210-DTC14.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RealGoldenGeneral/2800-202210-DTC14/issues"
+  },
+  "homepage": "https://github.com/RealGoldenGeneral/2800-202210-DTC14#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
