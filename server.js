@@ -158,13 +158,27 @@ app.get("/get_news_articles", function(req, res) {
   })
 })
 
+app.get("/find_article/:title", function(req, res) {
+  console.log("server recieved the get request")
+  console.log("Passed title", req.params.title)
+  newsModel.find({title: req.params.title}, function(err, found_article) {
+    if (err) {
+      console.log("Err" + err) 
+    }
+    else {
+      console.log("Data" + found_article)
+      res.json(found_article)
+      }
+  })
+})
+
 app.listen(process.env.PORT || 5005, function (err) {
   if (err)
       console.log(err);
 })
 
 const mongoose = require('mongoose');
-const { stringify } = require("nodemon/lib/utils");
+// const { stringify } = require("nodemon/lib/utils");
 
 mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
  {useNewUrlParser: true, useUnifiedTopology: true});

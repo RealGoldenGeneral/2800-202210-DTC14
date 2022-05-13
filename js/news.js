@@ -5,15 +5,16 @@ function load_selected_article(data) {
 }
 
 function get_full_article_info() {
-    headline = $(this).find("h5").text()
+    title = $(this).find("h5").text()
+    console.log(title)
     $.ajax(
         {
-            "url": "/find_article",
+            "url": `/find_article/${title}`,
             "type": "GET",
-            "data": {
-                "title": headline
-            },
-            "success": load_selected_article
+            "success": load_selected_article,
+            // "data": {
+            //     "title": 
+            // }
         }
     )
 }
@@ -28,6 +29,7 @@ function load_news_cards(data) {
         var clone = template.content.cloneNode(true);
         clone.querySelector("#news-title").innerHTML = data[i].title
         clone.querySelector("#news-image").src = data[i].img_url
+        clone.querySelector(".news-card").id = data[i]._id
         document.getElementById("real-news-container").appendChild(clone)
     }
 }
