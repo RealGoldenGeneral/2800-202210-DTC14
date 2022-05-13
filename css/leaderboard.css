@@ -47,24 +47,37 @@ body{
   gap: 25%;
 }
 
+.navbar-placeholder {
+  height: 100%;
+  /* background-color: #8dc1ac;; */
+}
+
 .navbar {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
-  justify-items: center;
-  background-color: rgb(202, 202, 202);
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%
+  background-color: #8dc1ac;
+  height: 100%;
 }
 
-.navbar > div {
-  padding: 5px;
-  text-align: center;
+.navbar a {
+  text-decoration: none;
+  color: black;
 }
 
-.navbar > div:hover {
-  background-color: rgb(170, 170, 170);
+.navbar-item:hover {
+  background-color: #449372;
+}
+
+.navbar-item {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  align-items: center;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+  font-size: 1em;
+  /* padding: ; */
 }
 
 #selectOptions {
