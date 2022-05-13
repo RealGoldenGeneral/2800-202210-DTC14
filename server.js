@@ -167,8 +167,13 @@ app.get("/find_article/:title", function(req, res) {
     }
     else {
       console.log("Data" + found_article)
-      res.json(found_article)
+      if (found_article.length > 1) {
+        res.json(found_article[0])
       }
+      else {
+        res.json(found_article)
+      }
+    }
   })
 })
 
