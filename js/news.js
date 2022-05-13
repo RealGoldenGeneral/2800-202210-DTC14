@@ -1,5 +1,23 @@
 const date = new Date()
 
+function load_selected_article(data) {
+    console.log(data)
+}
+
+function get_full_article_info() {
+    headline = $(this).find("h5").text()
+    $.ajax(
+        {
+            "url": "/find_article",
+            "type": "GET",
+            "data": {
+                "title": headline
+            },
+            "success": load_selected_article
+        }
+    )
+}
+
 function load_news_cards(data) {
     // defining a template
     console.log(data)
@@ -101,14 +119,6 @@ async function determine_new_day() {
     // else if the days was not greater than the one in the db, don't do anything
     milliseconds_per_day = 86400000
     current_time = date.getTime() / milliseconds_per_day
-    // console.log(Math.floor(current_time))
-    // await $.ajax(
-    //     {
-    //         "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=popularity&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
-    //         "type": "GET",
-    //         "success": process_response
-    //     }
-    // )
     $.ajax(
         {
             "url": `/day`,
@@ -122,7 +132,7 @@ async function determine_new_day() {
 function setup() {
     determine_new_day()
     get_news_data()
-    // $("#news-tab").click(determine_new_day)
+    $("body").on("click", ".news-card", get_full_article_info)
 }
 
 $(document).ready(setup)
