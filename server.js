@@ -1,6 +1,8 @@
 // const mysql = require("mysql");
 const express = require("express");
 const app = express();
+const ejs = require('ejs');
+app.set('view engine', 'ejs');
 
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({
@@ -152,12 +154,17 @@ app.listen(process.env.PORT || 5005, function (err) {
 })
 
 const mongoose = require('mongoose');
+const { request } = require("express");
 
 mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
  {useNewUrlParser: true, useUnifiedTopology: true});
 const userSchema = new mongoose.Schema({
     name: String,
     password: String,
+    email: String,
+    username: String,
+    phone: String,
+    img:String
 });
 
 const daySchema = new mongoose.Schema({
@@ -172,11 +179,34 @@ const newsSchema = new mongoose.Schema({
   content: String
 });
 
+const usersSchema = new mongoose.Schema({
+  // _id: Object,
+  name: String,
+  email: String,
+  username: String,
+  phone: String,
+  img:String
+})
+
 const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
 
 
+
+
+app.get('/profile', (req,res) =>{ 
+    userModel.find({}, function(err,users)
+     {
+      res.render('profile', {
+        name: users[16].name,
+        email: users[16].email,
+        username: users[16].username,
+        phone: users[16].phone,
+
+      })
+    })
+})
 
 //var session = require("express-session")
 
