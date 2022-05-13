@@ -146,12 +146,25 @@ app.post("/add_article", function(req, res) {
   })
 })
 
+app.get("/get_news_articles", function(req, res) {
+  newsModel.find({}, function(err, news) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + news)
+      res.json(news)
+    }
+  })
+})
+
 app.listen(process.env.PORT || 5005, function (err) {
   if (err)
       console.log(err);
 })
 
 const mongoose = require('mongoose');
+const { stringify } = require("nodemon/lib/utils");
 
 mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
  {useNewUrlParser: true, useUnifiedTopology: true});
@@ -165,7 +178,7 @@ const daySchema = new mongoose.Schema({
 });
 
 const newsSchema = new mongoose.Schema({
-  title: String,
+  title: {type: String, unique: true},
   url: String,
   img_url: String,
   description: String,
@@ -175,46 +188,3 @@ const newsSchema = new mongoose.Schema({
 const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
-
-
-
-//var session = require("express-session")
-
-//const bodyparser = require("body-parser");
-// app.use(bodyparser.urlencoded({
-//   extended: true
-// }));
-
-// const cors = require('cors');
-// app.use(cors())
-
-// app.use(express.static("../public"));
-
-// app.post("/login", function (req, res) {
-//     console.log("recieved1")
-//     user_credential = {"username": req.body.name, "password": req.body.password}
-//     res.send(user_credential)
-// })
-
-// app.get('/', function (req, res) {
-//     if (req.session.authenticated) {
-//         res.send(`Hi ${req.session.user}`)
-//     } else {
-//         res.redirect('/login')
-//     }
-// })
-
-// app.get("/login", function (req, res, next) {
-//     res.send("Plesae provide the credentials through the URL")
-// })
-
-// app.get(`/login/:user/:pass`, function (req, res, next) {
-//     if (users[req.params.user] == req.params.pass) {
-//         req.session.authenticated = true
-//         req.sesssion.user = req.params.user
-//         res.send("Successful login!")
-//     } else {
-//         req.session.authenticated = false
-//         res.send("Failed login")
-//     }
-// })
