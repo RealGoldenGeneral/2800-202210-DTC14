@@ -1,12 +1,27 @@
 const date = new Date()
 
-function load_news_cards() {
+function load_news_cards(data) {
     // defining a template
+    console.log(data)
     template = document.getElementById("news-article");
-    for (i = 0; i < 10; i++) {
+    article_title = document.getElementById("news-title")
+    article_img = document.getElementById("news-img")
+    for (i = 0; i < data.length; i++) {
         var clone = template.content.cloneNode(true);
+        clone.querySelector("#news-title").innerHTML = data[i].title
+        clone.querySelector("#news-image").src = data[i].img_url
         document.getElementById("real-news-container").appendChild(clone)
     }
+}
+
+function get_news_data() {
+    $.ajax(
+        {
+            "url": `/get_news_articles`,
+            "type": "GET",
+            "success": load_news_cards
+        }
+    )
 }
 
 function confirm_article_insertion(data) {
@@ -53,7 +68,7 @@ function process_news_response(data) {
 function get_daily_news() {
     $.ajax(
         {
-            "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=popularity&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
+            "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=relevancy&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
             "type": "GET",
             "success": process_news_response,
         }
@@ -106,7 +121,7 @@ async function determine_new_day() {
 
 function setup() {
     determine_new_day()
-    load_news_cards()
+    get_news_data()
     // $("#news-tab").click(determine_new_day)
 }
 
