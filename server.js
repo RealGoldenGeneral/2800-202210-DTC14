@@ -96,6 +96,10 @@ app.get("/welcome", function(req, res) {
   }
 })
 
+app.get("/leaderboard", function (req, res){
+  res.sendFile(__dirname + "/leaderboard.html")
+})
+
 app.get("/news", function(req, res) {
   res.sendFile(__dirname + "/news.html")
 })
