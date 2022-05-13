@@ -14,7 +14,7 @@ body{
   justify-content: center;
   align-items: center;
   min-height:100vh;
-  background-color: #449372;
+  background:linear-gradient(-50deg,#2c6d52,#8dc1ac);
   font-size: 100%;
   /* background-color: #8dc1ac; */
   /* background:linear-gradient(-45deg,#d7eee4,#449372); */
@@ -26,7 +26,7 @@ body{
   display:flex;
   justify-content: center;
   align-items:center;
-  background-color: #fff;
+  background-color: #d7eee4;
   box-shadow: 0 0 15px #00000033;
   border-radius: 15px;
   overflow:hidden;
@@ -37,6 +37,15 @@ body{
   height:100%;
   position:relative;
 }
+
+#logo{
+  position: absolute;
+  left:50px;
+  bottom: 65px;
+  width: 75%;
+  height: 75%;
+}
+
 .design div:first-child{
   width: 190px;
   height: 90px;
@@ -97,25 +106,84 @@ body{
 .input-field{
   width:90.5%;
   height: 40px;
-  border-radius: 5px;
+  border-radius: 0px;
   margin:10px 0;
   padding:15px;
   font-size:1em;
   color:#000;
-  background-color: #e2c4e0;
+  background-color: black;
+  border: none;
+  outline: 0;
+  box-sizing: border-box;
+  background:transparent;
+  border-bottom: 2px solid black
 }
 .input-field:placeholder{
   color:#303030;
 }
 .btn{
-  width:60%;
+  width:70%;
   height:40px;
-  background-color:#7f379b;
+  background-color:#449372;
   color:#fff;
   letter-spacing: 1px;
   font-size:1em;
-  margin-top:15px;
   border-radius: 5px;
+  display: block;
+  text-align: center;
+  margin-left: 11%;
+  margin-top: 2%;
+
+
+}
+
+@media screen and (max-width:500px){
+  img{width: 100%;
+    height: auto;
+    justify-content: stretch;}
+
+  .box{
+    width:325px;
+  height:650px;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  background-color: #d7eee4;
+  box-shadow: 0 0 15px #00000033;
+  border-radius: 15px;
+  overflow:hidden;
+  }
+
+  #logo{
+    position: absolute;
+    left:60px;
+    bottom: 480px;
+    width: 250%;
+    height: 25%;
+  }
+
+  form{
+    display:flex;
+    text-align: center;
+    flex-direction: column;
+    padding-right: 60px;
+  }
+
+  h2{
+    margin-bottom: 1px;
+    margin-left: 25px;
+  }
+
+  .btn{
+    margin-bottom: 10px;
+  }
+
+  #incorrect-login{
+    position: relative;
+    top: 40px;
+    right: 5px;
+  }
+  
 }
 /*  */
 
