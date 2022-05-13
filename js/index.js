@@ -1,3 +1,4 @@
+const { append } = require("express/lib/response")
 function show_full_menu() {
     console.log($("#full_menu").css("display"))
     if ($("#full_menu").css("display") == "none") {
