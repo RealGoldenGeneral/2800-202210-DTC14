@@ -1,5 +1,11 @@
 const date = new Date()
 
+function close_article() {
+    $("#full-news-article-card").remove()
+    $("#real-news-container").css("grid-template-columns", "50% 50%")
+    $(".news-card").show()
+}
+
 function load_selected_article(data) {
     console.log(data)
     $(".news-card").hide()
@@ -152,6 +158,7 @@ function setup() {
     determine_new_day()
     get_news_data()
     $("body").on("click", ".news-card", get_full_article_info)
+    $("body").on("click", ".article-close", close_article)
 }
 
 $(document).ready(setup)

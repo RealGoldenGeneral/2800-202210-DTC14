@@ -121,7 +121,13 @@ body{
 
 /* Full Article */
 #full-news-article-card {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 5% 15% 40% 15% 20% 5%;
+}
 
+.article-close {
+  
 }
 
 #full-article-title {
@@ -130,6 +136,7 @@ body{
 
 #full-article-image {
   width: 90%;
+  height: 100%;
   margin: auto;
 }
 
