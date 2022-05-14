@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./news.css">
     <title>Co-Vention</title>
     <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
 </head>
@@ -36,8 +37,18 @@
             <div id="real-news-container">
                 <template id="news-article">
                     <div class="news-card">
-                        <img src="./covention_logo.png" width="150px" height="100px">
-                        <h4>Title</h4>
+                        <img src="" width="150px" height="100px" id="news-image">
+                        <h5 id="news-title">Title</h5>
+                    </div>
+                </template>
+                <template id="full-news-article">
+                    <div id="full-news-article-card">
+                        <i class="fa-solid fa-xmark article-close"></i>
+                        <h3 id="full-article-title"></h3>
+                        <img src="" id="full-article-image">
+                        <h5 id="full-article-desc"></h5>
+                        <p id="full-article-content"></p>
+                        <a href="" id="full-article-link">Read more on this article</a>
                     </div>
                 </template>
             </div>

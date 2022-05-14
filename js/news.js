@@ -1,12 +1,70 @@
 const date = new Date()
 
-function load_news_cards() {
+function close_article() {
+    $("#full-news-article-card").remove()
+    $("#real-news-container").css("grid-template-columns", "50% 50%")
+    $(".news-card").show()
+}
+
+function load_selected_article(data) {
+    console.log(data)
+    $(".news-card").hide()
+    full_article_template = document.getElementById("full-news-article")
+    full_article_title = data.title
+    full_article_image = data.img_url
+    full_article_desc = data.description
+    full_article_content = data.content
+    full_article_link = data.url
+    var clone = full_article_template.content.cloneNode(true)
+    clone.querySelector("#full-article-title").innerHTML = full_article_title
+    clone.querySelector("#full-article-image").src = full_article_image
+    clone.querySelector("#full-article-desc").innerHTML = full_article_desc
+    clone.querySelector("#full-article-content").innerHTML = full_article_content
+    clone.querySelector("#full-article-link").href = full_article_link
+    document.getElementById("real-news-container").appendChild(clone)
+    $("#real-news-container").css({"display": "grid", 
+                                   "grid-template-columns": "100%",
+                                   })
+}
+
+function get_full_article_info() {
+    title = $(this).find("h5").text()
+    console.log(title)
+    $.ajax(
+        {
+            "url": `/find_article/${title}`,
+            "type": "GET",
+            "success": load_selected_article,
+            // "data": {
+            //     "title": 
+            // }
+        }
+    )
+}
+
+function load_news_cards(data) {
     // defining a template
+    console.log(data)
     template = document.getElementById("news-article");
-    for (i = 0; i < 10; i++) {
+    article_title = document.getElementById("news-title")
+    article_img = document.getElementById("news-img")
+    for (i = 0; i < data.length; i++) {
         var clone = template.content.cloneNode(true);
+        clone.querySelector("#news-title").innerHTML = data[i].title
+        clone.querySelector("#news-image").src = data[i].img_url
+        clone.querySelector(".news-card").id = data[i]._id
         document.getElementById("real-news-container").appendChild(clone)
     }
+}
+
+function get_news_data() {
+    $.ajax(
+        {
+            "url": `/get_news_articles`,
+            "type": "GET",
+            "success": load_news_cards
+        }
+    )
 }
 
 function confirm_article_insertion(data) {
@@ -53,7 +111,7 @@ function process_news_response(data) {
 function get_daily_news() {
     $.ajax(
         {
-            "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=popularity&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
+            "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=relevancy&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
             "type": "GET",
             "success": process_news_response,
         }
@@ -86,14 +144,6 @@ async function determine_new_day() {
     // else if the days was not greater than the one in the db, don't do anything
     milliseconds_per_day = 86400000
     current_time = date.getTime() / milliseconds_per_day
-    // console.log(Math.floor(current_time))
-    // await $.ajax(
-    //     {
-    //         "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=popularity&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
-    //         "type": "GET",
-    //         "success": process_response
-    //     }
-    // )
     $.ajax(
         {
             "url": `/day`,
@@ -106,8 +156,9 @@ async function determine_new_day() {
 
 function setup() {
     determine_new_day()
-    load_news_cards()
-    // $("#news-tab").click(determine_new_day)
+    get_news_data()
+    $("body").on("click", ".news-card", get_full_article_info)
+    $("body").on("click", ".article-close", close_article)
 }
 
 $(document).ready(setup)
