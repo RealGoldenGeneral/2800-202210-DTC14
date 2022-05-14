@@ -104,5 +104,5 @@ function listenToClick() {
     })
 }
 
-$("#menu-content").hide()
+$("#full_menu").hide()
 $(document).ready(listenToClick)

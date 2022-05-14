@@ -160,6 +160,37 @@ app.post("/add_article", function(req, res) {
   })
 })
 
+app.get("/get_news_articles", function(req, res) {
+  newsModel.find({}, function(err, news) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + news)
+      res.json(news)
+    }
+  })
+})
+
+app.get("/find_article/:title", function(req, res) {
+  console.log("server recieved the get request")
+  console.log("Passed title", req.params.title)
+  newsModel.find({title: req.params.title}, function(err, found_article) {
+    if (err) {
+      console.log("Err" + err) 
+    }
+    else {
+      console.log("Data" + found_article)
+      if (found_article.length > 1) {
+        res.json(found_article[0])
+      }
+      else {
+        res.json(found_article)
+      }
+    }
+  })
+})
+
 app.listen(process.env.PORT || 5005, function (err) {
   if (err)
       console.log(err);
@@ -184,7 +215,7 @@ const daySchema = new mongoose.Schema({
 });
 
 const newsSchema = new mongoose.Schema({
-  title: String,
+  title: {type: String, unique: true},
   url: String,
   img_url: String,
   description: String,
