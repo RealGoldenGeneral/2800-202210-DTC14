@@ -162,7 +162,7 @@ main {
     background-color: #449372;
   }
   
-  .navbar-item {
+  .navbar-item { 
     height: 100%;
     display: grid;
     grid-template-columns: 100%;
@@ -179,8 +179,28 @@ main {
   .navbar .navbar-item.active {
     background-color: #449372;
   }
+  
   /*  */
   
+/* Full Article */
+#full-news-article-card {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 5% 15% 40% 15% 20% 5%;
+}
+
+#full-article-image {
+  width: 90%;
+  height: 100%;
+  margin: auto;
+}
+
+
+#full-article-content {
+  text-overflow: none;
+}
+/*  */
+
   /* Media Queries */
   @media screen and (max-width: 1200px) {
     .navbar-item {
