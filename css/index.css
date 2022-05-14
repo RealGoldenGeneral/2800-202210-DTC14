@@ -364,6 +364,55 @@ from regular navbar background colour */
 }
 /*  */
 
+#button1 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #168BE7;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin:auto;
+}
+
+#button1:hover {background-color: #42A0E9}
+
+#button1:active {
+  background-color: #1173BF;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#button2 {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #C4F4C7;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin:auto;
+  width:131.38px;
+}
+
+#button2:hover {background-color: #9BB291}
+
+#button2:active {
+  background-color: #C7FFDA;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 /* Media Queries */
 @media screen and (max-width: 1200px) {
   .navbar-item {

@@ -16,6 +16,12 @@ function redirect_to_page() {
     if ($(this).attr("id") == "news-tab") {
         location.href = "/news"
     }
+    if ($(this).attr("id") == "button1") {
+        location.href = "/game"
+    }
+    if ($(this).attr("id") == "button2") {
+        location.href = "/quiz"
+    }
 }
 
 // This code snippet was a portion the W3Schools Horizontal Tabs How-To
@@ -82,6 +88,7 @@ function listenToClick() {
     console.log("loaded")
     $("body").on("click", ".news-card", show_click_effect)
     $(".navbar-item").click(redirect_to_page)
+    $(".button-item").click(redirect_to_page)
     $("body").on("click", ".navbar-item", show_active_nav_item)
     $(".profile-icon").click(show_full_menu)
     $("#login").click(function() {

@@ -106,6 +106,14 @@ app.get("/news", function(req, res) {
   res.sendFile(__dirname + "/news.html")
 })
 
+app.get("/game", function (req, res){
+  res.sendFile(__dirname + "/game.html")
+})
+
+app.get("/quiz", function (req, res){
+  res.sendFile(__dirname + "/quiz.html")
+})
+
 app.get("/day", function(req, res) {
   console.log("request recieved to get the days")
   dayModel.find({}, function(err, total_days) {
