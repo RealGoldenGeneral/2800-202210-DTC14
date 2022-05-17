@@ -60,6 +60,7 @@ body{
     grid-template-rows: 50% 50%;
     width: 90%;
     margin: auto;
+    position: relative;
 }
 
 .quiz_score_info p {
@@ -99,4 +100,42 @@ a.next {
     position: absolute;
     right: 7%;
     bottom: 21.6%;
+}
+/* Animation for Slideshow */
+@keyframes slide_in_right {
+    0% {left: 0%;}
+    10% {left: 0.4%;}
+    20% {left: 0.8%;}
+    30% {left: 1.2%;}
+    40% {left: 1.6%;}
+    50% {left: 2.0%;}
+    60% {left: 2.4%;}
+    70% {left: 2.8%;}
+    80% {left: 3.2%;}
+    90% {left: 3.6%;}
+    100% {left: 4.0%;}
+}
+
+.slide_right {
+    animation-name: slide_in_right;
+    animation-duration: 0.5s;
+}
+
+@keyframes slide_in_left {
+    0% {right: 0%;}
+    10% {right: 0.4%;}
+    20% {right: 0.8%;}
+    30% {right: 1.2%;}
+    40% {right: 1.6%;}
+    50% {right: 2.0%;}
+    60% {right: 2.4%;}
+    70% {right: 2.8%;}
+    80% {right: 3.2%;}
+    90% {right: 3.6%;}
+    100% {right: 4.0%;}
+}
+
+.slide_left {
+    animation-name: slide_in_left;
+    animation-duration: 0.5s;
 }
