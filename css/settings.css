@@ -8,7 +8,7 @@
 
 .profileSettings div {
     display: flex;
-    flex-direction: column;
+    gap: 10px;
 }
 
 .quizSettings {
@@ -25,5 +25,6 @@
 }
 
 #box {
+    height: auto;
     gap: 25px;
 }
