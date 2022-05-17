@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Roboto',sans-serif;
+  outline: none;
+  border: none;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(-50deg,#2c6d52,#8dc1ac);
+  font-size: 100%;
+}
+
+/* Quiz Page */
+/* Outer Container */
+.quiz_container {
+    background-color: rgb(221, 221, 221);
+    border-radius: 40px 40px 0 0;
+    height: 100%;
+}
