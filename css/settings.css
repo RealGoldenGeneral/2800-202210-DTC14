@@ -23,3 +23,7 @@
     flex-direction: column;
     gap: 10px;
 }
+
+#box {
+    gap: 25px;
+}
