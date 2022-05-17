@@ -33,4 +33,50 @@ body{
     display: grid;
     grid-template-rows: 20% 60% 20%;
     align-items: center;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #449372;
+}
+
+.quiz_start_button {
+    background-color: #449372 ;
+    color: white;
+    width: 60%;
+    height: 50%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 2px 4px 0px rgb(117, 117, 117);
+}
+
+.quiz_start_button:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 0px rgb(117, 117, 117);
+}
+
+.quiz_score_info {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    width: 90%;
+    margin: auto;
+}
+
+.quiz_score_info p {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+}
+
+.quiz_score_info p:nth-child(1) {
+    border-width: 0 1px 1px 0;
+}
+
+.quiz_score_info p:nth-child(3) {
+    border-style: solid;
+    border-width: 0 1px 0 0;
+
+}
+
+.quiz_score_info p:nth-child(4) {
+    border-width: 0;
 }
