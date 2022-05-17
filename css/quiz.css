@@ -20,4 +20,17 @@ body{
     background-color: rgb(221, 221, 221);
     border-radius: 40px 40px 0 0;
     height: 100%;
+    display: flex;
+    justify-content: center;
+}
+/* Inner Container */
+.quiz_start_container {
+    background-color: #d7eee4;
+    width: 90%;
+    height: 75%;
+    margin: auto;
+    border-radius: 40px;
+    display: grid;
+    grid-template-rows: 20% 60% 20%;
+    align-items: center;
 }
