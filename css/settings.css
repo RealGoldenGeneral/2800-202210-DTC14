@@ -1,0 +1,9 @@
+.profileSettings {
+    display: flex;
+    flex-direction: column;
+}
+
+.quizSettings {
+    display: flex;
+    flex-direction: column;
+}
