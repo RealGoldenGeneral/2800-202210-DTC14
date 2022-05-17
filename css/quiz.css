@@ -80,3 +80,23 @@ body{
 .quiz_score_info p:nth-child(4) {
     border-width: 0;
 }
+
+i.fa-angle-left, i.fa-angle-right {
+    font-size: 1.5em;
+}
+
+a.prev:hover, a.next:hover {
+    background-color: #747474;
+}
+
+a.prev {
+    position: absolute;
+    left: 7%; 
+    bottom: 21.6%;  
+}
+
+a.next {
+    position: absolute;
+    right: 7%;
+    bottom: 21.6%;
+}
