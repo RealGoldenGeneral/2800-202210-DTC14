@@ -39,7 +39,6 @@ function setup() {
     $("#covid_safety").show()
     $(".next").click(show_next_quiz_info)
     $(".prev").click(show_prev_quiz_info)
-
 }
 
 $(document).ready(setup)
