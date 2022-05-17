@@ -1,13 +1,11 @@
 .profileSettings {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .quizSettings {
     display: flex;
     flex-direction: column;
-}
-
-#box {
     justify-content: center;
 }
