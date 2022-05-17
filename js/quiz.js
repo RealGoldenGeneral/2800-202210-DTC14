@@ -2,7 +2,15 @@ current_slide = 0
 
 function show_prev_quiz_info() {
     $(".quiz_score_info").hide()
-    $("#covid_safety").show()
+    slides = $(".quiz_info_slideshow_container").children(".quiz_score_info")
+    if (current_slide <= 0) {
+        current_slide = slides.length - 1
+        $(slides[current_slide]).show()
+    }
+    else {
+        current_slide -= 1
+        $(slides[current_slide]).show()
+    }
 }
 
 function show_next_quiz_info() {
