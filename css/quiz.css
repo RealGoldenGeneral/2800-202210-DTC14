@@ -172,19 +172,24 @@ a.next {
     grid-template-rows: 20% 80%;
 }
 
+/* Container for the question */
 .play_quiz_question {
     background-color: #d7eee4;
     width: 95%;
-    height: 90%;
+    height: 80%;
     justify-self: center;
     border-radius: 20px;
     padding: 10px 5px 10px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .play_quiz_question, .play_quiz_answer_container > div {
     align-self: center;
 }
 
+/* Container for displayed choices */
 .play_quiz_answer_container {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -194,6 +199,7 @@ a.next {
     border-color: #449372;
 }
 
+/* Each of the choice containers*/
 .play_quiz_answer_container > div {
     width: 90%;
     height: 90%;
@@ -209,7 +215,6 @@ a.next {
     border-color: #449372;
 }
 
-/*  */
 /* Media Queries */
 @media screen and (max-width: 400px) {
     .play_quiz_answer_container {

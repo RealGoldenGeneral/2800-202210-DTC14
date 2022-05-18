@@ -42,7 +42,7 @@ function move_to_next_question() {
 }
 
 function start_quiz() {
-    $(".play_quiz_question").text(current_questions[current_question].question)
+    $(".play_quiz_question p").text(current_questions[current_question].question)
     for (i = 0; i < current_questions[current_question].choices.length; i++) {
         displayed_choice = ""
         displayed_choice += `<div class="play_quiz_choice" id="${current_questions[current_question].choices[i].choice}"`
