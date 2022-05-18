@@ -2,6 +2,10 @@ current_questions = ""
 current_question = 0
 user_quiz_score = 0
 
+function display_correct_answer_only(choice) {
+    return choice.choice
+}
+
 function grab_correct_answers(choice) {
     if (choice.type == "correct") {
         return choice
@@ -11,6 +15,7 @@ function grab_correct_answers(choice) {
 function get_current_quiz_question_answers(chosen_answer) {
     console.log(current_questions[current_question].choices)
     correct_answers = current_questions[current_question].choices.filter(grab_correct_answers)
+    correct_answers = correct_answers.map(display_correct_answer_only)
     console.log(correct_answers)
     console.log(chosen_answer)
 }
