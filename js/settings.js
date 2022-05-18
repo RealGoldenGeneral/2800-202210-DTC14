@@ -14,6 +14,8 @@ function setup() {
         newUsername = $("#username").val();
         if (newUsername != '') {
             registerNewUsername(newUsername);
+        } else {
+            $("#usernameOption").append("<p>Name cannot be blank.</p>")
         }
     })
 }
