@@ -31,7 +31,13 @@ function start_quiz() {
 function store_quiz_questions(data) {
     console.log(data)
     current_questions = data[0].questions
-    $(".title div:nth-child(2)").text(data[0].category)
+    split_category_title = data[0].category.split("_")
+    console.log(split_category_title)
+    for (i = 0; i < split_category_title.length; i++) {
+        split_category_title[i] = split_category_title[i].slice(0, 1).toUpperCase() + split_category_title[i].slice(1)
+    }
+    console.log(split_category_title)
+    $(".title div:nth-child(2) h2").text(split_category_title.join(" "))
     console.log(current_questions)
     start_quiz()
 }
