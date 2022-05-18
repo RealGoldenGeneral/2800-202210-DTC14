@@ -17,7 +17,10 @@ function get_current_quiz_question_answers(chosen_answer) {
     correct_answers = current_questions[current_question].choices.filter(grab_correct_answers)
     correct_answers = correct_answers.map(display_correct_answer_only)
     console.log(correct_answers)
-    console.log(chosen_answer)
+    if (correct_answers.indexOf(chosen_answer) != -1) {
+        user_quiz_score += 1
+        console.log(user_quiz_score)
+    }
 }
 
 function display_end_screen() {
