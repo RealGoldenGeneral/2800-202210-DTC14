@@ -12,7 +12,9 @@ function registerNewUsername(newUsername) {
 function setup() {
     $("#usernameSubmit").click(() => {
         newUsername = $("#username").val();
-        registerNewUsername(newUsername);
+        if (newUsername != '') {
+            registerNewUsername(newUsername);
+        }
     })
 }
 
