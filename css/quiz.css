@@ -175,9 +175,10 @@ a.next {
 .play_quiz_question {
     background-color: #d7eee4;
     width: 95%;
+    height: 90%;
     justify-self: center;
     border-radius: 20px;
-    padding: 20px;
+    padding: 10px 5px 10px 5px;
 }
 
 .play_quiz_question, .play_quiz_answer_container > div {
@@ -209,3 +210,14 @@ a.next {
 }
 
 /*  */
+/* Media Queries */
+@media screen and (max-width: 400px) {
+    .play_quiz_answer_container {
+        grid-template-columns: 100%;
+        grid-template-rows: 25% 25% 25% 25%;
+    }
+
+    .play_quiz_question {
+        width: 90%;
+    }
+}

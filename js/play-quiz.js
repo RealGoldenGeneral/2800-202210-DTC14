@@ -23,7 +23,9 @@ function get_current_quiz_question_answers(chosen_answer) {
     }
 }
 
+//placeholder for now, will work on it later
 function display_end_screen() {
+    update_user_score()
     $(".play_quiz_container").html("")
 }
 
