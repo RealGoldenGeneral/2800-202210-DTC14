@@ -172,10 +172,24 @@ a.next {
     grid-template-rows: 20% 80%;
 }
 
+.play_quiz_question, .play_quiz_answer_container > div {
+    align-self: center;
+}
+
 .play_quiz_answer_container {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
+}
+
+.play_quiz_answer_container > div {
+    width: 90%;
+    height: 90%;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /*  */

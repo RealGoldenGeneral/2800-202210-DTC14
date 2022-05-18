@@ -1,8 +1,17 @@
-function start_quiz(data) {
-    current_question = 1
-    console.log(data)
-    current_questions = data[0].questions
-    console.log(current_questions)
+current_questions = ""
+current_question = 4
+
+function move_to_next_question() {
+    current_question += 1
+    if (current_question >= 10) {
+        display_end_screen()
+    }
+    else {
+
+    }
+}
+
+function start_quiz() {
     $(".play_quiz_question").text(current_questions[current_question].question)
     for (i = 0; i < current_questions[current_question].choices.length; i++) {
         displayed_choice = ""
@@ -14,19 +23,27 @@ function start_quiz(data) {
     }
 }
 
+function store_quiz_questions(data) {
+    console.log(data)
+    current_questions = data[0].questions
+    console.log(current_questions)
+    start_quiz()
+}
+
 function grab_current_quiz_category_questions() {
     $.ajax(
         {
             // need to get quiz category later on
             "url": "/findQuizQuestions",
             "type": "POST",
-            "success": start_quiz
+            "success": store_quiz_questions
         }
     )
 }
 
 function setup() {
     grab_current_quiz_category_questions()
+    $("body").on("click", ".play_quiz_choice", move_to_next_question)
 }
 
 $(document).ready(setup)
