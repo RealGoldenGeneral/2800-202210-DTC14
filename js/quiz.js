@@ -1,3 +1,18 @@
+function start_quiz(data) {
+    console.log(data)
+}
+
+function grab_current_quiz_category_questions() {
+    $.ajax(
+        {
+            // need to get quiz category later on
+            "url": "/findQuizQuestions",
+            "type": "POST",
+            "success": start_quiz
+        }
+    )
+}
+
 ////
 // Referenced the slideshow how-to from W3Schools, can be found here: https://www.w3schools.com/howto/howto_js_slideshow.asp
 // All code was changed to use jQuery events and handlers instead, no inline js, event handling is done in js file
@@ -56,6 +71,7 @@ function setup() {
     $("#covid_safety").show()
     $(".next").click(show_next_quiz_info)
     $(".prev").click(show_prev_quiz_info)
+    $(".quiz_start_button").click(grab_current_quiz_category_questions)
 }
 
 $(document).ready(setup)

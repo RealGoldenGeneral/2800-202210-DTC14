@@ -191,6 +191,18 @@ app.get("/find_article/:title", function(req, res) {
   })
 })
 
+app.post("/findQuizQuestions", function(req, res) {
+  quizModel.find({category: "covid_safety"}, {_id: 0, questions: 1}, function(err, questions) {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      console.log("Data")
+      res.send(questions[0].questions)
+    }
+  })
+})
+
 app.listen(process.env.PORT || 5010, function (err) {
   if (err)
       console.log(err);
@@ -231,9 +243,21 @@ const usersSchema = new mongoose.Schema({
   img:String
 })
 
+const quizSchema = new mongoose.Schema({
+  category: String,
+  questions: [{
+    question: String,
+    choices: [{
+      choice: String,
+      type: String
+    }]
+  }]
+})
+
 const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
+const quizModel = mongoose.model("quizzes", quizSchema)
 
 
 
