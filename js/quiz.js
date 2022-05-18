@@ -1,18 +1,5 @@
-function start_quiz(data) {
-    current_questions = data[0].questions
-    console.log(current_questions)
-    location.href = `/startQuiz/${JSON.stringify(current_questions)}`
-}
-
-function grab_current_quiz_category_questions() {
-    $.ajax(
-        {
-            // need to get quiz category later on
-            "url": "/findQuizQuestions",
-            "type": "POST",
-            "success": start_quiz
-        }
-    )
+function move_to_quiz_screen() {
+    location.href = `/startQuiz`
 }
 
 ////
@@ -73,7 +60,7 @@ function setup() {
     $("#covid_safety").show()
     $(".next").click(show_next_quiz_info)
     $(".prev").click(show_prev_quiz_info)
-    $(".quiz_start_button").click(grab_current_quiz_category_questions)
+    $(".quiz_start_button").click(move_to_quiz_screen)
 }
 
 $(document).ready(setup)

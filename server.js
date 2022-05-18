@@ -114,6 +114,10 @@ app.get("/quiz", function (req, res){
   res.sendFile(__dirname + "/quiz.html")
 })
 
+app.get("/startQuiz/", function(req, res) {
+  res.sendFile(__dirname + "/play-quiz.html")
+})
+
 app.get("/day", function(req, res) {
   console.log("request recieved to get the days")
   dayModel.find({}, function(err, total_days) {
@@ -201,10 +205,6 @@ app.post("/findQuizQuestions", function(req, res) {
       res.send(questions)
     }
   })
-})
-
-app.get("/startQuiz/:questions", function(req, res) {
-  res.sendFile(__dirname + "/play-quiz.html")
 })
 
 app.listen(process.env.PORT || 5010, function (err) {
