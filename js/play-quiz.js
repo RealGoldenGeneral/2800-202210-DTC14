@@ -2,10 +2,16 @@ current_questions = ""
 current_question = 0
 user_quiz_score = 0
 
+function grab_correct_answers(choice) {
+    if (choice.type == "correct") {
+        return choice
+    }
+}
+
 function get_current_quiz_question_answers(chosen_answer) {
-    current_question_text = $(".play_quiz_question").text()
-    console.log(current_question_text)
-    console.log(current_questions[current_question].question)
+    console.log(current_questions[current_question].choices)
+    correct_answers = current_questions[current_question].choices.filter(grab_correct_answers)
+    console.log(correct_answers)
     console.log(chosen_answer)
 }
 
