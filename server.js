@@ -192,13 +192,13 @@ app.get("/find_article/:title", function(req, res) {
 })
 
 app.post("/findQuizQuestions", function(req, res) {
-  quizModel.find({category: "covid_safety"}, {_id: 0, questions: 1}, function(err, questions) {
+  quizModel.find({category: "covid_safety"}, function(err, questions) {
     if (err) {
       console.log(err)
     }
     else {
       console.log("Data")
-      res.send(questions[0].questions)
+      res.send(questions)
     }
   })
 })
@@ -247,10 +247,7 @@ const quizSchema = new mongoose.Schema({
   category: String,
   questions: [{
     question: String,
-    choices: [{
-      choice: String,
-      type: String
-    }]
+    choices: [Object]
   }]
 })
 

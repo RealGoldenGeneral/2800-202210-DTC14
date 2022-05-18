@@ -1,5 +1,6 @@
 function start_quiz(data) {
-    console.log(data)
+    current_questions = data[0].questions
+    console.log(current_questions)
 }
 
 function grab_current_quiz_category_questions() {
