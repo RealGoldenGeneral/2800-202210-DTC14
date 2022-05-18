@@ -2,31 +2,19 @@ current_questions = ""
 current_question = 0
 user_quiz_score = 0
 
-function determine_correct_answer(data) {
-    console.log(data)
-}
-
-function get_current_quiz_question_answers() {
-    chosen_answer = $(this).attr("id")
-    current_question = $(".play_quiz_question").text()
-    await $.ajax(
-        {
-            "url": "/findAnswers",
-            "type": "POST",
-            "success": determine_correct_answer,
-            "data": {
-                "current_question": current_question
-            }
-        }
-    )
+function get_current_quiz_question_answers(chosen_answer) {
+    current_question_text = $(".play_quiz_question").text()
+    console.log(current_question_text)
+    console.log(current_questions[current_question].question)
+    console.log(chosen_answer)
 }
 
 function display_end_screen() {
-    get_current_quiz_question_answers()
     $(".play_quiz_container").html("")
 }
 
 function move_to_next_question() {
+    get_current_quiz_question_answers($(this).attr("id"))
     current_question += 1
     if (current_question >= 10) {
         display_end_screen()
