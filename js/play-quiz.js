@@ -31,6 +31,7 @@ function start_quiz() {
 function store_quiz_questions(data) {
     console.log(data)
     current_questions = data[0].questions
+    $(".title div:nth-child(2)").text(data[0].category)
     console.log(current_questions)
     start_quiz()
 }

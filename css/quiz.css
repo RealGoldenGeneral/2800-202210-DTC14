@@ -172,6 +172,14 @@ a.next {
     grid-template-rows: 20% 80%;
 }
 
+.play_quiz_question {
+    background-color: #d7eee4;
+    width: 95%;
+    justify-self: center;
+    border-radius: 20px;
+    padding: 20px;
+}
+
 .play_quiz_question, .play_quiz_answer_container > div {
     align-self: center;
 }
@@ -180,6 +188,9 @@ a.next {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
+    border-width: 3px 0 0 0;
+    border-style: solid;
+    border-color: #449372;
 }
 
 .play_quiz_answer_container > div {
@@ -190,6 +201,11 @@ a.next {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #d7eee4;
+    border-radius: 20px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #449372;
 }
 
 /*  */
