@@ -261,7 +261,22 @@ app.post('/changeUsername', function (req, res) {
   userModel.updateOne({
     '_id': test_id
   }, {
-    $set: {'name': req.body.username}
+    $set: {'username': req.body.username}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.post('/changePassword', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'password': req.body.password}
   }, function (err, data) {
     if (err) {
       console.log("Error: " + err)
