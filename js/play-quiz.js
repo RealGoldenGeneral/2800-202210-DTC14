@@ -1,5 +1,9 @@
 current_questions = ""
-current_question = 4
+current_question = 0
+
+function display_end_screen() {
+    $(".play_quiz_container").html("")
+}
 
 function move_to_next_question() {
     current_question += 1
@@ -7,7 +11,8 @@ function move_to_next_question() {
         display_end_screen()
     }
     else {
-
+        $(".play_quiz_answer_container").html("")
+        start_quiz()
     }
 }
 
