@@ -203,6 +203,10 @@ app.post("/findQuizQuestions", function(req, res) {
   })
 })
 
+app.get("/startQuiz/:questions", function(req, res) {
+  res.sendFile(__dirname + "/play-quiz.html")
+})
+
 app.listen(process.env.PORT || 5010, function (err) {
   if (err)
       console.log(err);
