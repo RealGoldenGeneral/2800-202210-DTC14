@@ -1,3 +1,13 @@
+function registerNewPassword(newPassword) {
+    $.ajax({
+        type: "post",
+        data: {
+            password: newPassword
+        },
+        url: '/changePassword'
+    })
+}
+
 function registerNewUsername(newUsername) {
     $.ajax({
         type: "post",
@@ -16,6 +26,14 @@ function setup() {
             registerNewUsername(newUsername);
         } else {
             $("#usernameOption").append("<p>Name cannot be blank.</p>")
+        }
+    })
+    $("#passwordSubmit").click(() => {
+        newPassword = $("#password").val();
+        if (newPassword != '') {
+            registerNewPassword(newPassword);
+        } else {
+            $("#passwordOption").append("<p>Name cannot be blank.</p>")
         }
     })
 }
