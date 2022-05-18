@@ -156,4 +156,26 @@ a.next {
     animation-duration: 0.5s;
 }
 /*  */
+
+/* Play Quiz Screen */
+.play_quiz_container {
+    background-color: #8dc1ac;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    border-radius: 20px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #449372;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 80%;
+}
+
+.play_quiz_answer_container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+}
+
 /*  */
