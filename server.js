@@ -207,6 +207,7 @@ app.get('/profile', (req,res) =>{
         email: users[16].email,
         username: users[16].username,
         phone: users[16].phone,
+        img: users[16].img
 
       })
     })
