@@ -287,7 +287,7 @@ app.get('/getRecords', (req, res) => {
 })
 
 app.put('/getQuizRecords', (req, res) => {
-  scoresModel.find({}, function (err, scores) {
+  questionsModel.find({}, function (err, scores) {
     if (err) {
       console.log("Error: " + err)
     } else {
