@@ -39,9 +39,7 @@ app.get("/welcome",function(req,res){
   res.sendFile(__dirname + "/welcome.html")
 })
 
-<<<<<<< HEAD
 app.listen(4500);
-=======
 async function createDB() {
   const connection = await mysql.createConnection({
     host: "localhost",
@@ -114,4 +112,3 @@ app.listen(5005, function (err) {
 //         res.send("Failed login")
 //     }
 // })
->>>>>>> 1103a733cbf0b9d0f1e86957988698e499a43111
