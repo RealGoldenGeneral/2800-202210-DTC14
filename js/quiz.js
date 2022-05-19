@@ -54,8 +54,26 @@ function show_next_quiz_info() {
 }
 ////
 
+function covid_safety_quiz_scores(quiz) {
+    if (quiz.category == "covid_safety") {
+        return quiz
+    }
+}
+
+function covid_info_quiz_scores(quiz) {
+    if (quiz.category == "covid_information") {
+        return quiz
+    }
+}
+
 function load_high_and_previous_scores(data) {
     console.log(data)
+    quiz_scores = data[0].quiz_scores
+    console.log(quiz_scores)
+    covid_safety = quiz_scores.filter(covid_safety_quiz_scores) 
+    covid_info = quiz_scores.filter(covid_info_quiz_scores)
+    console.log(covid_safety, covid_info)
+    $("#covid_safety .quiz_high_score").text(covid_safety[0].high_score)
 }
 
 function grab_high_and_previous_score() {
