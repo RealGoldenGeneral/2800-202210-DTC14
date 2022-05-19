@@ -17,9 +17,6 @@ connection.connect(function(error){
   else console.log("connected to the database successfully!")
 })
 
-app.get("/",function(req,res){
-  res.sendFile(_dirname + "/index.html");
-})
 
 app.post("/",encoder, function(req,res){
   var username = req.body.username;
@@ -71,24 +68,13 @@ app.listen(5005, function (err) {
   else createDB();
 })
 
+app.use(express.static("../public"));
 
-//var session = require("express-session")
-
-//const bodyparser = require("body-parser");
-// app.use(bodyparser.urlencoded({
-//   extended: true
-// }));
-
-// const cors = require('cors');
-// app.use(cors())
-
-// app.use(express.static("../public"));
-
-// app.post("/login", function (req, res) {
-//     console.log("recieved1")
-//     user_credential = {"username": req.body.name, "password": req.body.password}
-//     res.send(user_credential)
-// })
+app.post("/login", function (req, res) {
+    console.log("recieved1")
+    user_credential = {"username": req.body.name, "password": req.body.password}
+    res.send(user_credential)
+})
 
 // app.get('/', function (req, res) {
 //     if (req.session.authenticated) {
