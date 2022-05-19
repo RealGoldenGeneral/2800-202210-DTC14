@@ -213,7 +213,8 @@ const userSchema = new mongoose.Schema({
     email: String,
     username: String,
     phone: String,
-    img:String
+    img:String,
+    category: String
 });
 
 const daySchema = new mongoose.Schema({
@@ -307,6 +308,21 @@ app.post('/changePhoneNumber', function (req, res) {
     '_id': test_id
   }, {
     $set: {'phone': req.body.phone}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.post('/changeQuizCategory', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'category': req.body.category}
   }, function (err, data) {
     if (err) {
       console.log("Error: " + err)

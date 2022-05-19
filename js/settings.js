@@ -1,3 +1,13 @@
+function changeCategory(category){
+    $.ajax({
+        type: "post",
+        data: {
+            category: category
+        },
+        url: "/changeQuizCategory"
+    })
+}
+
 function registerNewPhoneNumber(newPhoneNumber) {
     $.ajax({
         type: "post",
@@ -72,6 +82,9 @@ function setup() {
         } else {
             $("#phoneNumberOption").append("<p>Name cannot be blank.</p>")
         }
+    })
+    $("#categories").change(() => {
+        changeCategory($("#categories").val())
     })
 }
 
