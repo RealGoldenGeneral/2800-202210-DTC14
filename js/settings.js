@@ -47,6 +47,14 @@ function setup() {
             $("#passwordOption").append("<p>Name cannot be blank.</p>")
         }
     })
+    $("#emailSubmit").click(() => {
+        newEmail = $("#email").val();
+        if (newEmail != '') {
+            registerNewEmail(newEmail);
+        } else {
+            $("#emailOption").append("<p>Name cannot be blank.</p>")
+        }
+    })
 }
 
 
