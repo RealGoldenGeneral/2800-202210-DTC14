@@ -89,3 +89,46 @@ html{
     height: 200px;
 }
 
+/* Navbar */
+.navbar-placeholder {
+    height: 100%;
+    /* background-color: #8dc1ac;; */
+  }
+  
+  .navbar {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    background-color: #8dc1ac;
+    height: 100%;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .navbar-item:hover {
+    background-color: #449372;
+  }
+  
+  .navbar-item {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    font-size: 1em;
+    /* padding: ; */
+  }
+
+  main {
+    display: grid;
+    height: 100vh;
+    width: 100%;
+    grid-template-columns: 100%;
+    grid-template-rows: 15% 77% 8%;
+    align-items: center;
+    text-align: center;
+  }

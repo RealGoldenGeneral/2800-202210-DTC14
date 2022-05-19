@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="profile.css" type="text/css">
 </head>
 
@@ -16,25 +17,25 @@
     </header>
     <div id="profile">
         <div>
-            <img id="profile_pic" src =<%= img%>>
+            <img id="profile_pic" src=<%= img%>>
             <form id="profile_form">
                 <fieldset>
-                <div class="info">
-                    <label>Name</label>
-                    <h1><%= name%></h1>
-                </div>
-                <div class="info">
-                    <label>Email</label>
-                    <h1><%= email%></h1>
-                </div>
-                <div class="info">
-                    <label>Username</label>
-                    <h1><%= username%></h1>
-                </div>
-                <div class="info">
-                    <label>Phone</label>
-                    <h1><%= phone%></h1>
-                </div>
+                    <div class="info">
+                        <label>Name</label>
+                        <h1><%= name%></h1>
+                    </div>
+                    <div class="info">
+                        <label>Email</label>
+                        <h1><%= email%></h1>
+                    </div>
+                    <div class="info">
+                        <label>Username</label>
+                        <h1><%= username%></h1>
+                    </div>
+                    <div class="info">
+                        <label>Phone</label>
+                        <h1><%= phone%></h1>
+                    </div>
                 </fieldset>
             </form>
         </div>
@@ -44,6 +45,32 @@
             <button type="button" id="save_btn">Save</button>
         </div>
     </div>
+    <main>
+        <div class="navbar">
+
+            <div class="navbar-item" id="home-tab">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </div>
+
+            <div class="navbar-item" id="news-tab">
+                <i class="fa-solid fa-newspaper"></i>
+                <p>News</p>
+            </div>
+
+
+            <div class="navbar-item" id="scores-tab">
+                <i class="fa-solid fa-trophy"></i>
+                <p>Scores</p>
+            </div>
+
+
+            <div class="navbar-item">
+                <i class="fa-solid fa-user" id="profile-tab"></i>
+                <p>Profile</p>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
