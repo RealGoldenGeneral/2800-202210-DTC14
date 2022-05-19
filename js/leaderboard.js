@@ -15,18 +15,21 @@ function fillScoreboardQuiz() {
 }
 
 function fillScoreboardGame() {
-    $("#leaderboard").empty()
-    to_add = ''
-    j = 10
-    for(i = 1; i <= 10; i++) {
-        num = 10000 * j
-        to_add += `<div class="score">
-        <h4>${i}. Roy Cheng</h4>
-        <h4>${num}</h4>
-        </div>`
-        j--
-    }
-    $("#leaderboard").html(to_add);
+    $.ajax({
+        type: "get",
+        url: "/getRecords",
+        success: (data) => {
+            $("#leaderboard").empty()
+            to_add = ''
+            for(i = 1; i <= data.length; i++) {
+                to_add += `<div class="score">
+                <h4>${i}. ${data[i].num}</h4>
+                <h4>${data[i].score}</h4>
+                </div>`
+            }
+            $("#leaderboard").html(to_add);
+        }
+    })
 }
 
 function setup() {
