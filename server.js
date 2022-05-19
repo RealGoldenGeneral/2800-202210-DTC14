@@ -1,6 +1,8 @@
 // const mysql = require("mysql");
 const express = require("express");
 const app = express();
+const ejs = require('ejs');
+app.set('view engine', 'ejs');
 
 const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({
@@ -30,9 +32,9 @@ app.use(cors())
 //   else console.log("connected to the database successfully!")
 // })
 
-app.use(express.static("css"));
-app.use(express.static("js"));
-app.use(express.static("img"))
+app.use("/css", express.static("./css"));
+app.use("/js", express.static("./js"));
+app.use("/img", express.static("./img"))
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html")
@@ -96,8 +98,20 @@ app.get("/welcome", function(req, res) {
   }
 })
 
+app.get("/leaderboard", function (req, res){
+  res.sendFile(__dirname + "/leaderboard.html")
+})
+
 app.get("/news", function(req, res) {
   res.sendFile(__dirname + "/news.html")
+})
+
+app.get("/game", function (req, res){
+  res.sendFile(__dirname + "/game.html")
+})
+
+app.get("/quiz", function (req, res){
+  res.sendFile(__dirname + "/quiz.html")
 })
 
 app.get("/day", function(req, res) {
@@ -146,18 +160,54 @@ app.post("/add_article", function(req, res) {
   })
 })
 
+app.get("/get_news_articles", function(req, res) {
+  newsModel.find({}, function(err, news) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + news)
+      res.json(news)
+    }
+  })
+})
+
+app.get("/find_article/:title", function(req, res) {
+  console.log("server recieved the get request")
+  console.log("Passed title", req.params.title)
+  newsModel.find({title: req.params.title}, function(err, found_article) {
+    if (err) {
+      console.log("Err" + err) 
+    }
+    else {
+      console.log("Data" + found_article)
+      if (found_article.length > 1) {
+        res.json(found_article[0])
+      }
+      else {
+        res.json(found_article)
+      }
+    }
+  })
+})
+
 app.listen(process.env.PORT || 5005, function (err) {
   if (err)
       console.log(err);
 })
 
 const mongoose = require('mongoose');
+const { request } = require("express");
 
 mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
  {useNewUrlParser: true, useUnifiedTopology: true});
 const userSchema = new mongoose.Schema({
     name: String,
     password: String,
+    email: String,
+    username: String,
+    phone: String,
+    img:String
 });
 
 const daySchema = new mongoose.Schema({
@@ -165,18 +215,41 @@ const daySchema = new mongoose.Schema({
 });
 
 const newsSchema = new mongoose.Schema({
-  title: String,
+  title: {type: String, unique: true},
   url: String,
   img_url: String,
   description: String,
   content: String
 });
 
+const usersSchema = new mongoose.Schema({
+  // _id: Object,
+  name: String,
+  email: String,
+  username: String,
+  phone: String,
+  img:String
+})
+
 const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
 
 
+
+
+app.get('/profile', (req,res) =>{ 
+    userModel.find({}, function(err,users)
+     {
+      res.render('profile', {
+        name: users[16].name,
+        email: users[16].email,
+        username: users[16].username,
+        phone: users[16].phone,
+
+      })
+    })
+})
 
 //var session = require("express-session")
 
