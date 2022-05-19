@@ -23,6 +23,19 @@ function get_current_quiz_question_answers(chosen_answer) {
     }
 }
 
+function update_user_score() {
+    $.ajax(
+        {
+            "url": "/updateUserQuizScore",
+            "type": "POST",
+            "data": {
+                "score": user_quiz_score,
+                "category": ""
+            }
+        }
+    )
+}
+
 //placeholder for now, will work on it later
 function display_end_screen() {
     update_user_score()
@@ -67,15 +80,27 @@ function store_quiz_questions(data) {
     start_quiz()
 }
 
+function get_quiz_questions(data) {
+    console.log(data)
+}
+
 function grab_current_quiz_category_questions() {
     $.ajax(
         {
-            // need to get quiz category later on
-            "url": "/findQuizQuestions",
-            "type": "POST",
-            "success": store_quiz_questions
+            "url": "/getSelecetedCategory",
+            "type": "GET",
+            "success": get_quiz_questions
         }
     )
+
+    // $.ajax(
+    //     {
+    //         // need to get quiz category later on
+    //         "url": "/findQuizQuestions",
+    //         "type": "POST",
+    //         "success": store_quiz_questions
+    //     }
+    // )
 }
 
 function setup() {
