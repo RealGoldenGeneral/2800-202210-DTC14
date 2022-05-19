@@ -54,10 +54,25 @@ function show_next_quiz_info() {
 }
 ////
 
+function load_high_and_previous_scores(data) {
+    console.log(data)
+}
+
+function grab_high_and_previous_score() {
+    $.ajax(
+        {
+            "url": "/getQuizScores",
+            "type": "GET",
+            "success": load_high_and_previous_scores
+        }
+    )
+}
+
 function setup() {
     // hiding and showing defaulted quiz info section
     $(".quiz_score_info").hide()
     $("#covid_safety").show()
+    grab_high_and_previous_score()
     $(".next").click(show_next_quiz_info)
     $(".prev").click(show_prev_quiz_info)
     $(".quiz_start_button").click(move_to_quiz_screen)

@@ -95,7 +95,6 @@ body{
     grid-area: prev_score_points;
 }
 
-/*  */
 /* Slideshow controls */
 i.fa-angle-left, i.fa-angle-right {
     font-size: 1.5em;
@@ -155,7 +154,6 @@ a.next {
     animation-name: slide_in_left;
     animation-duration: 0.5s;
 }
-/*  */
 
 /* Play Quiz Screen */
 .play_quiz_container {
