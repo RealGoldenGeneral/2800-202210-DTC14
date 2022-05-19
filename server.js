@@ -64,6 +64,7 @@ app.post("/login", function(req, res) {
   userModel.find({name: username}, function(err, user) {
     console.log(`entered: ${pass}, in db: ${user}`)
     var full_info = user
+    console.log("Full Info: ", full_info)
     if (err) {
       console.log(err)
     }
@@ -203,6 +204,19 @@ app.post("/findQuizQuestions", function(req, res) {
     else {
       console.log("Data")
       res.send(questions)
+    }
+  })
+})
+
+app.get("/getQuizScores", function(req, res) {
+  console.log("Current User: ", req.session.real_user)
+  userModel.find({name: req.session.real_user[0].name}, function(err, user_doc) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + user_doc)
+      res.json(user_doc)
     }
   })
 })
