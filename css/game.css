@@ -8,6 +8,10 @@
     outline: none;
     border: none;
 }
+
+html {
+  height: 100vh;
+}
 body{
     background-color: #449372;
     margin: 0;
