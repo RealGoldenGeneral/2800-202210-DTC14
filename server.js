@@ -20,3 +20,4 @@ app.get('/thanks.html', function(req, res){
 
 app.use('/css', express.static("./css"))
 app.use('/img', express.static("./img"))
+
