@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/settings.css">
+    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/settings.js"></script>
+</head>
+
+<body>
+    <main>
+        <div class="title">
+            <div>
+            </div>
+            <div>
+                <h2>Settings</h2>
+            </div>
+            <div>
+                <i class="fa-solid fa-bars profile-icon"></i>
+            </div>
+            <div id="full_menu">
+                <div id="sign_out">
+                    <div>
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign Out</span>
+                    </div>
+                </div>
+                <div id="settings">
+                    <div>
+                        <i class="fa-solid fa-gear"></i><span>Settings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: rgb(221, 221, 221); height:100%; border-radius: 50px 50px 0 0;">
+            <div id="box">
+                <div class="profileSettings">
+                    <h3>Profile</h3>
+                    <div id="usernameOption">
+                        <label for="username">Change Username:</label>
+                        <input type="text" id="username" name="username" pattern="[A-Za-z0-9_-]{3, 25}">
+                        <input type="submit" value="Submit" id="usernameSubmit">
+                    </div>
+                    <div id="passwordOption">
+                        <label for="password">Change Password:</label>
+                        <input type="password" id="password" name="password">
+                        <input type="submit" value="Submit" id="passwordSubmit">
+                    </div>
+                    <div id="emailOption">
+                        <label for="email">Change Email:</label>
+                        <input type="email" id="email" name="email">
+                        <input type="submit" value="Submit" id="emailSubmit">
+                    </div>
+                    <div id="phoneNumberOption">
+                        <label for="phoneNumber">Change Phone Number:</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber">
+                        <input type="submit" value="Submit" id="phoneNumberSubmit">
+                    </div>
+                </div>
+                <div class="quizSettings">
+                    <h3>Quiz Categories</h3>
+                    <div id="categorySettings">
+                        <label for="categories">Select a category:</label>
+                        <select name="categories" id="categories">
+                            <option value="COVID Safety">COVID Safety</option>
+                            <option value="COVID Information">COVID Information</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar">
+
+            <div class="navbar-item" id="home-tab">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </div>
+
+            <div class="navbar-item" id="news-tab">
+                <i class="fa-solid fa-newspaper"></i>
+                <p>News</p>
+            </div>
+
+
+            <div class="navbar-item" id="scores-tab">
+                <i class="fa-solid fa-trophy"></i>
+                <p>Scores</p>
+            </div>
+
+
+            <div class="navbar-item">
+                <i class="fa-solid fa-user" id="profile-tab"></i>
+                <p>Profile</p>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

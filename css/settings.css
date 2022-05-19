@@ -1,0 +1,33 @@
+.profileSettings {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.profileSettings div {
+    display: flex;
+    gap: 10px;
+}
+
+.quizSettings {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#categorySettings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 25px;
+}

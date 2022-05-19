@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Roboto',sans-serif;
+    outline: none;
+    border: none;
+}
+body{
+    background-color: #449372;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
+  
+}
+.navbar-item {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: x-large;
+}
+img{
+    /*width: 300px;
+    margin-right: 175px;
+    height: 300px;*/
+    max-width: 100%;
+    height: auto;
+    margin-left: 30%;
+}
+button{
+    background-color: #a7d1c6;
+    border: 5px outset #d7eee4;
+    color: #000000;
+    padding: 20px;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    width: 500px;
+    height: 100px;
+    margin-left: 30%;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 30px;
+    
+}
+.play-container{
+    width: 100%;
+    border: 5px outset #d7eee4;
+    opacity: 80%;
+    height: 1013px;
+    background-color: rgb(221, 221, 221);
+    border-radius: 40px 40px 0 0;
+    
+}
+
+.navbar {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    background-color: #8dc1ac;
+    margin-bottom: 500px;
+    height: 100%;
+}
+.navbar > div {
+    padding: 5px;
+}
+
+.navbar-item:hover{
+    background-color: #449372;
+}
+
+
+
+.navbar .navbar-item.active {
+    background-color: #449372;
+}
+
+@media screen and (max-width: 850px) {
+    .navbar-item {
+      font-size: small;
+    }
+    img{
+        margin-left: 75px;
+        width: 80%;
+        height: 50%;
+    }
+    button{
+        width: 50%;
+  }
+}
+  
+  @media screen and (max-width: 450px) {
+    * {
+      font-size: x-large;
+    }
+  }
+  
+  @media screen and (max-width: 350px) {
+    .navbar p {
+      display: none;
+    }
+  
+    .navbar > div {
+      padding: 15px
+    }
+    .play-container{
+        width: 25%
+    }
+  }
+  
+
+
