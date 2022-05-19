@@ -232,7 +232,12 @@ const usersSchema = new mongoose.Schema({
   img:String
 })
 
-const scoresSchema = new mongooseSchema({
+const scoresSchema = new mongoose.Schema({
+  name: String,
+  score: Number
+})
+
+const questionsSchema = new mongoose.Schema({
   name: String,
   score: Number
 })
@@ -241,6 +246,7 @@ const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
 const scoresModel = mongoose.model("scores", scoresSchema);
+const questionsModel = mongoose.model("correct_questions", questionsSchema);
 
 app.get('/profile', (req,res) =>{ 
     userModel.find({}, function(err,users)
@@ -273,6 +279,17 @@ app.get('/getRecords', (req, res) => {
   scoresModel.find({}, function (err, scores) {
     if (err) {
       console.log("Error: " + error)
+    } else {
+      console.log("Data: " + scores)
+    }
+    res.send("Successfully displayed all scores.")
+  })
+})
+
+app.put('/getQuizRecords', (req, res) => {
+  scoresModel.find({}, function (err, scores) {
+    if (err) {
+      console.log("Error: " + err)
     } else {
       console.log("Data: " + scores)
     }
