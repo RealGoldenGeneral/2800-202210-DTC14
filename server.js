@@ -71,6 +71,8 @@ app.post("/login", function(req, res) {
       user = user.map(filter_password)
       console.log(user[0])
       if (req.body.password == user[0]) {
+        tast_id = ''
+        test_id = user[0]._id
         req.session.real_user = full_info
         req.session.authenticated = true
         res.send(req.session.real_user)
@@ -112,6 +114,10 @@ app.get("/game", function (req, res){
 
 app.get("/quiz", function (req, res){
   res.sendFile(__dirname + "/quiz.html")
+})
+
+app.get("/settings", function (req, res) {
+  res.sendFile(__dirname + "/settings.html")
 })
 
 app.get("/day", function(req, res) {
@@ -207,7 +213,8 @@ const userSchema = new mongoose.Schema({
     email: String,
     username: String,
     phone: String,
-    img:String
+    img:String,
+    category: String
 });
 
 const daySchema = new mongoose.Schema({
@@ -249,6 +256,81 @@ app.get('/profile', (req,res) =>{
 
       })
     })
+})
+
+app.post('/changeUsername', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'username': req.body.username}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.post('/changePassword', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'password': req.body.password}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.post('/changeEmail', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'email': req.body.email}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.post('/changePhoneNumber', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'phone': req.body.phone}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.post('/changeQuizCategory', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'category': req.body.category}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
 })
 
 //var session = require("express-session")
