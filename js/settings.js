@@ -1,3 +1,14 @@
+function registerNewEmail(newEmail) {
+    $.ajax({
+        type: "post",
+        data: {
+            email: newEmail
+        },
+        url: '/changeEmail'
+    })
+}
+
+
 function registerNewPassword(newPassword) {
     $.ajax({
         type: "post",

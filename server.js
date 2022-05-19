@@ -287,6 +287,21 @@ app.post('/changePassword', function (req, res) {
   })
 })
 
+app.post('/changeEmail', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'email': req.body.email}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
 //var session = require("express-session")
 
 //const bodyparser = require("body-parser");
