@@ -1,17 +1,27 @@
+function hide_error_message() {
+    $("#incorrect-login").hide()
+}
+
 function process_response(data) {
-    console.log("recieved back from server")
-    console.log(`username: ${data["username"]}, password: ${data["password"]}`)
+    $("#incorrect-login").hide()
+    console.log(data)
+    if (data != "incorrect information") {
+        location.href = "https://co-vention.herokuapp.com/welcome"
+    } else {
+        $("#incorrect-login").show()
+        setTimeout(hide_error_message, 3000)
+    }
 }
 
 function listenToClick() {
-    console.log("loaded")
-    $(".login_button").click(function() {
+    $("#incorrect-login").hide()
+    $("#login").click(function() {
         $.ajax({
             type: "POST",
-            url: "http://localhost:5005/login",
+            url: "https://co-vention.herokuapp.com/login",
             data: {
-                name: $("#username:text").val(),
-                password: $("#password:text").val()
+                name: $("#username").val(),
+                password: $("#password").val()
             },
             success: process_response
         })
