@@ -67,7 +67,7 @@ function start_quiz() {
 }
 
 function store_quiz_questions(data) {
-    console.log(data)
+    console.log("quiz questions of selected category", data)
     current_questions = data[0].questions
     split_category_title = data[0].category.split("_")
     console.log(split_category_title)
@@ -81,26 +81,28 @@ function store_quiz_questions(data) {
 }
 
 function get_quiz_questions(data) {
-    console.log(data)
+    console.log("retrieved user stuff", data)
+    $.ajax(
+        {
+            // need to get quiz category later on
+            "url": "/findQuizQuestions",
+            "type": "POST",
+            "data": {
+                "category": data[0].category
+            },
+            "success": store_quiz_questions
+        }
+    )
 }
 
 function grab_current_quiz_category_questions() {
     $.ajax(
         {
-            "url": "/getSelecetedCategory",
+            "url": "/getSelectedCategory",
             "type": "GET",
             "success": get_quiz_questions
         }
     )
-
-    // $.ajax(
-    //     {
-    //         // need to get quiz category later on
-    //         "url": "/findQuizQuestions",
-    //         "type": "POST",
-    //         "success": store_quiz_questions
-    //     }
-    // )
 }
 
 function setup() {

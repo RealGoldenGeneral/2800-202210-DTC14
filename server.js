@@ -196,8 +196,20 @@ app.get("/find_article/:title", function(req, res) {
   })
 })
 
+app.get("/getSelectedCategory", function(req, res) {
+  userModel.find({name: req.session.real_user[0].name}, function(err, user_stuff) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + user_stuff)
+      res.json(user_stuff)
+    }
+  })
+})
+
 app.post("/findQuizQuestions", function(req, res) {
-  quizModel.find({category: "covid_safety"}, function(err, questions) {
+  quizModel.find({category: req.body.category}, function(err, questions) {
     if (err) {
       console.log(err)
     }
