@@ -74,6 +74,9 @@ function load_high_and_previous_scores(data) {
     covid_info = quiz_scores.filter(covid_info_quiz_scores)
     console.log(covid_safety, covid_info)
     $("#covid_safety .quiz_high_score").text(covid_safety[0].high_score)
+    $("#covid_safety .quiz_prev_score").text(covid_safety[0].previous_score)
+    $("#covid_virus .quiz_high_score").text(covid_info[0].high_score)
+    $("#covid_virus .quiz_prev_score").text(covid_info[0].previous_score)
 }
 
 function grab_high_and_previous_score() {
