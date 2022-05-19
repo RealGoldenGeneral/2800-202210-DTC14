@@ -22,6 +22,9 @@ function redirect_to_page() {
     if ($(this).attr("id") == "button2") {
         location.href = "/quiz"
     }
+    if ($(this).attr("id") == "profile-tab") {
+        location.href = "/profile"
+    }
 }
 
 // This code snippet was a portion the W3Schools Horizontal Tabs How-To
