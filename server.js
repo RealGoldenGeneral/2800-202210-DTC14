@@ -302,6 +302,21 @@ app.post('/changeEmail', function (req, res) {
   })
 })
 
+app.post('/changePhoneNumber', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'phone': req.body.phone}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
 //var session = require("express-session")
 
 //const bodyparser = require("body-parser");

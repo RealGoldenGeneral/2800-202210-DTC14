@@ -1,3 +1,13 @@
+function registerNewPhoneNumber(newPhoneNumber) {
+    $.ajax({
+        type: "post",
+        data: {
+            phone: newPhoneNumber
+        },
+        url: '/changePhoneNumber'
+    })
+}
+
 function registerNewEmail(newEmail) {
     $.ajax({
         type: "post",
@@ -53,6 +63,14 @@ function setup() {
             registerNewEmail(newEmail);
         } else {
             $("#emailOption").append("<p>Name cannot be blank.</p>")
+        }
+    })
+    $("#phoneNumberSubmit").click(() => {
+        newPhoneNumber = $("#phoneNumber").val();
+        if (newPhoneNumber != '') {
+            registerNewPhoneNumber(newPhoneNumber);
+        } else {
+            $("#phoneNumberOption").append("<p>Name cannot be blank.</p>")
         }
     })
 }
