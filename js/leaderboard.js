@@ -21,6 +21,7 @@ function fillScoreboardGame() {
         success: (data) => {
             $("#leaderboard").empty()
             to_add = ''
+            data.sort(function(a, b){return b - a}) //From W3 schools resources
             for(i = 1; i <= data.length; i++) {
                 to_add += `<div class="score">
                 <h4>${i}. ${data[i].num}</h4>
