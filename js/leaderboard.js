@@ -24,6 +24,7 @@ function fillScoreboardGame() {
         url: "/getRecords",
         success: (data) => {
             $("#leaderboard").empty()
+            console.log(data)
             to_add = ''
             for (i = 0; i <= data.length; i++) {
                 to_add += `<div class="score">
