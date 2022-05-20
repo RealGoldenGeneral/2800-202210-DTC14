@@ -208,6 +208,25 @@ a.next {
     border-color: #449372;
 }
 
+/* Quiz End Screen */
+.play_quiz_end_title {
+    grid-area: 1 / 1 / 2 / 3;
+}
+
+.play_quiz_end_score_info {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    height: 100%;
+}
+
+.play_quiz_end_questions_container {
+    grid-area: 2 / 1 / 3 / 3;
+}
+
+.play_quiz_end_menu_controls {
+    grid-area: 3 / 1 / 4 / 3;
+}
+
 /* Media Queries */
 @media screen and (max-width: 400px) {
     .play_quiz_answer_container {

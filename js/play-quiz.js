@@ -62,6 +62,36 @@ function get_user_score() {
 function display_end_screen() {
     get_user_score()
     $(".play_quiz_container").html("")
+    end_screen = ""
+    end_screen += `<div class="play_quiz_end_title">`
+    end_screen += `<h4>You made it to the end!</h4>`
+    end_screen += `</div>`
+    end_screen += `<div class="play_quiz_end_info">`
+    end_screen += `<div class="play_quiz_end_score_info">`
+    end_screen += `<div class="play_quiz_end_high_score">`
+    end_screen += `<p><i class="fa-solid fa-trophy"></i> High Score</p>`
+    end_screen += `<p>10</p>`
+    end_screen += `</div>`
+    end_screen += `<div class="play_quiz_end_current_score">`
+    end_screen += `<p>Current Score</p>`
+    end_screen += `<p>${user_quiz_score}</p>`
+    end_screen += `</div>`
+    
+    end_screen += `<div class="play_quiz_end_questions_container">`
+    // accordians of questions, coloured in red and green 
+    end_screen += `<p>Placeholder</p>`
+    end_screen += `</div>`
+
+    end_screen += `<div class="play_quiz_end_menu_controls">`
+    end_screen += `<div class="play_quiz_end_return_button">`
+    end_screen += `<p>Go Back To Quiz Screen</p>`
+    end_screen += `</div>`
+    end_screen += `</div>`
+
+    end_screen += `</div>`
+    end_screen += `</div>`
+    old = $(".play_quiz_container").html()
+    $(".play_quiz_container").html(old + end_screen)
 }
 
 function move_to_next_question() {
@@ -91,12 +121,18 @@ function start_quiz() {
 function store_quiz_questions(data) {
     console.log("quiz questions of selected category", data)
     current_questions = data[0].questions
+    // the formatted category string in db: covid_safety
+    // split string by _
     split_category_title = data[0].category.split("_")
     console.log(split_category_title)
+    // loop through ['covid', 'safety']
     for (i = 0; i < split_category_title.length; i++) {
+        // set new string of each index to it's capitalized form
+        // slice first letter and capitalize and concatentate with rest of string in lowercase
         split_category_title[i] = split_category_title[i].slice(0, 1).toUpperCase() + split_category_title[i].slice(1)
     }
     console.log(split_category_title)
+    // join ['Covid', 'Safety'] array elements with space in bewtween: Covid Safety
     $(".title div:nth-child(2) h2").text(split_category_title.join(" "))
     console.log(current_questions)
     start_quiz()
