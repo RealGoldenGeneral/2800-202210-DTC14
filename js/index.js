@@ -1,4 +1,9 @@
 // const { append } = require("express/lib/response")
+
+function redirect_to_signup() {
+    location.href = "/signup"
+}
+
 function show_full_menu() {
     console.log($("#full_menu").css("display"))
     if ($("#full_menu").css("display") == "none") {
@@ -108,6 +113,7 @@ function listenToClick() {
             success: process_response
         })
     })
+    $("#sign").click()
 }
 
 $("#full_menu").hide()

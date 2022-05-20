@@ -333,6 +333,10 @@ app.post('/changeQuizCategory', function (req, res) {
   })
 })
 
+app.get('/signup', function (req, res) {
+  res.sendFile(__dirname + "signup.html")
+})
+
 //var session = require("express-session")
 
 //const bodyparser = require("body-parser");
