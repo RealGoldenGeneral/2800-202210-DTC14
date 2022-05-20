@@ -61,7 +61,7 @@ app.post("/login", function(req, res) {
   //     console.log(user)
   //   }
   // })
-  userModel.find({name: username}, function(err, user) {
+  userModel.find({username: username}, function(err, user) {
     console.log(`entered: ${pass}, in db: ${user}`)
     var full_info = user
     console.log("Full Info: ", full_info)
