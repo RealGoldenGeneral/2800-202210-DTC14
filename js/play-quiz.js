@@ -6,6 +6,16 @@ user_info = ""
 correct = []
 incorrect = []
 
+function expand_this_accordian() {
+    if ($(this).parent().find(".play_quiz_end_accordian_answer").css("display") == "none") {
+        $(".play_quiz_end_accordian_answer").hide()
+        $(this).parent().find(".play_quiz_end_accordian_answer").show()
+    }   
+    else {
+        $(this).parent().find(".play_quiz_end_accordian_answer").hide()
+    }
+}
+
 function get_correct_only(data) {
     if (data.type == "correct") {
         return data
@@ -177,6 +187,7 @@ async function display_end_screen() {
     end_screen += `</div>`
     old = $(".play_quiz_container").html()
     $(".play_quiz_container").html(old + end_screen)
+    $(".play_quiz_end_accordian_answer").hide()
 }
 
 function move_to_next_question() {
@@ -252,6 +263,7 @@ function grab_current_quiz_category_questions() {
 function setup() {
     grab_current_quiz_category_questions()
     $("body").on("click", ".play_quiz_choice", move_to_next_question)
+    $("body").on("click", ".expand_accordian", expand_this_accordian)
 }
 
 $(document).ready(setup)
