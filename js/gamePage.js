@@ -395,6 +395,14 @@ function game() {
 
             record = destroyed > record ? destroyed : record;
 
+            $.ajax({
+                type: "put",
+                url: "insertRecord",
+                data: {
+                    score: record
+                }
+            })
+
             ctx.font = "20px Verdana";
             ctx.fillStyle = "white";
             ctx.textAlign = "center";
@@ -402,7 +410,7 @@ function game() {
 
             ctx.drawImage(sprite, 500, 18, 70, 70, cW/2 - 35, cH/2 + 40, 70,70);
 
-            canvas.removeAttribute('class');
+            canvas.removeAttribute('class')
         }
     }
 

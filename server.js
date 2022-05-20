@@ -71,6 +71,7 @@ app.post("/login", function(req, res) {
       user = user.map(filter_password)
       console.log(user[0])
       if (req.body.password == user[0]) {
+        id = full_info[0]._id
         req.session.real_user = full_info
         req.session.authenticated = true
         res.send(req.session.real_user)
@@ -232,15 +233,28 @@ const usersSchema = new mongoose.Schema({
   email: String,
   username: String,
   phone: String,
-  img:String
+  img:String,
+  quiz_scores: [{
+    category: String,
+    high_score: Number,
+    previous_score: Number}]
+})
+
+const scoresSchema = new mongoose.Schema({
+  name: String,
+  score: Number
+})
+
+const questionsSchema = new mongoose.Schema({
+  name: String,
+  score: Number
 })
 
 const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
-
-
-
+const scoresModel = mongoose.model("scores", scoresSchema);
+const questionsModel = mongoose.model("correct_questions", questionsSchema);
 
 app.get('/profile', (req,res) =>{ 
     userModel.find({}, function(err,users)
@@ -253,6 +267,42 @@ app.get('/profile', (req,res) =>{
 
       })
     })
+})
+
+app.put('/insertRecord', (req, res) => {
+  scoresModel.create({
+    'names': full_info[0].username,
+    'score': req.body.score
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log ("Data: " + data)
+    }
+    res.send("Successfully inserted record.")
+  })
+})
+
+app.get('/getRecords', (req, res) => {
+  scoresModel.find({}, function (err, scores) {
+    if (err) {
+      console.log("Error: " + error)
+    } else {
+      console.log("Data: " + scores)
+    }
+    res.send("Successfully displayed all scores.")
+  })
+})
+
+app.put('/getQuizRecords', (req, res) => {
+  userModel.find({}, function (err, scores) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + scores.quiz_scores)
+    }
+    res.send("Successfully displayed all scores.")
+  })
 })
 
 //var session = require("express-session")
