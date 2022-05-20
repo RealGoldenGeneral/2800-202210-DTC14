@@ -1,5 +1,9 @@
 // const { append } = require("express/lib/response")
 
+function redirect_to_settings() {
+    location.href = "/settings"
+}
+
 function redirect_to_signup() {
     location.href = "/signup"
 }
@@ -133,6 +137,7 @@ function listenToClick() {
         })
     })
     $("#sign").click(redirect_to_signup)
+    $("#settings").click(redirect_to_settings)
 }
 
 $("#full_menu").hide()
