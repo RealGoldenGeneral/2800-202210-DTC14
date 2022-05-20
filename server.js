@@ -484,7 +484,7 @@ app.get('/getRecords', (req, res) => {
   })
 })
 
-app.put('/getQuizRecords', (req, res) => {
+app.get('/getQuizRecords', (req, res) => {
   userModel.find({}, function (err, scores) {
     if (err) {
       console.log("Error: " + err)
