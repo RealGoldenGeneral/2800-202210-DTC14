@@ -71,6 +71,7 @@ function build_question_accordians() {
         accordian += `<p>${incorrect[i].question}</p>`
         accordian += `<i class="fa-solid fa-plus expand_accordian"></i>`
         accordian += `<div class="play_quiz_end_accordian_answer">`
+        accordian += `<p><b>Correct Answer(s)</b></p>`
         accordian += get_answers_of_question(incorrect[i].question)
         accordian += `</div>` 
         accordian += `</div>`
