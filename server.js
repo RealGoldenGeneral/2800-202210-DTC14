@@ -421,7 +421,7 @@ app.post('/changePhoneNumber', function (req, res) {
 
 app.post('/changeQuizCategory', function (req, res) {
   userModel.updateOne({
-    '_id': test_id
+    'username': req.session.real_user[0].username
   }, {
     $set: {'category': req.body.category}
   }, function (err, data) {
