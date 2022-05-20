@@ -46,7 +46,7 @@ function build_question_accordians() {
         accordian += `</div>`
     }
     for (i = 0; i < incorrect.length; i++) {
-        accordian += `<div class="play_quiz_end_accordian_item incorrect" id="${incorrect[i].question}"`
+        accordian += `<div class="play_quiz_end_accordian_item incorrect" id="${incorrect[i].question}">`
         accordian += `<p>${incorrect[i].question}</p>`
         accordian += `<div class="play_quiz_end_accordian_answer">`
         accordian += get_answers_of_question(incorrect[i].question)
