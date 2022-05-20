@@ -434,8 +434,11 @@ app.post('/changeQuizCategory', function (req, res) {
 })
 
 app.put('/insertRecord', (req, res) => {
+  userModel({name: req.session.real_user.name}, function (err, users) {
+    username = req.session.real_user[0].username
+  })
   scoresModel.create({
-    'names': full_info[0].username,
+    'name': username,
     'score': req.body.score
   }, function (err, data) {
     if (err) {
