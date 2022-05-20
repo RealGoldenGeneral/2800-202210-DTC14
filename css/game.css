@@ -8,8 +8,15 @@
     outline: none;
     border: none;
 }
+
+html {
+  height: 100vh;
+}
 body{
     background-color: #449372;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
   
 }
 .navbar-item {
@@ -25,7 +32,7 @@ img{
     height: 300px;*/
     max-width: 100%;
     height: auto;
-    margin-left: 38%;
+    margin-left: 30%;
 }
 button{
     background-color: #a7d1c6;
@@ -35,9 +42,9 @@ button{
     text-align: center;
     display: block;
     font-size: 20px;
-    width: 2000px;
+    width: 500px;
     height: 100px;
-    margin: 195px;
+    margin-left: 30%;
     align-items: center;
     cursor: pointer;
     border-radius: 5px;
@@ -48,7 +55,6 @@ button{
     width: 100%;
     border: 5px outset #d7eee4;
     opacity: 80%;
-    height: 1013px;
     background-color: rgb(221, 221, 221);
     border-radius: 40px 40px 0 0;
     
