@@ -229,7 +229,11 @@ const usersSchema = new mongoose.Schema({
   email: String,
   username: String,
   phone: String,
-  img:String
+  img:String,
+  quiz_scores: [{
+    category: String,
+    high_score: Number,
+    previous_score: Number}]
 })
 
 const scoresSchema = new mongoose.Schema({
@@ -287,11 +291,11 @@ app.get('/getRecords', (req, res) => {
 })
 
 app.put('/getQuizRecords', (req, res) => {
-  questionsModel.find({}, function (err, scores) {
+  userModel.find({}, function (err, scores) {
     if (err) {
       console.log("Error: " + err)
     } else {
-      console.log("Data: " + scores)
+      console.log("Data: " + scores.quiz_scores)
     }
     res.send("Successfully displayed all scores.")
   })
