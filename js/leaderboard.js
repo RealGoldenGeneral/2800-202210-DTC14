@@ -27,7 +27,7 @@ function fillScoreboardGame() {
             to_add = ''
             for (i = 0; i <= data.length; i++) {
                 to_add += `<div class="score">
-                <h4>${i + 1}. ${data[i].num}</h4>
+                <h4>${i + 1}. ${data[i].name}</h4>
                 <h4>${data[i].score}</h4>
                 </div>`
             }
