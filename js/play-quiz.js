@@ -6,6 +6,11 @@ user_info = ""
 correct = []
 incorrect = []
 
+function return_to_quiz_home() {
+    console.log("activated")
+    location.href = "/quiz"
+}
+
 function expand_this_accordian() {
     if ($(this).parent().find(".play_quiz_end_accordian_answer").css("display") == "none") {
         $(".play_quiz_end_accordian_answer").hide()
@@ -268,6 +273,7 @@ function setup() {
     grab_current_quiz_category_questions()
     $("body").on("click", ".play_quiz_choice", move_to_next_question)
     $("body").on("click", ".expand_accordian", expand_this_accordian)
+    $("body").on("click", ".play_quiz_end_return_button", return_to_quiz_home)
 }
 
 $(document).ready(setup)
