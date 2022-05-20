@@ -10,11 +10,11 @@ function load_selected_article(data) {
     console.log(data)
     $(".news-card").hide()
     full_article_template = document.getElementById("full-news-article")
-    full_article_title = data.title
-    full_article_image = data.img_url
-    full_article_desc = data.description
-    full_article_content = data.content
-    full_article_link = data.url
+    full_article_title = data[0].title
+    full_article_image = data[0].img_url
+    full_article_desc = data[0].description
+    full_article_content = data[0].content
+    full_article_link = data[0].url
     var clone = full_article_template.content.cloneNode(true)
     clone.querySelector("#full-article-title").innerHTML = full_article_title
     clone.querySelector("#full-article-image").src = full_article_image
@@ -32,12 +32,12 @@ function get_full_article_info() {
     console.log(title)
     $.ajax(
         {
-            "url": `/find_article/${title}`,
-            "type": "GET",
+            "url": `/find_article`,
+            "type": "POST",
+            "data": {
+                "title": title
+            },
             "success": load_selected_article,
-            // "data": {
-            //     "title": 
-            // }
         }
     )
 }

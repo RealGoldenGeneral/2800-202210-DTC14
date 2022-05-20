@@ -200,17 +200,17 @@ app.get("/get_news_articles", function(req, res) {
   })
 })
 
-app.get("/find_article/:title", function(req, res) {
+app.post("/find_article", function(req, res) {
   console.log("server recieved the get request")
   console.log("Passed title", req.params.title)
-  newsModel.find({title: req.params.title}, function(err, found_article) {
+  newsModel.find({title: req.body.title}, function(err, found_article) {
     if (err) {
       console.log("Err" + err) 
     }
     else {
       console.log("Data" + found_article)
       if (found_article.length > 1) {
-        res.json(found_article[0])
+        res.json(found_article)
       }
       else {
         res.json(found_article)
