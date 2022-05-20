@@ -113,7 +113,7 @@ function listenToClick() {
             success: process_response
         })
     })
-    $("#sign").click()
+    $("#sign").click(redirect_to_signup)
 }
 
 $("#full_menu").hide()
