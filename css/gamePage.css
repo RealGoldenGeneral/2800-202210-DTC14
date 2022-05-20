@@ -15,3 +15,14 @@ html {
 #canvas.playing {
     cursor: url('https://res.cloudinary.com/dc4stsmlc/image/upload/v1570612589/Codepen/aim_red_j9cyuq.png') 17.5 17.5,auto !important;
 }
+
+.return{
+    position:fixed;
+    width:30px;
+    height: 30px;
+    background:url('/img/returnButton.png'), no-repeat;
+    z-index: 10;
+    display: block;
+    right: 10px;
+    bottom:10px;
+}
