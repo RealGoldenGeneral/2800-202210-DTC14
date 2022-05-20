@@ -457,7 +457,8 @@ app.put('/addNewUser', function (req, res) {
     'phone': req.body.phone,
     'img': './img/profileicon.png',
     'category': "covid_safety",
-    'education': req.body.education
+    'education': req.body.education,
+    "quiz_scores": [{"category": "covid_safety", "high_score": 0}, {"category": "covid_information", "high_score": 0}]
   }, function (err, data) {
     if (err) {
       console.log("Error: " + err)
