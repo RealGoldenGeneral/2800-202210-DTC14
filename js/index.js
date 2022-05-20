@@ -34,7 +34,7 @@ function redirect_to_page() {
         location.href = "/profile"
     }
     if ($(this).attr("id") == "button3"){
-        location.href = "/gamePage.html"
+        location.href = "/gamePage"
     }
 }
 
