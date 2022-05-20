@@ -72,6 +72,8 @@ app.post("/login", function(req, res) {
       console.log(user[0])
       if (req.body.password == user[0]) {
         req.session.real_user = full_info
+        // console.log(req.session.real_user = full_info)
+        console.log(full_info) 
         req.session.authenticated = true
         res.send(req.session.real_user)
       }
@@ -198,16 +200,19 @@ app.listen(process.env.PORT || 5005, function (err) {
 
 const mongoose = require('mongoose');
 const { request } = require("express");
+const { name } = require("ejs");
+const { Router } = require("express");
 
 mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/co-vention?retryWrites=true&w=majority",
  {useNewUrlParser: true, useUnifiedTopology: true});
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({ 
+    _id:Object,
     name: String,
     password: String,
     email: String,
     username: String,
     phone: String,
-    img:String
+    img:String,
 });
 
 const daySchema = new mongoose.Schema({
@@ -237,19 +242,46 @@ const newsModel = mongoose.model("news", newsSchema);
 
 
 
-
 app.get('/profile', (req,res) =>{ 
-    userModel.find({}, function(err,users)
+    userModel.find({name:req.session.real_user.name}, function(err,users)
      {
       res.render('profile', {
-        name: users[16].name,
-        email: users[16].email,
-        username: users[16].username,
-        phone: users[16].phone,
+        name: req.session.real_user[0].name,
+        email: req.session.real_user[0].email,
+        username: req.session.real_user[0].username,
+        phone: req.session.real_user[0].phone,
+        img: req.session.real_user[0].img
 
       })
     })
 })
+
+
+// app.get("/users", function(req, res) {
+//   userModel.find({}, function(err, users) {
+//     if (err) {
+//       console.log("Err" + err)
+//     }
+//     else {
+//       console.log("Data" + users)
+//       res.json(users)
+//     }
+//   })
+// })
+
+// app.get("/users/:id", function(req, res) {
+//   userModel.find({}, function(err, users) {
+//     if (err) {
+//       console.log("Err" + err)
+//     }
+//     else {
+//       console.log("Data" + users)
+//       res.json(users)
+//     }
+//   })
+// })
+    
+
 
 //var session = require("express-session")
 
