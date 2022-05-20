@@ -122,9 +122,9 @@ async function display_end_screen() {
     end_screen += `<p>${user_quiz_score}</p>`
     end_screen += `</div>`
     
+    end_screen += `<div class="play_quiz_end_question_title"><p>Questions</p></div>`
     end_screen += `<div class="play_quiz_end_questions_container">`
     // accordians of questions, coloured in red and green 
-    end_screen += `<p>Questions</p>`
 
     end_screen += `<div class="play_quiz_end_questions_accordians">`
     end_screen += build_question_accordians()
