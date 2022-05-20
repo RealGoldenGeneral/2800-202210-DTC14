@@ -20,6 +20,13 @@ body{
   /* background:linear-gradient(-45deg,#d7eee4,#449372); */
 }
 
+@media screen and (max-width: 600px) {
+  #home_img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+  }
 .box{
   width:900px;
   height:400px;
@@ -32,10 +39,15 @@ body{
   overflow:hidden;
 }
 
-.design{
-  width: 50%;
-  height:100%;
-  position:relative;
+  #username{
+      width: 43%;
+      margin-right: 43px;
+  }
+  
+  #password{
+      width: 43%;
+      margin-right: 40px;
+  }
 }
 
 #logo{
