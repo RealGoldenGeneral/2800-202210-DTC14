@@ -1,30 +1,71 @@
-const express = require('express')
-const app = express()
-const mongoose = require("mongoose")
-var session = require("express-session")
+const mysql = require("mysql2");
+const express = require("express");
+const bodyParser = require("body-parser");
+const encoder = bodyParser.urlencoded();
 
-const bodyparser = require("body-parser");
-app.use(bodyparser.urlencoded({
-  extended: true
-}));
+const app = express();
 
+const connection = mysql.createConnection({
+  host:"localhost",
+  user:"root",
+  password:"",
+  database:"nodejs"
+});
 
- mongoose.connect("mongodb+srv://A1exander-liU:assignment3@cluster0.xi03q.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",{
-   UseNewURLParser: true, useUnifiedTopology:true});
- const userSchema = new mongoose.Schema({
-    _id: Object,
-    name: String,
-    email: String,
-    username: String,
-    phone: String
+connection.connect(function(error){
+  if(error) throw error
+  else console.log("connected to the database successfully!")
 })
 
 
-const cors = require('cors');
-app.use(cors())
+app.post("/",encoder, function(req,res){
+  var username = req.body.username;
+  var password = req.body.password;
+
+  connection.query("select * from loginuser where user_name = ? and user_pass = ?",[username,password],function(error,results,fields){
+    if(results.length> 0){
+      res.redirect("/welcome");
+    } else {
+      res.redirect("/");
+    }
+    res.end();
+  })
+})
+
+app.get("/welcome",function(req,res){
+  res.sendFile(__dirname + "/welcome.html")
+})
+
+app.listen(4500);
+async function createDB() {
+  const connection = await mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    multipleStatements: true
+  })
+  const createDBandTables = await connection.query(`CREATE DATABASE IF NOT EXISTS nodejs;
+  use nodejs;
+  CREATE TABLE IF NOT EXISTS user
+  NameID int NOT NULL AUTO INCREMENT
+  name varchar(30)
+  password varchar(30)
+  PRIMARY KEY (NameID)`)
+
+  await connection.query(createDBandTables);
+
+  const [user_rows, user_fields] = await connection.query("SELECT * FROM user");
+
+  if (user_rows.length == 0) {
+    let sqlQuery = "INSERT INTO user (name, password) values ?"
+    let userRecord = [["Roy", "roypassword"]];
+    await connection.query(sqlQuery, [userRecord]);
+  }
+}
 
 app.listen(5005, function (err) {
-    if (err) console.log(err);
+  if (err) console.log(err);
+  else createDB();
 })
 
 app.use(express.static("../public"));

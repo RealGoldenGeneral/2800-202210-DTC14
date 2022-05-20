@@ -10,46 +10,57 @@
 </head>
 
 <body>
-    <header>
-        <h1 id="title">Scores</h1>
-    </header>
-    <div class="box" style="background-color: rgb(221, 221, 221); height:100%; border-radius: 50px 50px 0 0;">
-        <div id="selectOptions">
-            <div id="buttons">
-                <button type="button" id="gameToggle">Game</button>
-                <button type="button" id="quizToggle">Quiz</button>
+    <main>
+        <header>
+            <h1 id="title">Scores</h1>
+        </header>
+        <div class="box"
+            style="background-color: rgb(221, 221, 221); height:100%; width: 100%; justify-content: flex-start;border-radius: 50px 50px 0 0;">
+            <div id="selectOptions">
+                <div id="buttons">
+                    <button type="button" id="gameToggle">Game</button>
+                    <button type="button" id="quizToggle">Quiz</button>
+                </div>
+                <div id="searchUsername">
+                    <label for="search">Search username:</label>
+                    <input type="text" id="search" name="search" pattern="[A-Za-z0-9_-]" title="Username:">
+                    <button type="submit" id="submit">Submit</button>
+                </div>
             </div>
-            <div id="searchUsername">
-                <label for="search">Search username:</label>
-                <input type="text" id="search" name="search" pattern="[A-Za-z0-9_-]" title="Username:">
-                <button type="submit" id="submit">Submit</button>
-            </div>
-        </div>
-        <div id="leaderboard">
+            <div id="leaderboard">
 
+            </div>
         </div>
-    </div>
-    <div class="navbar">
-        <div>
-            <i class="fa-solid fa-house"></i>
-            <p>Home</p>
+
+        <div class="navbar">
+
+            <div class="navbar-item" id="home-tab">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </div>
+
+            <div class="navbar-item" id="news-tab">
+                <i class="fa-solid fa-newspaper"></i>
+                <p>News</p>
+            </div>
+
+
+            <div class="navbar-item" id="scores-tab">
+                <i class="fa-solid fa-trophy"></i>
+                <p>Scores</p>
+            </div>
+
+
+            <div class="navbar-item" id="profile-tab">
+                <i class="fa-solid fa-user"></i>
+                <p>Profile</p>
+            </div>
         </div>
-        <div>
-            <i class="fa-solid fa-newspaper"></i>
-            <p>News</p>
-        </div>
-        <div>
-            <i class="fa-solid fa-trophy"></i>
-            <p>Scoreboard</p>
-        </div>
-        <div>
-            <i class="fa-solid fa-gear"></i>
-            <p>Settings</p>
-        </div>
-    </div>
+    </main>
     <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="./js/leaderboard.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
