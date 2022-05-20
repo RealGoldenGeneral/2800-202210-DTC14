@@ -482,11 +482,11 @@ app.get('/thanks', function (req, res) {
 app.get('/getRecords', (req, res) => {
   scoresModel.find({}, function (err, scores) {
     if (err) {
-      console.log("Error: " + error)
+      console.log("Error: " + err)
     } else {
       console.log("Data: " + scores)
     }
-    res.send("Successfully displayed all scores.")
+    res.send(scores)
   })
 })
 
@@ -497,7 +497,7 @@ app.get('/getQuizRecords', (req, res) => {
     } else {
       console.log("Data: " + scores.quiz_scores)
     }
-    res.send("Successfully displayed all scores.")
+    res.send(scores)
   })
 })
 
