@@ -135,9 +135,10 @@ html{
   }
 
   main {
+    display: grid;
     width: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: 15% 77% 8%;
+    /* grid-template-rows: 15% 77% 8%; */
     align-items: center;
     text-align: center;
   }
