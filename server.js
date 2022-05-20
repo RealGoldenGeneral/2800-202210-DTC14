@@ -214,7 +214,8 @@ const userSchema = new mongoose.Schema({
     username: String,
     phone: String,
     img:String,
-    category: String
+    category: String,
+    education: String
 });
 
 const daySchema = new mongoose.Schema({
@@ -335,6 +336,30 @@ app.post('/changeQuizCategory', function (req, res) {
 
 app.get('/signup', function (req, res) {
   res.sendFile(__dirname + "/signup.html")
+})
+
+app.put('/addNewUser', function (req, res) {
+  userModel.create({
+    'name': req.body.name,
+    'password': req.body.password,
+    'email': req.body.email,
+    'username': req.body.username,
+    'phone': req.body.phone,
+    'img': './img/profileicon.png',
+    'category': 'none',
+    'education': req.body.education
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+    }
+    res.send("Data sent successfully.")
+  })
+})
+
+app.get('/thanks', function (req, res) {
+  res.sendFile(__dirname + "/thanks.html")
 })
 
 //var session = require("express-session")
