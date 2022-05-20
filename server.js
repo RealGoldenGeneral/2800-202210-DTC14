@@ -72,7 +72,7 @@ app.post("/login", function(req, res) {
       console.log(user[0])
       if (req.body.password == user[0]) {
         tast_id = ''
-        test_id = user[0]._id
+        test_id = full_info[0]._id
         req.session.real_user = full_info
         req.session.authenticated = true
         res.send(req.session.real_user)
