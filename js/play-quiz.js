@@ -1,6 +1,7 @@
 current_questions = ""
 current_question = 0
 user_quiz_score = 0
+selected_category = ""
 
 function display_correct_answer_only(choice) {
     return choice.choice
@@ -30,7 +31,7 @@ function update_user_score() {
             "type": "POST",
             "data": {
                 "score": user_quiz_score,
-                "category": ""
+                "category": selected_category
             }
         }
     )
@@ -82,6 +83,7 @@ function store_quiz_questions(data) {
 
 function get_quiz_questions(data) {
     console.log("retrieved user stuff", data)
+    selected_category = data[0].category
     $.ajax(
         {
             // need to get quiz category later on

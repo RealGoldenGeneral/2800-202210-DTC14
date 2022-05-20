@@ -233,6 +233,20 @@ app.get("/getQuizScores", function(req, res) {
   })
 })
 
+app.post("/updateUserQuizScore", function(req, res) {
+  console.log("user score: ", req.body)
+  console.log("/updateUserQuizScore", req.session.real_user)
+  userModel.updateOne({name: req.session.real_user[0].name, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      console.log(data)
+      res.send("success")
+    }
+  })
+})
+
 app.listen(process.env.PORT || 5010, function (err) {
   if (err)
       console.log(err);
@@ -249,7 +263,12 @@ const userSchema = new mongoose.Schema({
     email: String,
     username: String,
     phone: String,
-    img:String
+    img:String,
+    quiz_scores: [{
+      category: String,
+      high_score: Number,
+      previous_score: Number}],
+    category: String
 });
 
 const daySchema = new mongoose.Schema({
@@ -270,7 +289,10 @@ const usersSchema = new mongoose.Schema({
   email: String,
   username: String,
   phone: String,
-  img:String
+  img:String,
+  quiz_scores: [{category: String,
+                high_score: Number,
+                previous_score: Number}]
 })
 
 const quizSchema = new mongoose.Schema({
