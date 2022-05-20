@@ -6,6 +6,35 @@ user_info = ""
 correct = []
 incorrect = []
 
+function get_correct_only(data) {
+    if (data.type == "correct") {
+        return data
+    }
+}
+
+function get_answers_of_question(question) {
+    answers = ""
+    this_question = current_questions.filter(function(data) {
+        if (data.question == question) {
+            return data
+        }
+    });
+    this_question = this_question[0].choices.filter(get_correct_only)
+    console.log("questoin", this_question)
+    // for (i = 0; i < this_question[0].choices.length; i++) {
+    //    answers += this_question[0].choices[i].choice 
+    // }
+    if (this_question.length == 1) {
+        return this_question[0].choice
+    }
+    else {
+        for (answer = 0; answer < this_question.length; answer++) {
+            answers += `<p>${this_question[answer].choice}</p>`
+        }
+        return answers
+    }
+}
+
 function build_question_accordians() {
     accordian = ""
     // build all the html
@@ -18,7 +47,10 @@ function build_question_accordians() {
     }
     for (i = 0; i < incorrect.length; i++) {
         accordian += `<div class="play_quiz_end_accordian_item incorrect" id="${incorrect[i].question}"`
-        accordian += `<p>${incorrect[i].question}</p>` 
+        accordian += `<p>${incorrect[i].question}</p>`
+        accordian += `<div class="play_quiz_end_accordian_answer">`
+        accordian += get_answers_of_question(incorrect[i].question)
+        accordian += `</div>` 
         accordian += `</div>`
     }
     // return it all
