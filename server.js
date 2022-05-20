@@ -204,15 +204,14 @@ const newsModel = mongoose.model("news", newsSchema);
 
 
 app.get('/profile', (req,res) =>{ 
-    userModel.find({name:req.session.real_user[0].name}, function(err,users)
+    userModel.find({name:req.session.real_user.name}, function(err,users)
      {
-       console.log(users + "")
       res.render('profile', {
-        name: req.session.real_user,
-        email: req.session.real_user,
-        username: req.session.real_user,
-        phone: req.session.real_user,
-        img: req.session.real_user
+        name: req.session.real_user[0].name,
+        email: req.session.real_user[0].email,
+        username: req.session.real_user[0].username,
+        phone: req.session.real_user[0].phone,
+        img: req.session.real_user[0].img
 
       })
     })

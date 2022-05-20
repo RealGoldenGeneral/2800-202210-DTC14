@@ -2,6 +2,16 @@
     text-align: center;
 }
 
+.title {
+    display: grid;
+  }
+
+.back-button {
+font-size:xx-large;
+margin-left: 50px;
+padding-bottom: 50px;
+  }
+
 input{
     padding: 0.7rem .1rem;
     /* border: 1px #ced4da */
@@ -28,6 +38,7 @@ input, label{
     padding: 30px;
     background-color: #8dc1ac;
     border-radius: 50px;
+    margin-bottom: 50px;
 }
 
 fieldset{
@@ -99,7 +110,7 @@ html{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     background-color: #8dc1ac;
-    height: 100%;
+    height: 78px;
   }
   
   .navbar a {
@@ -124,11 +135,19 @@ html{
   }
 
   main {
-    display: grid;
-    height: 100vh;
     width: 100%;
     grid-template-columns: 100%;
     grid-template-rows: 15% 77% 8%;
     align-items: center;
     text-align: center;
   }
+
+  body{
+      margin:0
+  }
+
+  .fa-solid{
+    margin-top: 10px;
+  }
+
+  
