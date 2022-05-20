@@ -211,12 +211,14 @@ a.next {
 /* Quiz End Screen */
 .play_quiz_end_title {
     grid-area: 1 / 1 / 2 / 3;
+    align-self: center;
 }
 
 .play_quiz_end_score_info {
     display: grid;
     grid-template-columns: 50% 50%;
     height: 100%;
+    align-items: center;
 }
 
 .play_quiz_end_questions_container {
