@@ -61,7 +61,7 @@ app.post("/login", function(req, res) {
   //     console.log(user)
   //   }
   // })
-  userModel.find({name: username}, function(err, user) {
+  userModel.find({username: username}, function(err, user) {
     console.log(`entered: ${pass}, in db: ${user}`)
     var full_info = user
     console.log("Full Info: ", full_info)
@@ -120,7 +120,7 @@ app.get("/startQuiz/", function(req, res) {
 })
 
 app.get("/getUserInfo", function(req, res) {
-  userModel.find({name: req.session.real_user[0].name}, function(err, data) {
+  userModel.find({username: req.session.real_user[0].username}, function(err, data) {
     if (err) {
       console.log("Err" + err)
     }
@@ -209,7 +209,7 @@ app.get("/find_article/:title", function(req, res) {
 })
 
 app.get("/getSelectedCategory", function(req, res) {
-  userModel.find({name: req.session.real_user[0].name}, function(err, user_stuff) {
+  userModel.find({username: req.session.real_user[0].username}, function(err, user_stuff) {
     if (err) {
       console.log("Err" + err)
     }
@@ -234,7 +234,7 @@ app.post("/findQuizQuestions", function(req, res) {
 
 app.get("/getQuizScores", function(req, res) {
   console.log("Current User: ", req.session.real_user)
-  userModel.find({name: req.session.real_user[0].name}, function(err, user_doc) {
+  userModel.find({username: req.session.real_user[0].username}, function(err, user_doc) {
     if (err) {
       console.log("Err" + err)
     }
@@ -248,7 +248,7 @@ app.get("/getQuizScores", function(req, res) {
 app.post("/updateUserQuizScore", function(req, res) {
   console.log("user score: ", req.body)
   console.log("/updateUserQuizScore", req.session.real_user)
-  userModel.updateOne({name: req.session.real_user[0].name, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
+  userModel.updateOne({username: req.session.real_user[0].username, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
     if (err) {
       console.log("Err" + err)
     }
