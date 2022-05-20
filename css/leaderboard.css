@@ -1,33 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Roboto',sans-serif;
-  outline: none;
-  border: none;
-}
-
-body{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height:100vh;
-    background:#8dc1ac;
-}
-
 .box{
-    width:90%;
-    height:85vh;
     display:flex;
     align-items: center;
     flex-direction: column;
-    gap: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 15px #00000033;
-    border-radius: 15px;
-    overflow:hidden;
 }
 
 #search {
@@ -45,34 +19,4 @@ body{
   display: flex;
   flex-direction: row;
   gap: 25%;
-}
-
-.navbar {
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  justify-items: center;
-  background-color: rgb(202, 202, 202);
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%
-}
-
-.navbar > div {
-  padding: 5px;
-  text-align: center;
-}
-
-.navbar > div:hover {
-  background-color: rgb(170, 170, 170);
-}
-
-@media screen and (max-width: 550px) {
-  .navbar p {
-    display: none;
-  }
-
-  .navbar > div {
-    padding: 15px
-  }
 }

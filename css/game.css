@@ -27,12 +27,9 @@ body{
     font-size: x-large;
 }
 img{
-    /*width: 300px;
-    margin-right: 175px;
-    height: 300px;*/
     max-width: 100%;
     height: auto;
-    margin-left: 30%;
+    margin-left: 40%;
 }
 button{
     background-color: #a7d1c6;
@@ -44,7 +41,7 @@ button{
     font-size: 20px;
     width: 500px;
     height: 100px;
-    margin-left: 30%;
+    margin-left: 40%;
     align-items: center;
     cursor: pointer;
     border-radius: 5px;
@@ -64,8 +61,7 @@ button{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     background-color: #8dc1ac;
-    margin-bottom: 500px;
-    height: 100%;
+    max-height: 100vh;
 }
 .navbar > div {
     padding: 5px;
