@@ -3,17 +3,22 @@
 *{
     font-family: 'Roboto', sans-serif;
 }
+
+h2{
+    text-align: center;
+}
 .card{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     background-color: #a7d1c6;
     transition: 0.3s;
     padding: 5px;
-    width: 100%;
+    width: 80%;
     border-radius: 5px;
+    margin: auto;
 }
 
 img{
-    padding-right: 90%;
+    margin: auto;
 }
 
 .card:hover{
@@ -42,7 +47,7 @@ a:hover{
 input{
     padding: 0.7rem .1rem;
     /* border: 1px #ced4da */
-    width: 99.5%;
+    width: 40%;
     margin-top: 5px;
     margin-bottom: 10px;
     border-radius: 10px;
