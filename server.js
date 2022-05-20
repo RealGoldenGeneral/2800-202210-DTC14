@@ -295,18 +295,6 @@ const newsSchema = new mongoose.Schema({
   content: String
 });
 
-const usersSchema = new mongoose.Schema({
-  // _id: Object,
-  name: String,
-  email: String,
-  username: String,
-  phone: String,
-  img:String,
-  quiz_scores: [{category: String,
-                high_score: Number,
-                previous_score: Number}]
-})
-
 const quizSchema = new mongoose.Schema({
   category: String,
   questions: [{
