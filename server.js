@@ -72,7 +72,7 @@ app.post("/login", function(req, res) {
       console.log(user[0])
       if (req.body.password == user[0]) {
         tast_id = ''
-        test_id = user[0]._id
+        test_id = full_info[0]._id
         req.session.real_user = full_info
         req.session.authenticated = true
         res.send(req.session.real_user)
@@ -214,7 +214,8 @@ const userSchema = new mongoose.Schema({
     username: String,
     phone: String,
     img:String,
-    category: String
+    category: String,
+    education: String
 });
 
 const daySchema = new mongoose.Schema({
@@ -331,6 +332,34 @@ app.post('/changeQuizCategory', function (req, res) {
       res.send("Successfully updated.")
     }
   })
+})
+
+app.get('/signup', function (req, res) {
+  res.sendFile(__dirname + "/signup.html")
+})
+
+app.put('/addNewUser', function (req, res) {
+  userModel.create({
+    'name': req.body.name,
+    'password': req.body.password,
+    'email': req.body.email,
+    'username': req.body.username,
+    'phone': req.body.phone,
+    'img': './img/profileicon.png',
+    'category': 'none',
+    'education': req.body.education
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+    }
+    res.send("Data sent successfully.")
+  })
+})
+
+app.get('/thanks', function (req, res) {
+  res.sendFile(__dirname + "/thanks.html")
 })
 
 //var session = require("express-session")

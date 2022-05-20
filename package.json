@@ -15,7 +15,8 @@
     "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
-    "mongoose": "^6.3.4",
+    "heroku": "^7.60.2",
+    "mongoose": "^6.3.2",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.16"
   }

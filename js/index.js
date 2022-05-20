@@ -1,4 +1,9 @@
 // const { append } = require("express/lib/response")
+
+function redirect_to_signup() {
+    location.href = "/signup"
+}
+
 function show_full_menu() {
     console.log($("#full_menu").css("display"))
     if ($("#full_menu").css("display") == "none") {
@@ -21,6 +26,9 @@ function redirect_to_page() {
     }
     if ($(this).attr("id") == "button2") {
         location.href = "/quiz"
+    }
+    if ($(this).attr("id") == "scores-tab") {
+        location.href = "/leaderboard"
     }
     if ($(this).attr("id") == "profile-tab") {
         location.href = "/profile"
@@ -105,6 +113,7 @@ function listenToClick() {
             success: process_response
         })
     })
+    $("#sign").click(redirect_to_signup)
 }
 
 $("#full_menu").hide()
