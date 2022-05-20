@@ -1,7 +1,3 @@
 function myFunction() {
-    location.replace("gamePage.html")
+    location.href = "/gamePage"
 }
-
-
-
-$(document).ready(myFunction)
