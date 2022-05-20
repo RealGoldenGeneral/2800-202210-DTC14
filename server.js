@@ -307,14 +307,14 @@ const newsSchema = new mongoose.Schema({
   content: String
 });
 
-const usersSchema = new mongoose.Schema({
-  // _id: Object,
-  name: String,
-  email: String,
-  username: String,
-  phone: String,
-  img:String,
-})
+// const usersSchema = new mongoose.Schema({
+//   // _id: Object,
+//   name: String,
+//   email: String,
+//   username: String,
+//   phone: String,
+//   img:String,
+// })
 
 const scoresSchema = new mongoose.Schema({
   name: String,
@@ -455,6 +455,7 @@ app.get('/signup', function (req, res) {
 
 app.put('/addNewUser', function (req, res) {
   userModel.create({
+    '_id': Object,
     'name': req.body.name,
     'password': req.body.password,
     'email': req.body.email,
@@ -463,7 +464,7 @@ app.put('/addNewUser', function (req, res) {
     'img': './img/profileicon.png',
     'category': "covid_safety",
     'education': req.body.education,
-    "quiz_scores": [{"category": "covid_safety", "high_score": 0}, {"category": "covid_information", "high_score": 0}]
+    'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
   }, function (err, data) {
     if (err) {
       console.log("Error: " + err)

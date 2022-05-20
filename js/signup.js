@@ -4,7 +4,7 @@ function processResponse() {
 
 function addAccount() {
     $.ajax({
-        type: 'put',
+        type: 'PUT',
         url: '/addNewUser',
         data: {
             name: `${$("#first_name").val()} ${$("#last_name").val()}`,
