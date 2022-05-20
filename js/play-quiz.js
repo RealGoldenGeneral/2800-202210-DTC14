@@ -3,6 +3,14 @@ current_question = 0
 user_quiz_score = 0
 selected_category = ""
 user_info = ""
+correct = []
+incorrect = []
+
+function build_question_accordians() {
+    // build all the html
+
+    // return it all
+}
 
 function display_correct_answer_only(choice) {
     return choice.choice
@@ -20,8 +28,12 @@ function get_current_quiz_question_answers(chosen_answer) {
     correct_answers = correct_answers.map(display_correct_answer_only)
     console.log(correct_answers)
     if (correct_answers.includes(chosen_answer)) {
+        correct.push(current_questions[current_question])
         user_quiz_score += 1
         console.log(user_quiz_score)
+    }
+    else {
+        incorrect.push(current_questions[current_question])
     }
 }
 
@@ -97,7 +109,12 @@ async function display_end_screen() {
     
     end_screen += `<div class="play_quiz_end_questions_container">`
     // accordians of questions, coloured in red and green 
-    end_screen += `<p>Placeholder</p>`
+    end_screen += `<p>Questions</p>`
+
+    end_screen += `<div class="play_quiz_end_questions_accordians">`
+    end_screen += build_question_accordians()
+    end_screen += `</div>`
+
     end_screen += `</div>`
 
     end_screen += `<div class="play_quiz_end_menu_controls">`
