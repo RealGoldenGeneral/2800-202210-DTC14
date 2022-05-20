@@ -102,7 +102,7 @@ function process_response(data) {
 
 function change_display_name(data) {
     console.log(data)
-    $(".logged_in_username").text(data[0].username)
+    $(".logged_in_username").text(data[0].name)
 }
 
 function welcome_the_user() {
