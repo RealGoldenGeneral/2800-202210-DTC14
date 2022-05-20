@@ -89,11 +89,32 @@ function grab_high_and_previous_score() {
     )
 }
 
+function reformat_title(data) {
+    console.log(data)
+    split_category_title = data[0].category.split("_")
+    console.log(split_category_title)
+    for (i = 0; i < split_category_title.length; i++) {
+        split_category_title[i] = split_category_title[i].slice(0, 1).toUpperCase() + split_category_title[i].slice(1)
+    }
+    $(".quiz_start_container .quiz_category").text(split_category_title.join(" "))
+}
+
+function change_quiz_category_title() {
+    $.ajax(
+        {
+            "url": "/getUserInfo",
+            "type": "GET",
+            "success": reformat_title
+        }
+    )
+}
+
 function setup() {
     // hiding and showing defaulted quiz info section
     $(".quiz_score_info").hide()
     $("#covid_safety").show()
     grab_high_and_previous_score()
+    change_quiz_category_title()
     $(".next").click(show_next_quiz_info)
     $(".prev").click(show_prev_quiz_info)
     $(".quiz_start_button").click(move_to_quiz_screen)
