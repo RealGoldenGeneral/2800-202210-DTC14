@@ -95,7 +95,7 @@ i.fa-angle-left, i.fa-angle-right {
     font-size: 1.5em;
 }
 
-a.prev:hover, a.next:hover {
+.fa-angle-right:hover, .fa-angle-left:hover {
     background-color: #747474;
 }
 
@@ -104,17 +104,6 @@ a.prev, a.next {
     font-size: 2em;
 }
 
-a.prev {
-    /* left: 17%;
-    bottom: 22%; */
-    /* position: absolute; */
-}
-
-a.next {
-    /* right: 17%;
-    bottom: 22%; */
-    /* position: absolute; */
-}
 /*  */
 /* Animation for Slideshow */
 @keyframes slide_in_right {
