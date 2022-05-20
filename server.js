@@ -290,6 +290,7 @@ const userSchema = new mongoose.Schema({
     username: String,
     phone: String,
     img:String,
+    category: String,
     quiz_scores: [{
       category: String,
       high_score: Number,
