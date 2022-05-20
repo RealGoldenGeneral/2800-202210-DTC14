@@ -7,9 +7,22 @@ correct = []
 incorrect = []
 
 function build_question_accordians() {
+    accordian = ""
     // build all the html
-
+    // add class red green to highlight correct and incorrect answers
+    // use question as the id
+    for (i = 0; i < correct.length; i++) {
+        accordian += `<div class="play_quiz_end_accordian_item correct" id="${correct[i].question}"`
+        accordian += `<p>${correct[i].question}</p>` 
+        accordian += `</div>`
+    }
+    for (i = 0; i < incorrect.length; i++) {
+        accordian += `<div class="play_quiz_end_accordian_item incorrect" id="${incorrect[i].question}"`
+        accordian += `<p>${incorrect[i].question}</p>` 
+        accordian += `</div>`
+    }
     // return it all
+    return accordian
 }
 
 function display_correct_answer_only(choice) {
@@ -74,6 +87,8 @@ async function get_user_score() {
 
 //placeholder for now, will work on it later
 async function display_end_screen() {
+    console.log("correct",correct)
+    console.log("incorrect",incorrect)
     user_info = ""
     await $.ajax(
         {
