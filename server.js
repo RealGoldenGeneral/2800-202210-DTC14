@@ -292,7 +292,8 @@ const userSchema = new mongoose.Schema({
     img:String,
     quiz_scores: [{
       category: String,
-      high_score: Number}]
+      high_score: Number,
+      _id: false}]
 });
 
 const daySchema = new mongoose.Schema({
