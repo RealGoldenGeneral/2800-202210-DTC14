@@ -57,14 +57,17 @@ body{
 /* Quiz Score Slide */
 .quiz_score_info {
     display: grid;
-    grid-template-columns: 5% 45% 45% 5%;
+    grid-template-columns: 100%;
     grid-template-rows: 34% 33% 33%;
-    grid-template-areas: "prev title title next"
-                         "prev high_score prev_score next"
-                         "prev high_score_points prev_score_points next";
-    width: 90%;
+    grid-template-areas: "title"
+                         "high_score"
+                         "high_score_points";
+    width: 60%;
     margin: auto;
     position: relative;
+    background-color: #449372;
+    border-radius: 20px;
+    padding: 5px;
 }
 
 .quiz_score_info h4 {
@@ -73,26 +76,13 @@ body{
 
 .quiz_score_info p:nth-child(2) {
     border-style: solid;
-    border-width: 0 1px 1px 0;
+    border-width: 0 0 1px 0;
     grid-area: high_score;
 
 }
 
 .quiz_score_info p:nth-child(3) {
-    border-style: solid;
-    border-width: 0 0 1px 0;
-    grid-area: prev_score;
-}
-
-.quiz_score_info p:nth-child(4) {
-    border-style: solid;
-    border-width: 0 1px 0 0;
-    grid-row: 3 / 4;
-    grid-column: 2 / 3;
-}
-
-.quiz_score_info p:nth-child(5) {
-    grid-area: prev_score_points;
+    grid-area: high_score_points;
 }
 
 /* Slideshow controls */
@@ -106,14 +96,19 @@ a.prev:hover, a.next:hover {
 
 a.prev, a.next {
     align-self: center;
+    font-size: 2em;
 }
 
 a.prev {
-    grid-area: prev;
+    left: 17%;
+    bottom: 22%;
+    position: absolute;
 }
 
 a.next {
-    grid-area: next;
+    right: 17%;
+    bottom: 22%;
+    position: absolute;
 }
 /*  */
 /* Animation for Slideshow */
