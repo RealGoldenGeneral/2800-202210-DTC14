@@ -9,9 +9,13 @@ incorrect = []
 function expand_this_accordian() {
     if ($(this).parent().find(".play_quiz_end_accordian_answer").css("display") == "none") {
         $(".play_quiz_end_accordian_answer").hide()
+        $(this).parent().find(".expand_accordian").removeClass("fa-plus")
+        $(this).parent().find(".expand_accordian").addClass("fa-minus")
         $(this).parent().find(".play_quiz_end_accordian_answer").show()
     }   
     else {
+        $(this).parent().find(".expand_accordian").removeClass("fa-minus")
+        $(this).parent().find(".expand_accordian").addClass("fa-plus")
         $(this).parent().find(".play_quiz_end_accordian_answer").hide()
     }
 }
