@@ -119,6 +119,18 @@ app.get("/startQuiz/", function(req, res) {
   res.sendFile(__dirname + "/play-quiz.html")
 })
 
+app.get("/getUserInfo", function(req, res) {
+  userModel.find({name: req.session.real_user[0].name}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.json(data)
+    }
+  })
+})
+
 app.get("/day", function(req, res) {
   console.log("request recieved to get the days")
   dayModel.find({}, function(err, total_days) {
@@ -238,10 +250,10 @@ app.post("/updateUserQuizScore", function(req, res) {
   console.log("/updateUserQuizScore", req.session.real_user)
   userModel.updateOne({name: req.session.real_user[0].name, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
     if (err) {
-      console.log(err)
+      console.log("Err" + err)
     }
     else {
-      console.log(data)
+      console.log("Data" + data)
       res.send("success")
     }
   })

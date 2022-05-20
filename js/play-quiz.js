@@ -24,22 +24,43 @@ function get_current_quiz_question_answers(chosen_answer) {
     }
 }
 
-function update_user_score() {
+function get_selected_category_score(data) {
+    if (data.category == selected_category) {
+        return data
+    }
+}
+
+function update_user_score(data) {
+    console.log(data)
+    console.log(selected_category)
+    quiz_score = data[0].quiz_scores.filter(get_selected_category_score)
+    if (user_quiz_score > quiz_score[0].high_score) {
+        $.ajax(
+            {
+                "url": "/updateUserQuizScore",
+                "type": "POST",
+                "data": {
+                    "score": user_quiz_score,
+                    "category": selected_category
+                }
+            }
+        )
+    }
+}
+
+function get_user_score() {
     $.ajax(
         {
-            "url": "/updateUserQuizScore",
-            "type": "POST",
-            "data": {
-                "score": user_quiz_score,
-                "category": selected_category
-            }
+            "url": "/getUserInfo",
+            "type": "GET",
+            "success": update_user_score
         }
     )
 }
 
 //placeholder for now, will work on it later
 function display_end_screen() {
-    update_user_score()
+    get_user_score()
     $(".play_quiz_container").html("")
 }
 
