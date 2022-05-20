@@ -12,6 +12,8 @@ function return_to_quiz_home() {
 }
 
 function expand_this_accordian() {
+    $(".expand_accordian").removeClass("fa-minus")
+    $(".expand_accordian").addClass("fa-plus")
     if ($(this).parent().find(".play_quiz_end_accordian_answer").css("display") == "none") {
         $(".play_quiz_end_accordian_answer").hide()
         $(this).parent().find(".expand_accordian").removeClass("fa-plus")
@@ -176,7 +178,6 @@ async function display_end_screen() {
     
     end_screen += `<div class="play_quiz_end_question_title"><p>Questions</p></div>`
     end_screen += `<div class="play_quiz_end_questions_container">`
-    // accordians of questions, coloured in red and green 
 
     end_screen += `<div class="play_quiz_end_questions_accordians">`
     end_screen += build_question_accordians()
