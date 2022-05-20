@@ -2,6 +2,7 @@ current_questions = ""
 current_question = 0
 user_quiz_score = 0
 selected_category = ""
+user_info = ""
 
 function display_correct_answer_only(choice) {
     return choice.choice
@@ -31,6 +32,7 @@ function get_selected_category_score(data) {
 }
 
 function update_user_score(data) {
+    user_info = data
     console.log(data)
     console.log(selected_category)
     quiz_score = data[0].quiz_scores.filter(get_selected_category_score)
@@ -48,8 +50,8 @@ function update_user_score(data) {
     }
 }
 
-function get_user_score() {
-    $.ajax(
+async function get_user_score() {
+    await $.ajax(
         {
             "url": "/getUserInfo",
             "type": "GET",
@@ -59,19 +61,35 @@ function get_user_score() {
 }
 
 //placeholder for now, will work on it later
-function display_end_screen() {
+async function display_end_screen() {
+    user_info = ""
+    await $.ajax(
+        {
+            "url": "/getUserInfo",
+            "type": "GET",
+            "success": function(data) {
+                user_info = data
+            }
+        }
+    )
     get_user_score()
+    high_score_in_db = user_info[0].quiz_scores.filter(get_selected_category_score)
+    high_score_in_db = high_score_in_db[0].high_score
     $(".play_quiz_container").html("")
     end_screen = ""
     end_screen += `<div class="play_quiz_end_title">`
     end_screen += `<h4>You made it to the end!</h4>`
     end_screen += `</div>`
+
     end_screen += `<div class="play_quiz_end_info">`
+    
     end_screen += `<div class="play_quiz_end_score_info">`
+    
     end_screen += `<div class="play_quiz_end_high_score">`
     end_screen += `<p><i class="fa-solid fa-trophy"></i> High Score</p>`
-    end_screen += `<p>10</p>`
+    end_screen += `<p>${high_score_in_db}</p>`
     end_screen += `</div>`
+    
     end_screen += `<div class="play_quiz_end_current_score">`
     end_screen += `<p>Current Score</p>`
     end_screen += `<p>${user_quiz_score}</p>`
@@ -86,9 +104,11 @@ function display_end_screen() {
     end_screen += `<div class="play_quiz_end_return_button">`
     end_screen += `<p>Go Back To Quiz Screen</p>`
     end_screen += `</div>`
+    
     end_screen += `</div>`
 
     end_screen += `</div>`
+    
     end_screen += `</div>`
     old = $(".play_quiz_container").html()
     $(".play_quiz_container").html(old + end_screen)
