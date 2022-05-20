@@ -61,9 +61,10 @@ app.post("/login", function(req, res) {
   //     console.log(user)
   //   }
   // })
-  userModel.find({name: username}, function(err, user) {
+  userModel.find({username: username}, function(err, user) {
     console.log(`entered: ${pass}, in db: ${user}`)
     var full_info = user
+    console.log("Full Info: ", full_info)
     if (err) {
       console.log(err)
     }
@@ -121,6 +122,22 @@ app.get("/settings", function (req, res) {
 
 app.get("/gamePage", function (req, res) {
   res.sendFile(__dirname + "/gamePage.html")
+})
+
+app.get("/startQuiz/", function(req, res) {
+  res.sendFile(__dirname + "/play-quiz.html")
+})
+
+app.get("/getUserInfo", function(req, res) {
+  userModel.find({username: req.session.real_user[0].username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.json(data)
+    }
+  })
 })
 
 app.get("/day", function(req, res) {
@@ -200,7 +217,58 @@ app.get("/find_article/:title", function(req, res) {
   })
 })
 
-app.listen(process.env.PORT || 5005, function (err) {
+app.get("/getSelectedCategory", function(req, res) {
+  userModel.find({username: req.session.real_user[0].username}, function(err, user_stuff) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + user_stuff)
+      res.json(user_stuff)
+    }
+  })
+})
+
+app.post("/findQuizQuestions", function(req, res) {
+  quizModel.find({category: req.body.category}, function(err, questions) {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      console.log("Data")
+      res.send(questions)
+    }
+  })
+})
+
+app.get("/getQuizScores", function(req, res) {
+  console.log("Current User: ", req.session.real_user)
+  userModel.find({username: req.session.real_user[0].username}, function(err, user_doc) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + user_doc)
+      res.json(user_doc)
+    }
+  })
+})
+
+app.post("/updateUserQuizScore", function(req, res) {
+  console.log("user score: ", req.body)
+  console.log("/updateUserQuizScore", req.session.real_user)
+  userModel.updateOne({username: req.session.real_user[0].username, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.send("success")
+    }
+  })
+})
+
+app.listen(process.env.PORT || 5010, function (err) {
   if (err)
       console.log(err);
 })
@@ -256,11 +324,23 @@ const questionsSchema = new mongoose.Schema({
   score: Number
 })
 
+const quizSchema = new mongoose.Schema({
+  category: String,
+  questions: [{
+    question: String,
+    choices: [Object]
+  }]
+})
+
 const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
 const scoresModel = mongoose.model("scores", scoresSchema);
 const questionsModel = mongoose.model("correct_questions", questionsSchema);
+const quizModel = mongoose.model("quizzes", quizSchema)
+
+
+
 
 app.get('/profile', (req,res) =>{ 
     userModel.find({}, function(err,users)
