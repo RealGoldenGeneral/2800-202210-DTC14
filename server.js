@@ -346,7 +346,7 @@ app.put('/addNewUser', function (req, res) {
     'username': req.body.username,
     'phone': req.body.phone,
     'img': './img/profileicon.png',
-    'category': "COVID Safety",
+    'category': "covid_safety",
     'education': req.body.education
   }, function (err, data) {
     if (err) {
