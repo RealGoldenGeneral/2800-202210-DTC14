@@ -200,17 +200,17 @@ app.get("/get_news_articles", function(req, res) {
   })
 })
 
-app.get("/find_article/:title", function(req, res) {
+app.post("/find_article", function(req, res) {
   console.log("server recieved the get request")
   console.log("Passed title", req.params.title)
-  newsModel.find({title: req.params.title}, function(err, found_article) {
+  newsModel.find({title: req.body.title}, function(err, found_article) {
     if (err) {
       console.log("Err" + err) 
     }
     else {
       console.log("Data" + found_article)
       if (found_article.length > 1) {
-        res.json(found_article[0])
+        res.json(found_article)
       }
       else {
         res.json(found_article)
@@ -290,6 +290,11 @@ const userSchema = new mongoose.Schema({
     username: String,
     phone: String,
     img:String,
+    category: String,
+    quiz_scores: [{
+      category: String,
+      high_score: Number,
+      _id: false}]
 });
 
 const daySchema = new mongoose.Schema({
@@ -304,18 +309,14 @@ const newsSchema = new mongoose.Schema({
   content: String
 });
 
-const usersSchema = new mongoose.Schema({
-  // _id: Object,
-  name: String,
-  email: String,
-  username: String,
-  phone: String,
-  img:String,
-  quiz_scores: [{
-    category: String,
-    high_score: Number,
-    previous_score: Number}]
-})
+// const usersSchema = new mongoose.Schema({
+//   // _id: Object,
+//   name: String,
+//   email: String,
+//   username: String,
+//   phone: String,
+//   img:String,
+// })
 
 const scoresSchema = new mongoose.Schema({
   name: String,
@@ -456,6 +457,7 @@ app.get('/signup', function (req, res) {
 
 app.put('/addNewUser', function (req, res) {
   userModel.create({
+    '_id': Object,
     'name': req.body.name,
     'password': req.body.password,
     'email': req.body.email,
@@ -464,7 +466,7 @@ app.put('/addNewUser', function (req, res) {
     'img': './img/profileicon.png',
     'category': "covid_safety",
     'education': req.body.education,
-    "quiz_scores": [{"category": "covid_safety", "high_score": 0}, {"category": "covid_information", "high_score": 0}]
+    'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
   }, function (err, data) {
     if (err) {
       console.log("Error: " + err)
@@ -482,11 +484,11 @@ app.get('/thanks', function (req, res) {
 app.get('/getRecords', (req, res) => {
   scoresModel.find({}, function (err, scores) {
     if (err) {
-      console.log("Error: " + error)
+      console.log("Error: " + err)
     } else {
       console.log("Data: " + scores)
     }
-    res.send("Successfully displayed all scores.")
+    res.send(scores)
   })
 })
 
@@ -497,7 +499,7 @@ app.get('/getQuizRecords', (req, res) => {
     } else {
       console.log("Data: " + scores.quiz_scores)
     }
-    res.send("Successfully displayed all scores.")
+    res.send(scores)
   })
 })
 

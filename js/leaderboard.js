@@ -5,11 +5,12 @@ function fillScoreboardQuiz() {
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
+            console.log(data)
             $("#leaderboard").empty()
             to_add = ''
             for (i = 0; i < data.length; i++) {
                 to_add += `<div class="score">
-                <h4>${i + 1}. ${data[i].name}/h4>
+                <h4>${data[i].category}</h4>
                 <h4>${data[i].high_score}</h4>
                 </div>`
             }
@@ -24,12 +25,10 @@ function fillScoreboardGame() {
         url: "/getRecords",
         success: (data) => {
             $("#leaderboard").empty()
+            console.log(data[0].name)
             to_add = ''
-            for (i = 0; i <= data.length; i++) {
-                to_add += `<div class="score">
-                <h4>${i + 1}. ${data[i].name}</h4>
-                <h4>${data[i].score}</h4>
-                </div>`
+            for (i = 0; i < data.length; i++) {
+                to_add += `<div class="score"><h4>${data[i].name}</h4><h4>${data[i].score}</h4></div>`
             }
             $("#leaderboard").html(to_add);
         }
@@ -43,12 +42,6 @@ function setup() {
 
     $("#quizToggle").click(() => {
         fillScoreboardQuiz();
-    })
-
-    $("#submit").click(() => {
-        if ($("#search").val() == "Roy Cheng") {
-            fillScoreboardGame();
-        }
     })
 }
 
