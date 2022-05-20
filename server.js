@@ -290,6 +290,9 @@ const userSchema = new mongoose.Schema({
     username: String,
     phone: String,
     img:String,
+    quiz_scores: [{
+      category: String,
+      high_score: Number}]
 });
 
 const daySchema = new mongoose.Schema({
@@ -311,10 +314,6 @@ const usersSchema = new mongoose.Schema({
   username: String,
   phone: String,
   img:String,
-  quiz_scores: [{
-    category: String,
-    high_score: Number,
-    previous_score: Number}]
 })
 
 const scoresSchema = new mongoose.Schema({
