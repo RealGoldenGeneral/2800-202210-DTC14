@@ -64,6 +64,7 @@ app.post("/login", function(req, res) {
   userModel.find({name: username}, function(err, user) {
     console.log(`entered: ${pass}, in db: ${user}`)
     var full_info = user
+    console.log("Full Info: ", full_info)
     if (err) {
       console.log(err)
     }
@@ -71,6 +72,7 @@ app.post("/login", function(req, res) {
       user = user.map(filter_password)
       console.log(user[0])
       if (req.body.password == user[0]) {
+        id = full_info[0]._id
         req.session.real_user = full_info
         // console.log(req.session.real_user = full_info)
         console.log(full_info) 
@@ -114,6 +116,30 @@ app.get("/game", function (req, res){
 
 app.get("/quiz", function (req, res){
   res.sendFile(__dirname + "/quiz.html")
+})
+
+app.get("/settings", function (req, res) {
+  res.sendFile(__dirname + "/settings.html")
+})
+
+app.get("/gamePage", function (req, res) {
+  res.sendFile(__dirname + "/gamePage.html")
+})
+
+app.get("/startQuiz/", function(req, res) {
+  res.sendFile(__dirname + "/play-quiz.html")
+})
+
+app.get("/getUserInfo", function(req, res) {
+  userModel.find({username: req.session.real_user[0].username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.json(data)
+    }
+  })
 })
 
 app.get("/day", function(req, res) {
@@ -193,7 +219,58 @@ app.get("/find_article/:title", function(req, res) {
   })
 })
 
-app.listen(process.env.PORT || 5005, function (err) {
+app.get("/getSelectedCategory", function(req, res) {
+  userModel.find({username: req.session.real_user[0].username}, function(err, user_stuff) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + user_stuff)
+      res.json(user_stuff)
+    }
+  })
+})
+
+app.post("/findQuizQuestions", function(req, res) {
+  quizModel.find({category: req.body.category}, function(err, questions) {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      console.log("Data")
+      res.send(questions)
+    }
+  })
+})
+
+app.get("/getQuizScores", function(req, res) {
+  console.log("Current User: ", req.session.real_user)
+  userModel.find({username: req.session.real_user[0].username}, function(err, user_doc) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + user_doc)
+      res.json(user_doc)
+    }
+  })
+})
+
+app.post("/updateUserQuizScore", function(req, res) {
+  console.log("user score: ", req.body)
+  console.log("/updateUserQuizScore", req.session.real_user)
+  userModel.updateOne({username: req.session.real_user[0].username, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.send("success")
+    }
+  })
+})
+
+app.listen(process.env.PORT || 5010, function (err) {
   if (err)
       console.log(err);
 })
@@ -233,12 +310,37 @@ const usersSchema = new mongoose.Schema({
   email: String,
   username: String,
   phone: String,
-  img:String
+  img:String,
+  quiz_scores: [{
+    category: String,
+    high_score: Number,
+    previous_score: Number}]
+})
+
+const scoresSchema = new mongoose.Schema({
+  name: String,
+  score: Number
+})
+
+const questionsSchema = new mongoose.Schema({
+  name: String,
+  score: Number
+})
+
+const quizSchema = new mongoose.Schema({
+  category: String,
+  questions: [{
+    question: String,
+    choices: [Object]
+  }]
 })
 
 const userModel = mongoose.model("users", userSchema);
 const dayModel = mongoose.model("days", daySchema);
 const newsModel = mongoose.model("news", newsSchema);
+const scoresModel = mongoose.model("scores", scoresSchema);
+const questionsModel = mongoose.model("correct_questions", questionsSchema);
+const quizModel = mongoose.model("quizzes", quizSchema)
 
 
 
@@ -256,32 +358,144 @@ app.get('/profile', (req,res) =>{
     })
 })
 
+app.post('/changeUsername', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'username': req.body.username}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
 
-// app.get("/users", function(req, res) {
-//   userModel.find({}, function(err, users) {
-//     if (err) {
-//       console.log("Err" + err)
-//     }
-//     else {
-//       console.log("Data" + users)
-//       res.json(users)
-//     }
-//   })
-// })
+app.post('/changePassword', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'password': req.body.password}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
 
-// app.get("/users/:id", function(req, res) {
-//   userModel.find({}, function(err, users) {
-//     if (err) {
-//       console.log("Err" + err)
-//     }
-//     else {
-//       console.log("Data" + users)
-//       res.json(users)
-//     }
-//   })
-// })
-    
+app.post('/changeEmail', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'email': req.body.email}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
 
+app.post('/changePhoneNumber', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'phone': req.body.phone}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.post('/changeQuizCategory', function (req, res) {
+  userModel.updateOne({
+    '_id': test_id
+  }, {
+    $set: {'category': req.body.category}
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+      res.send("Successfully updated.")
+    }
+  })
+})
+
+app.put('/insertRecord', (req, res) => {
+  scoresModel.create({
+    'names': full_info[0].username,
+    'score': req.body.score
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log ("Data: " + data)
+    }
+    res.send("Successfully inserted record.")
+  })
+})
+
+app.get('/signup', function (req, res) {
+  res.sendFile(__dirname + "/signup.html")
+})
+
+app.put('/addNewUser', function (req, res) {
+  userModel.create({
+    'name': req.body.name,
+    'password': req.body.password,
+    'email': req.body.email,
+    'username': req.body.username,
+    'phone': req.body.phone,
+    'img': './img/profileicon.png',
+    'category': "covid_safety",
+    'education': req.body.education
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+    }
+    res.send("Data sent successfully.")
+  })
+})
+
+app.get('/thanks', function (req, res) {
+  res.sendFile(__dirname + "/thanks.html")
+})
+
+app.get('/getRecords', (req, res) => {
+  scoresModel.find({}, function (err, scores) {
+    if (err) {
+      console.log("Error: " + error)
+    } else {
+      console.log("Data: " + scores)
+    }
+    res.send("Successfully displayed all scores.")
+  })
+})
+
+app.get('/getQuizRecords', (req, res) => {
+  userModel.find({}, function (err, scores) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + scores.quiz_scores)
+    }
+    res.send("Successfully displayed all scores.")
+  })
+})
 
 //var session = require("express-session")
 

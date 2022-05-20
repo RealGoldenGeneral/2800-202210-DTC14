@@ -8,8 +8,15 @@
     outline: none;
     border: none;
 }
+
+html {
+  height: 100vh;
+}
 body{
     background-color: #449372;
+    margin: 0;
+    padding: 0;
+    max-height: 100vh;
   
 }
 .navbar-item {
@@ -20,12 +27,9 @@ body{
     font-size: x-large;
 }
 img{
-    /*width: 300px;
-    margin-right: 175px;
-    height: 300px;*/
     max-width: 100%;
     height: auto;
-    margin-left: 38%;
+    margin-left: 40%;
 }
 button{
     background-color: #a7d1c6;
@@ -35,9 +39,9 @@ button{
     text-align: center;
     display: block;
     font-size: 20px;
-    width: 2000px;
+    width: 500px;
     height: 100px;
-    margin: 195px;
+    margin-left: 40%;
     align-items: center;
     cursor: pointer;
     border-radius: 5px;
@@ -48,7 +52,6 @@ button{
     width: 100%;
     border: 5px outset #d7eee4;
     opacity: 80%;
-    height: 1013px;
     background-color: rgb(221, 221, 221);
     border-radius: 40px 40px 0 0;
     
@@ -58,8 +61,7 @@ button{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     background-color: #8dc1ac;
-    margin-bottom: 500px;
-    height: 100%;
+    max-height: 100vh;
 }
 .navbar > div {
     padding: 5px;
