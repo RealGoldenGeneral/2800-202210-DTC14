@@ -7,7 +7,6 @@ function fillScoreboardQuiz() {
         success: (data) => {
             $("#leaderboard").empty()
             to_add = ''
-            data.sort(function (a, b) { return b - a }) //From W3 schools resources
             for (i = 0; i < data.length; i++) {
                 to_add += `<div class="score">
                 <h4>${i + 1}. ${data[i].name}/h4>
@@ -26,7 +25,6 @@ function fillScoreboardGame() {
         success: (data) => {
             $("#leaderboard").empty()
             to_add = ''
-            data.sort(function (a, b) { return b - a }) //From W3 schools resources
             for (i = 0; i <= data.length; i++) {
                 to_add += `<div class="score">
                 <h4>${i + 1}. ${data[i].num}</h4>
