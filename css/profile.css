@@ -1,0 +1,154 @@
+#topnav{
+    text-align: center;
+}
+
+.title {
+    display: grid;
+  }
+
+.back-button {
+font-size:xx-large;
+margin-left: 50px;
+padding-bottom: 50px;
+  }
+
+input{
+    padding: 0.7rem .1rem;
+    /* border: 1px #ced4da */
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: ghostwhite
+
+}
+
+input:hover{
+    border: 2px solid;
+}
+
+input, label{
+    display:block;
+    
+}
+
+#profile{
+    margin-left: 93.5px;
+    margin-right: 93.5px;
+    padding: 30px;
+    background-color: #8dc1ac;
+    border-radius: 50px;
+    margin-bottom: 50px;
+}
+
+fieldset{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    min-width: none;
+}
+
+html{
+    background-color: #449372;
+}
+
+#edit_btn{
+    background-color: ghostwhite;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: black;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    width: 5%;
+    border: 0px;
+    margin-right: 5px;
+    
+}
+
+#edit_btn:hover{
+    background-color: #449372;
+}
+
+#save_btn{
+    background-color: ghostwhite;
+    border-radius: .5rem;
+    box-sizing: border-box;
+    color: black;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 1rem 1.75rem;
+    text-decoration: none;
+    width: 5%;
+    border: 0px;
+}
+
+#save_btn:hover{
+    background-color: #449372;
+}
+#buttons{
+    justify-content:flex-end;
+    display: flex;
+    margin-top: 15px;
+}
+
+#profile_pic{
+    width: 200px;
+    height: 200px;
+}
+
+/* Navbar */
+.navbar-placeholder {
+    height: 100%;
+    /* background-color: #8dc1ac;; */
+  }
+  
+  .navbar {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    background-color: #8dc1ac;
+    height: 78px;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .navbar-item:hover {
+    background-color: #449372;
+  }
+  
+  .navbar-item {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    font-size: 1em;
+    /* padding: ; */
+  }
+
+  main {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 100%;
+    /* grid-template-rows: 15% 77% 8%; */
+    align-items: center;
+    text-align: center;
+  }
+
+  body{
+      margin:0
+  }
+
+  .fa-solid{
+    margin-top: 10px;
+  }
+
+  

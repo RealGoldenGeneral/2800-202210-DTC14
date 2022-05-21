@@ -2,7 +2,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
+    width: 25%;
 }
 
 #login_form{
@@ -10,13 +10,22 @@
 }
 
 #username{
-    padding-right: 10px;
-    margin-right: 40px;
+    width: 15%;
 }
 
 #password{
-    width: 43%;
-    margin-right: 40px;
+    width: 15%;
+
+}
+
+.login_button{
+    top: 40px;
+    width: 150px
+}
+
+.signUp_button{
+    top: 40px;
+    width: 150px;
 }
 
 .login_button{
@@ -140,3 +149,29 @@
 body{
     background-color: ghostwhite;
 }
+
+@media screen and (max-width: 600px) {
+    #home_img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    #username{
+        width: 43%;
+        margin-right: 43px;
+    }
+    
+    #password{
+        width: 43%;
+        margin-right: 40px;
+    }
+}
+
+
+
+
+    
+    
+   

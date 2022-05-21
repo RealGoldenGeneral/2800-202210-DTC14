@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="./img/covention_icon.ico">
+    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/quiz.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Co-Vention</title>
+</head>
+
+<body>
+    <main>
+        <div class="title">
+            <div>
+                <i class="fa-solid fa-arrow-left back-button"></i>
+            </div>
+            <div>
+                <h2>Quizzes</h2>
+            </div>
+            <div>
+                <i class="fa-solid fa-bars profile-icon"></i>
+            </div>
+            <div id="full_menu">
+                <div id="sign_out">
+                    <div>
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i><span>Sign Out</span>
+                    </div>
+                </div>
+                <div id="settings">
+                    <div>
+                        <i class="fa-solid fa-gear"></i><span>Settings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="quiz_container">
+                <div class="quiz_start_container">
+                    <span>What's the current quiz? <span class="quiz_category">Covid Safety</span>!</span>
+                    <button class="quiz_start_button">
+                        <p>
+                            START
+                        </p>
+                    </button>
+                    <div class="quiz_info_slideshow_container">
+                        <a class="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <div class="quiz_score_info slide_right" id="covid_safety">
+                            <!-- Placeholder score -->
+                            <h4>Covid Safety</h4>
+                            <p>Highest Score <i class="fa-solid fa-trophy"></i></p>
+                            <p class="quiz_high_score">100P</p>
+                        </div>
+                        <div class="quiz_score_info slide_right" id="covid_virus">
+                            <h4>Covid Information</h4>
+                            <p>Highest Score <i class="fa-solid fa-trophy"></i></p>        
+                            <p class="quiz_high_score">200P</p>
+                        </div>
+                        <a class="next"><i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </div>
+        </div>
+        <div class="navbar">
+            <div class="navbar-item" id="home-tab">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </div>
+            <div class="navbar-item" id="news-tab">
+                <i class="fa-solid fa-newspaper"></i>
+                <p>News</p>
+            </div>
+            <div class="navbar-item" id="scores-tab">
+                <i class="fa-solid fa-trophy"></i>
+                <p>Scoreboard</p>
+            </div>
+            <div class="navbar-item" id="profile-tab">
+                <i class="fa-solid fa-user"></i>
+                <p>Profile</p>
+            </div>
+        </div>
+    </main>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../js/index.js"></script>
+<script src="../js/quiz.js"></script>
+</html>
