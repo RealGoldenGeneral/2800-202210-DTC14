@@ -100,7 +100,23 @@ function process_response(data) {
     }
 }
 
+function change_display_name(data) {
+    console.log(data)
+    $(".logged_in_username").text(data[0].name)
+}
+
+function welcome_the_user() {
+    $.ajax(
+        {
+            "url": "/getUserInfo",
+            "type": "GET",
+            "success": change_display_name
+        }
+    )
+}
+
 function listenToClick() {
+    welcome_the_user()
     $("#sign_out").click(sign_out_user)
     $("#incorrect-login").hide()
     console.log("loaded")
