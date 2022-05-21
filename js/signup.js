@@ -1,5 +1,9 @@
 function processResponse() {
-    location.href = "/thanks"
+    if ($("#username").val() == "covid") {
+        $("form").append("<p>COVID is an invalid name.</p>")
+    } else {
+        location.href = "/thanks"
+    }
 }
 
 function addAccount() {
