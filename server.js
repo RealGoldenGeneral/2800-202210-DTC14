@@ -566,8 +566,7 @@ app.post("/updateUserInfo", function(req, res) {
     username: req.body.new_username,
     password: req.body.password,
     email: req.body.email, 
-    phone: 
-    req.body.phone}
+    phone: req.body.phone}
   }
   userModel.updateOne(criteria, updates, function(err, data) {
     if (err) {
