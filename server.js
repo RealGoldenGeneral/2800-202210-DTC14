@@ -361,7 +361,7 @@ app.get('/profile', (req,res) =>{
 
 app.post('/changeUsername', function (req, res) {
   userModel.updateOne({
-    name: req.session.real_user.name
+    name: req.session.real_user[0].name
   }, {
     $set: {'username': req.body.username}
   }, function (err, data) {
@@ -376,7 +376,7 @@ app.post('/changeUsername', function (req, res) {
 
 app.post('/changePassword', function (req, res) {
   userModel.updateOne({
-    name: req.session.real_user.name
+    name: req.session.real_user[0].name
   }, {
     $set: {'password': req.body.password}
   }, function (err, data) {
@@ -391,7 +391,7 @@ app.post('/changePassword', function (req, res) {
 
 app.post('/changeEmail', function (req, res) {
   userModel.updateOne({
-    name: req.session.real_user.name
+    name: req.session.real_user[0].name
   }, {
     $set: {'email': req.body.email}
   }, function (err, data) {
@@ -406,7 +406,7 @@ app.post('/changeEmail', function (req, res) {
 
 app.post('/changePhoneNumber', function (req, res) {
   userModel.updateOne({
-    name: req.session.real_user.name
+    name: req.session.real_user[0].name
   }, {
     $set: {'phone': req.body.phone}
   }, function (err, data) {
@@ -435,7 +435,7 @@ app.post('/changeQuizCategory', function (req, res) {
 })
 
 app.put('/insertRecord', (req, res) => {
-  userModel.find({name: req.session.real_user.name}, function (err, users) {
+  userModel.find({name: req.session.real_user[0].name}, function (err, users) {
     username = req.session.real_user[0].username
   })
   scoresModel.create({
