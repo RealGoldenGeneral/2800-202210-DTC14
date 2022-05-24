@@ -34,6 +34,11 @@
   cursor: pointer;
 }
 
+#gameToggle:hover, #quizToggle:hover {
+  background-color: darkgreen;
+  color: white;
+}
+
 #quizToggle {
   background-color: gainsboro;
   border: none;
