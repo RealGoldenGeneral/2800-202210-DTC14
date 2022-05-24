@@ -83,7 +83,7 @@ app.post("/login", function(req, res) {
         }
         else {
           req.session.authenticated = false
-          res.send("incorrect information")
+          res.send("Could not find a user with that username and password combo.")
         }
       }
     })
