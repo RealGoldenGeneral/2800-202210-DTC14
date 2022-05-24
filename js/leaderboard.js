@@ -10,8 +10,9 @@ function fillScoreboardQuiz() {
             to_add = ''
             for (i = 0; i < data.length; i++) {
                 to_add += `<div class="score">
+                <h4>${data[i].username}</h4>
                 <h4>${data[i].category}</h4>
-                <h4>${data[i].high_score}</h4>
+                <h4>${data[i].quiz_scores[0].high_score}</h4>
                 </div>`
             }
             $("#leaderboard").html(to_add)
