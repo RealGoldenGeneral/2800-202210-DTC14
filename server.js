@@ -459,10 +459,10 @@ app.get('/signup', function (req, res) {
 
 app.put('/addNewUser', function (req, res) {
   const validateUserSchema = Joi.object().keys({
-    username: Joi.string().min(1).required(),
-    email: Joi.string().email({tlds: {allow: ["com"]}}).required(),
-    password: Joi.string().min(5).required(),
-    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required()
+    username: Joi.string().min(1).required(), // string, min one char, required
+    email: Joi.string().email({tlds: {allow: ["com"]}}).required(), // string, email, has to end with .com, required
+    password: Joi.string().min(5).required(), // string, min five chars, required
+    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required() // string, phone-format: XXX-XXX-XXXX
   })
   validated_fields = {
     "username": req.body.username,
