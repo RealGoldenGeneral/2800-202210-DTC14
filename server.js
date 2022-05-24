@@ -560,6 +560,26 @@ app.delete("/removeUser", function(req, res) {
   })
 })
 
+app.post("/updateUserInfo", function(req, res) {
+  criteria = {username: req.body.old_username}
+  updates = {$set: {
+    username: req.body.new_username,
+    password: req.body.password,
+    email: req.body.email, 
+    phone: 
+    req.body.phone}
+  }
+  userModel.updateOne(criteria, updates, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.send("successful update")
+    }
+  })
+})
+
 //var session = require("express-session")
 
 //const bodyparser = require("body-parser");
