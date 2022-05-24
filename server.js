@@ -48,46 +48,46 @@ function filter_password(data) {
 
 app.post("/login", function(req, res) {
   console.log("post request recieved")
-  console.log(req.body.name, req.body.password)
-  username = req.body.name
-  pass = req.body.password
-  // const user = new userModel({
-  //   name: req.body.name,
-  //   password: req.body.password
-  // })
-  // user.save(function(err, user) {
-  //   if (err) {
-  //     console.log(err)
-  //   }else {
-  //     console.log("welcome back", user.name)
-  //     console.log(user)
-  //   }
-  // })
-  userModel.find({username: username}, function(err, user) {
-    console.log(`entered: ${pass}, in db: ${user}`)
-    var full_info = user
-    console.log("Full Info: ", full_info)
-    if (err) {
-      console.log(err)
-    }
-    else {
-      user = user.map(filter_password)
-      console.log(user[0])
-      if (req.body.password == user[0]) {
-        id = full_info[0]._id
-        req.session.real_user = full_info
-        // console.log(req.session.real_user = full_info)
-        console.log(full_info) 
-        req.session.authenticated = true
-        res.send(req.session.real_user)
+  console.log(req.body.username, req.body.password)
+  const loginValidationSchema = Joi.object().keys({
+    username: Joi.string().min(1).required(),
+    password: Joi.string().min(5).required()
+  })
+  login_credentials = {
+    "username": req.body.username,
+    "password": req.body.password
+  }
+  console.log("login credentials", login_credentials)
+
+  const {error, value} = loginValidationSchema.validate(login_credentials)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    userModel.find({username: req.body.username}, function(err, user) {
+      // console.log(`entered: ${pass}, in db: ${user}`)
+      var full_info = user
+      console.log("Full Info: ", full_info)
+      if (err) {
+        console.log(err)
       }
       else {
-        req.session.authenticated = false
-        res.send("incorrect information")
+        user = user.map(filter_password)
+        console.log(user[0])
+        if (req.body.password == user[0]) {
+          id = full_info[0]._id
+          req.session.real_user = full_info
+          console.log(full_info) 
+          req.session.authenticated = true
+          res.send("success")
+        }
+        else {
+          req.session.authenticated = false
+          res.send("incorrect information")
+        }
       }
-    }
-  })
-  // res.send({"stuff": username, "stuff2": pass})
+    })
+  }
 })
 
 app.get("/signOut", function(req, res) {

@@ -92,11 +92,12 @@ function hide_error_message() {
 function process_response(data) {
     $("#incorrect-login").hide()
     console.log(data)
-    if (data != "incorrect information") {
+    if (data == "success") {
         location.href = "/welcome"
     } else {
+        $("#incorrect-login").text(data)
         $("#incorrect-login").show()
-        setTimeout(hide_error_message, 3000)
+        setTimeout(hide_error_message, 5000)
     }
 }
 
@@ -130,7 +131,7 @@ function listenToClick() {
             type: "POST",
             url: "/login",
             data: {
-                name: $("#username").val(),
+                username: $("#username").val(),
                 password: $("#password").val()
             },
             success: process_response
