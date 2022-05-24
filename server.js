@@ -90,6 +90,33 @@ app.post("/login", function(req, res) {
 
 app.post("/adminLogin", function (res, req) {
   console.log("request recieved")
+  console.log(req.body.username, req.body.password)
+  username = req.body.username
+  password = req.body.password
+  userModel.find({username: username}, function (err, user) {
+    console.log(`entered ${password} into db: ${user}.`)
+    var full_info = user
+    console.log("full info: ", full_info)
+    if (err) {
+      console.log(err)
+    } else {
+      if (req.body.password == user[0]) {
+        id = full_info[0]._id
+        req.session.full_user = full_info
+        console.log(full_info)
+        if (full_info[0].type == "admin") {
+          req.session.authenticated = true
+          res.send(req.session.real_user)
+        } else {
+          req.session.authenticated = false
+          res.send("access denied")
+        }
+      } else {
+        req.session.authenticated = false
+        res.send("incorrect information")
+      }
+    }
+  })
 })
 
 app.get("/signOut", function(req, res) {
