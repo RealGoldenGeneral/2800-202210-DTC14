@@ -473,7 +473,7 @@ app.put('/addNewUser', function (req, res) {
   const {error, value} = validateUserSchema.validate(validated_fields)
   if (error) {
     console.log("Err" + error)
-    res.send(error)
+    res.send(error.details[0].message)
   }
   else {
     userModel.create({
@@ -493,7 +493,6 @@ app.put('/addNewUser', function (req, res) {
       } else {
         console.log("Data: " + data)
       }
-      res.send("Data sent successfully.")
     })
     res.send("success")
   }
