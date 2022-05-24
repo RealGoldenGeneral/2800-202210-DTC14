@@ -547,6 +547,19 @@ app.get('/getUsers', function (req, res) {
   })
 })
 
+app.delete("/removeUser", function(req, res) {
+  // req.body.username subject to change, may be some other value being used for criteria
+  userModel.deleteOne({username: req.body.username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.send(`successful removal of ${req.body.username} from users collection.`)
+    }
+  })
+})
+
 //var session = require("express-session")
 
 //const bodyparser = require("body-parser");
