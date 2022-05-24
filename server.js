@@ -88,6 +88,10 @@ app.post("/login", function(req, res) {
   // res.send({"stuff": username, "stuff2": pass})
 })
 
+app.post("/adminLogin", function (res, req) {
+  console.log("request recieved")
+})
+
 app.get("/signOut", function(req, res) {
   req.session.authenticated = false
   res.send("Signed out successfully!")
@@ -286,6 +290,7 @@ const userSchema = new mongoose.Schema({
     _id:Object,
     name: String,
     password: String,
+    type: String,
     email: String,
     username: String,
     phone: String,
@@ -460,6 +465,7 @@ app.put('/addNewUser', function (req, res) {
     '_id': Object,
     'name': req.body.name,
     'password': req.body.password,
+    'type': 'User',
     'email': req.body.email,
     'username': req.body.username,
     'phone': req.body.phone,
