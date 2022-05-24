@@ -85,19 +85,12 @@ function sign_out_user() {
     )
 }
 
-function hide_error_message() {
-    $("#incorrect-login").hide()
-}
-
 function process_response(data) {
-    $("#incorrect-login").hide()
     console.log(data)
     if (data == "success") {
         location.href = "/welcome"
     } else {
         $("#incorrect-login").text(data)
-        $("#incorrect-login").show()
-        setTimeout(hide_error_message, 5000)
     }
 }
 
@@ -119,7 +112,6 @@ function welcome_the_user() {
 function listenToClick() {
     welcome_the_user()
     $("#sign_out").click(sign_out_user)
-    $("#incorrect-login").hide()
     console.log("loaded")
     $("body").on("click", ".news-card", show_click_effect)
     $(".navbar-item").click(redirect_to_page)
