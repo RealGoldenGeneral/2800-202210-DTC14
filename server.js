@@ -492,7 +492,7 @@ app.put('/addNewUser', function (req, res) {
     '_id': Object,
     'name': req.body.name,
     'password': req.body.password,
-    'type': 'User',
+    'type': 'user',
     'email': req.body.email,
     'username': req.body.username,
     'phone': req.body.phone,
@@ -533,6 +533,17 @@ app.get('/getQuizRecords', (req, res) => {
       console.log("Data: " + scores.quiz_scores)
     }
     res.send(scores)
+  })
+})
+
+app.get('/getUsers', function (req, res) {
+  userModel.find({type: "user"}, function (err, data) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(data)
+    }
+    res.send(data)
   })
 })
 
