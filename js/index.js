@@ -5,7 +5,7 @@ function redirect_to_settings() {
 }
 
 function redirect_to_signup() {
-    location.href = "/signup"
+    location.href = "/signUp"
 }
 
 function show_full_menu() {

@@ -1,4 +1,4 @@
-// const mysql = require("mysql");
+// const mysql = require("mysql");nn
 const express = require("express");
 const app = express();
 const ejs = require('ejs');
@@ -10,6 +10,8 @@ app.use(bodyparser.urlencoded({
 }));
 
 var session = require('express-session')
+
+const Joi = require('joi');
 
 // To use the session middleware
 app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
@@ -456,25 +458,45 @@ app.get('/signup', function (req, res) {
 })
 
 app.put('/addNewUser', function (req, res) {
-  userModel.create({
-    '_id': Object,
-    'name': req.body.name,
-    'password': req.body.password,
-    'email': req.body.email,
-    'username': req.body.username,
-    'phone': req.body.phone,
-    'img': './img/profileicon.png',
-    'category': "covid_safety",
-    'education': req.body.education,
-    'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-    }
-    res.send("Data sent successfully.")
+  const validateUserSchema = Joi.object().keys({
+    username: Joi.string().min(1).required(),
+    email: Joi.string().email({tlds: {allow: ["com"]}}).required(),
+    password: Joi.string().min(5).required(),
+    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required()
   })
+  validated_fields = {
+    "username": req.body.username,
+    "email": req.body.email,
+    "password": req.body.password,
+    "phone": req.body.phone
+  }
+  const {error, value} = validateUserSchema.validate(validated_fields)
+  if (error) {
+    console.log("Err" + error)
+    res.send(error)
+  }
+  else {
+    userModel.create({
+      '_id': Object,
+      'name': req.body.name,
+      'password': req.body.password,
+      'email': req.body.email,
+      'username': req.body.username,
+      'phone': req.body.phone,
+      'img': './img/profileicon.png',
+      'category': "covid_safety",
+      'education': req.body.education,
+      'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+      }
+      res.send("Data sent successfully.")
+    })
+    res.send("success")
+  }
 })
 
 app.get('/thanks', function (req, res) {
