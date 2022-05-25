@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Co-Vention admin</title>
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="./css/adminPanel.css">
+</head>
+
+<body>
+<input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="las la-archive"></span><span>Co-Vention</span>
+            </h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="" class="active"><span class="las la-igloo"></span>
+                        <span>Dashboard</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="las la-users"></span>
+                        <span>Accounts</span></a>
+                </li>
+                <li>
+                    <a href=""><span class="las la-database"></span>
+                        <span>Scores</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <header>
+            <h2>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+
+                Dashboard
+            </h2>
+
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="Search here" />
+            </div>
+
+            <div class="user-wrapper">
+                <img src="./img/profileicon.png" width="40px" height="40px" alt="">
+                <div>
+                    <h4>Jack Luo</h4>
+                    <small>Super admin</small>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="cards">
+                <div class="card-single">
+                    <div>
+                        <h1>54</h1>
+                        <span>Users</span>
+                    </div>
+                    <div>
+                        <span class="las la-users"></span>
+                    </div>
+                </div>
+                <div class="card-single">
+                    <div>
+                        <h1>72</h1>
+                        <span>Record</span>
+                    </div>
+                    <div>
+                        <span class="las la-database"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="recent-grid">
+                <div class="projects">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Scores</h3>
+
+                            <button>See all<span class="las la-arrow-right">
+                                </span></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Username</td>
+                                            <td>Category</td>
+                                            <td>Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>User1</td>
+                                            <td>Quiz1</td>
+                                            <td>
+                                                <span class="status green"></span>
+                                                Passed
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User1</td>
+                                            <td>Quiz2</td>
+                                            <td>
+                                                <span class="status red"></span>
+                                                Failed
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User2</td>
+                                            <td>Quiz1</td>
+                                            <td>
+                                                <span class="status yellow"></span>
+                                                In-Progress
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User2</td>
+                                            <td>Quiz2</td>
+                                            <td>
+                                                <span class="status green"></span>
+                                                Passed
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User3</td>
+                                            <td>Quiz1</td>
+                                            <td>
+                                                <span class="status red"></span>
+                                                Failed
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>User3</td>
+                                            <td>Quiz2</td>
+                                            <td>
+                                                <span class="status yellow"></span>
+                                                In-Progress
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customers">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>News customers</h3>
+
+                            <button>See all<span class="las la-arrow-right">
+                                </span></button>
+                        </div>
+                        <div class="card-body">
+                            <div class="customer">
+                                <div class="info">
+                                    <div>
+                                        <img src="./img/profileicon.png" width="40px" height="40px" alt="">
+                                    </div>
+                                    <div>
+                                        <h4>User4</h4>
+                                        <small>Student</small>
+                                    </div>
+                                </div>
+                                <div class="contact">
+                                    <span class="las la-user-circle"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
