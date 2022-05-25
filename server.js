@@ -424,18 +424,30 @@ app.post('/changePassword', function (req, res) {
 })
 
 app.post('/changeEmail', function (req, res) {
-  userModel.updateOne({
-    name: req.session.real_user[0].name
-  }, {
-    $set: {'email': req.body.email}
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-      res.send("Successfully updated.")
-    }
+  const validateEmailSchema = Joi.object().keys({
+    email: Joi.string().email({tlds: {allow: ["com"]}}).required()
   })
+  updated_email = {
+    "email": req.body.email
+  }
+  const {error, value} = validateEmailSchema.validate(updated_email)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    userModel.updateOne({
+      name: req.session.real_user[0].name
+    }, {
+      $set: {'email': req.body.email}
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+        res.send("Successfully updated.")
+      }
+    })
+  }
 })
 
 app.post('/changePhoneNumber', function (req, res) {
