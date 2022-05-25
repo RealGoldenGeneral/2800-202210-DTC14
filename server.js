@@ -19,20 +19,14 @@ app.use(cors())
 
 const Joi = require('joi');
 
-// const cors = require('cors');
-// app.use(cors())
-
-// const connection = mysql.createConnection({
-//   host:"localhost",
-//   user:"root",
-//   password:"yourpasswd",
-//   database:"nodejs"
-// });
-
-// connection.connect(function(error){
-//   if(error) throw error
-//   else console.log("connected to the database successfully!")
-// })
+const loginValidator = function (req, res, next) {
+  if (req.session.authenticated != true) {
+    res.redirect("/")
+  }
+  else {
+    next()
+  }
+}
 
 app.use("/css", express.static("./css"));
 app.use("/js", express.static("./js"));
@@ -51,18 +45,6 @@ app.post("/login", function(req, res) {
   console.log(req.body.name, req.body.password)
   username = req.body.name
   pass = req.body.password
-  // const user = new userModel({
-  //   name: req.body.name,
-  //   password: req.body.password
-  // })
-  // user.save(function(err, user) {
-  //   if (err) {
-  //     console.log(err)
-  //   }else {
-  //     console.log("welcome back", user.name)
-  //     console.log(user)
-  //   }
-  // })
   userModel.find({username: username}, function(err, user) {
     console.log(`entered: ${pass}, in db: ${user}`)
     var full_info = user
@@ -126,7 +108,7 @@ app.get("/signOut", function(req, res) {
   res.send("Signed out successfully!")
 })
 
-app.get("/welcome", function(req, res) {
+app.get("/welcome", loginValidator, function(req, res) {
   if (req.session.authenticated) {
     res.sendFile(__dirname + "/welcome.html")
   }
@@ -135,31 +117,31 @@ app.get("/welcome", function(req, res) {
   }
 })
 
-app.get("/leaderboard", function (req, res){
+app.get("/leaderboard", loginValidator, function(req, res){
   res.sendFile(__dirname + "/leaderboard.html")
 })
 
-app.get("/news", function(req, res) {
+app.get("/news", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/news.html")
 })
 
-app.get("/game", function (req, res){
+app.get("/game", loginValidator, function(req, res){
   res.sendFile(__dirname + "/game.html")
 })
 
-app.get("/quiz", function (req, res){
+app.get("/quiz", loginValidator, function(req, res){
   res.sendFile(__dirname + "/quiz.html")
 })
 
-app.get("/settings", function (req, res) {
+app.get("/settings", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/settings.html")
 })
 
-app.get("/gamePage", function (req, res) {
+app.get("/gamePage", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/gamePage.html")
 })
 
-app.get("/startQuiz/", function(req, res) {
+app.get("/startQuiz/", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/play-quiz.html")
 })
 
