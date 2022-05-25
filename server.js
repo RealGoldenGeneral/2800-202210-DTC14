@@ -17,6 +17,8 @@ app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 const cors = require('cors');
 app.use(cors())
 
+const Joi = require('joi');
+
 // const cors = require('cors');
 // app.use(cors())
 
@@ -562,60 +564,37 @@ app.delete("/removeUser", function(req, res) {
 
 app.post("/updateUserInfo", function(req, res) {
   criteria = {username: req.body.old_username}
-  updates = {$set: {
-    username: req.body.new_username,
-    password: req.body.password,
-    email: req.body.email, 
-    phone: req.body.phone}
-  }
-  userModel.updateOne(criteria, updates, function(err, data) {
-    if (err) {
-      console.log("Err" + err)
-    }
-    else {
-      console.log("Data" + data)
-      res.send("successful update")
-    }
+  const validateUpdateSchema = Joi.object().keys({
+    new_username: Joi.string().required(),
+    password: Joi.string().min(5).required(),
+    email: Joi.string().email({tlds: {allow: ["com"]}}).required(),
+    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required()
   })
+  validate_updates = {
+    "new_username": req.body.new_username,
+    "password": req.body.password,
+    "email": req.body.email, 
+    "phone": req.body.phone
+  }
+  const {error, value} = validateUpdateSchema.validate(validate_updates)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    updates = {$set: {
+      username: req.body.new_username,
+      password: req.body.password,
+      email: req.body.email, 
+      phone: req.body.phone}
+    }
+    userModel.updateOne(criteria, updates, function(err, data) {
+      if (err) {
+        console.log("Err" + err)
+      }
+      else {
+        console.log("Data" + data)
+        res.send("successful update")
+      }
+    })
+  }
 })
-
-//var session = require("express-session")
-
-//const bodyparser = require("body-parser");
-// app.use(bodyparser.urlencoded({
-//   extended: true
-// }));
-
-// const cors = require('cors');
-// app.use(cors())
-
-// app.use(express.static("../public"));
-
-// app.post("/login", function (req, res) {
-//     console.log("recieved1")
-//     user_credential = {"username": req.body.name, "password": req.body.password}
-//     res.send(user_credential)
-// })
-
-// app.get('/', function (req, res) {
-//     if (req.session.authenticated) {
-//         res.send(`Hi ${req.session.user}`)
-//     } else {
-//         res.redirect('/login')
-//     }
-// })
-
-// app.get("/login", function (req, res, next) {
-//     res.send("Plesae provide the credentials through the URL")
-// })
-
-// app.get(`/login/:user/:pass`, function (req, res, next) {
-//     if (users[req.params.user] == req.params.pass) {
-//         req.session.authenticated = true
-//         req.sesssion.user = req.params.user
-//         res.send("Successful login!")
-//     } else {
-//         req.session.authenticated = false
-//         res.send("Failed login")
-//     }
-// })
