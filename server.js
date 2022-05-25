@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const ejs = require('ejs');
+const bcrypt = require('bcrypt')
 app.set('view engine', 'ejs');
 
 const bodyparser = require("body-parser");
@@ -48,6 +49,7 @@ function filter_password(data) {
 
 app.post("/login", function(req, res) {
   console.log("post request recieved")
+<<<<<<< HEAD
   console.log(req.body.username, req.body.password)
   const loginValidationSchema = Joi.object().keys({
     username: Joi.string().min(1).required(),
@@ -88,6 +90,53 @@ app.post("/login", function(req, res) {
       }
     })
   }
+=======
+  console.log(req.body.name, req.body.password)
+  username = req.body.name
+  pass = req.body.password
+  // const user = new userModel({
+  //   name: req.body.name,
+  //   password: req.body.password
+  // })
+  // user.save(function(err, user) {
+  //   if (err) {
+  //     console.log(err)
+  //   }else {
+  //     console.log("welcome back", user.name)
+  //     console.log(user)
+  //   }
+  // })
+  userModel.find({username: username}, function(err, user) {
+    console.log(`entered: ${pass}, in db: ${user}`)
+    var full_info = user
+    console.log("Full Info: ", full_info)
+    if (err) {
+      console.log(err)
+    }
+    else {
+      user = user.map(filter_password)
+      console.log(user[0])
+      bcrypt.compare(pass, user[0], function(err, result) {
+        if (err){
+          req.session.authenticated = false
+          res.send("error please try again")
+        }
+        else if (result) {
+          id = full_info[0]._id
+          req.session.real_user = full_info
+          // console.log(req.session.real_user = full_info)
+          console.log(full_info)
+          req.session.authenticated = true
+          res.send(req.session.real_user)
+        } else {
+          req.session.authenticated = false
+          res.send("incorrect information")
+        }
+    });
+    }
+  })
+  // res.send({"stuff": username, "stuff2": pass})
+>>>>>>> Jack_Berena_profilePage
 })
 
 app.get("/signOut", function(req, res) {
@@ -498,6 +547,17 @@ app.put('/addNewUser', function (req, res) {
       }
     })
     res.send("success")
+  }
+})
+
+userSchema.pre('save', async function (next){
+  try{
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(this.password, salt)
+    this.password = hashedPassword
+    next()
+  }catch(error){
+    next(error)
   }
 })
 
