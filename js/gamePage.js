@@ -395,13 +395,15 @@ function game() {
 
             record = destroyed > record ? destroyed : record;
 
-            $.ajax({
-                type: "put",
-                url: "insertRecord",
-                data: {
-                    score: record
-                }
-            })
+            if (destroyed == record) {
+                $.ajax({
+                    type: "put",
+                    url: "insertRecord",
+                    data: {
+                        score: record
+                    }
+                })
+            }
 
             ctx.font = "20px Verdana";
             ctx.fillStyle = "white";
