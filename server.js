@@ -394,18 +394,30 @@ app.get('/profile', (req,res) =>{
 })
 
 app.post('/changeUsername', function (req, res) {
-  userModel.updateOne({
-    name: req.session.real_user[0].name
-  }, {
-    $set: {'username': req.body.username}
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-      res.send("Successfully updated.")
-    }
+  const validateUsernameSchema = Joi.object().keys({
+    username: Joi.string().required()
   })
+  updated_username = {
+    "username": req.body.username
+  }
+  const {error, value} = validateUsernameSchema.validate(updated_username)
+  if (error) {
+    res.send(error.details[0].message) 
+  }
+  else {
+    userModel.updateOne({
+      name: req.session.real_user[0].name
+    }, {
+      $set: {'username': req.body.username}
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+        res.send("Successfully updated.")
+      }
+    }) 
+  }
 })
 
 app.post('/changePassword', function (req, res) {
