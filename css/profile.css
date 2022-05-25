@@ -1,16 +1,47 @@
-#topnav{
-    text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Roboto',sans-serif;
+  outline: none;
+  border: none;
 }
+
+/* Header Section */
+.title {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  height: 100%;
+}
+
+.title div:nth-child(1) {
+  justify-self: flex-start;
+  margin: 10px 0 0 10px;
+}
+
+.back-button {
+  font-size: xx-large;
+}
+
+.title div:nth-child(2) {
+  justify-self: flex-start;
+  align-self: flex-end;
+  padding-bottom: 20px;
+}
+
+.title div:nth-child(3) {
+  display: grid;
+  grid-template-areas: "profile"
+                       "menu";
+  grid-template-columns: 100%;
+  grid-template-rows: 50% 50%;
+}
+/*  */
 
 .title {
     display: grid;
-  }
-
-.back-button {
-font-size:xx-large;
-margin-left: 50px;
-padding-bottom: 50px;
-  }
+}
 
 input{
     padding: 0.7rem .1rem;
@@ -33,12 +64,11 @@ input, label{
 }
 
 #profile{
-    margin-left: 93.5px;
-    margin-right: 93.5px;
+    margin: auto;
     padding: 30px;
     background-color: #8dc1ac;
     border-radius: 50px;
-    margin-bottom: 50px;
+    height: 100%;
 }
 
 fieldset{
@@ -110,7 +140,7 @@ html{
     display: grid;
     grid-template-columns: 25% 25% 25% 25%;
     background-color: #8dc1ac;
-    height: 78px;
+    height: 100%;
   }
   
   .navbar a {
@@ -127,9 +157,9 @@ html{
     display: grid;
     grid-template-columns: 100%;
     align-items: center;
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    justify-content: center; */
+    justify-content: center;
     font-size: 1em;
     /* padding: ; */
   }
@@ -137,8 +167,9 @@ html{
   main {
     display: grid;
     width: 100%;
+    height: 100vh;
     grid-template-columns: 100%;
-    /* grid-template-rows: 15% 77% 8%; */
+    grid-template-rows: 15% 77% 8%;
     align-items: center;
     text-align: center;
   }
