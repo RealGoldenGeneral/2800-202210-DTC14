@@ -1,10 +1,16 @@
+function processResponse() {
+    alert("Successfully updated information.")
+    location.reload()
+}
+
 function changeCategory(category){
     $.ajax({
         type: "post",
         data: {
             category: category
         },
-        url: "/changeQuizCategory"
+        url: "/changeQuizCategory",
+        success: processResponse
     })
 }
 
@@ -14,7 +20,8 @@ function registerNewPhoneNumber(newPhoneNumber) {
         data: {
             phone: newPhoneNumber
         },
-        url: '/changePhoneNumber'
+        url: '/changePhoneNumber',
+        success: processResponse
     })
 }
 
@@ -24,7 +31,8 @@ function registerNewEmail(newEmail) {
         data: {
             email: newEmail
         },
-        url: '/changeEmail'
+        url: '/changeEmail',
+        success: processResponse
     })
 }
 
@@ -35,7 +43,8 @@ function registerNewPassword(newPassword) {
         data: {
             password: newPassword
         },
-        url: '/changePassword'
+        url: '/changePassword',
+        success: processResponse
     })
 }
 
@@ -45,7 +54,8 @@ function registerNewUsername(newUsername) {
         data: {
             username: newUsername
         },
-        url: '/changeUsername'
+        url: '/changeUsername',
+        success: processResponse
     })
 }
 
