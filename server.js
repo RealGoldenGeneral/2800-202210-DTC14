@@ -49,7 +49,6 @@ function filter_password(data) {
 
 app.post("/login", function(req, res) {
   console.log("post request recieved")
-<<<<<<< HEAD
   console.log(req.body.username, req.body.password)
   const loginValidationSchema = Joi.object().keys({
     username: Joi.string().min(1).required(),
@@ -75,48 +74,8 @@ app.post("/login", function(req, res) {
       }
       else {
         user = user.map(filter_password)
-        console.log(user[0])
-        if (req.body.password == user[0]) {
-          id = full_info[0]._id
-          req.session.real_user = full_info
-          console.log(full_info) 
-          req.session.authenticated = true
-          res.send("success")
-        }
-        else {
-          req.session.authenticated = false
-          res.send("Could not find a user with that username and password combo.")
-        }
-      }
-    })
-  }
-=======
-  console.log(req.body.name, req.body.password)
-  username = req.body.name
-  pass = req.body.password
-  // const user = new userModel({
-  //   name: req.body.name,
-  //   password: req.body.password
-  // })
-  // user.save(function(err, user) {
-  //   if (err) {
-  //     console.log(err)
-  //   }else {
-  //     console.log("welcome back", user.name)
-  //     console.log(user)
-  //   }
-  // })
-  userModel.find({username: username}, function(err, user) {
-    console.log(`entered: ${pass}, in db: ${user}`)
-    var full_info = user
-    console.log("Full Info: ", full_info)
-    if (err) {
-      console.log(err)
-    }
-    else {
-      user = user.map(filter_password)
       console.log(user[0])
-      bcrypt.compare(pass, user[0], function(err, result) {
+      bcrypt.compare(req.body.password, user[0], function(err, result) {
         if (err){
           req.session.authenticated = false
           res.send("error please try again")
@@ -127,16 +86,15 @@ app.post("/login", function(req, res) {
           // console.log(req.session.real_user = full_info)
           console.log(full_info)
           req.session.authenticated = true
-          res.send(req.session.real_user)
+          res.send("success")
         } else {
           req.session.authenticated = false
           res.send("incorrect information")
         }
     });
-    }
-  })
-  // res.send({"stuff": username, "stuff2": pass})
->>>>>>> Jack_Berena_profilePage
+      }
+    })
+  }
 })
 
 app.get("/signOut", function(req, res) {
@@ -528,38 +486,54 @@ app.put('/addNewUser', function (req, res) {
     res.send(error.details[0].message)
   }
   else {
-    userModel.create({
-      '_id': Object,
-      'name': req.body.name,
-      'password': req.body.password,
-      'email': req.body.email,
-      'username': req.body.username,
-      'phone': req.body.phone,
-      'img': './img/profileicon.png',
-      'category': "covid_safety",
-      'education': req.body.education,
-      'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
-    }, function (err, data) {
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
-        console.log("Error: " + err)
-      } else {
-        console.log("Data: " + data)
+        console.log("Err" + err)
+      }
+      else {
+        bcrypt.hash(req.body.password, salt, function(err, hashed_password) {
+          if (err) {
+            console.log("Err" + err)
+          }
+          else {
+            console.log("HASHED PASSWORD", hashed_password)
+            req.body.password = hashed_password
+            userModel.create({
+              '_id': Object,
+              'name': req.body.name,
+              'password': req.body.password,
+              'email': req.body.email,
+              'username': req.body.username,
+              'phone': req.body.phone,
+              'img': './img/profileicon.png',
+              'category': "covid_safety",
+              'education': req.body.education,
+              'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
+            }, function (err, data) {
+              if (err) {
+                console.log("Error: " + err)
+              } else {
+                console.log("Data: " + data)
+              }
+            })
+            res.send("success")
+          }
+        })
       }
     })
-    res.send("success")
   }
 })
 
-userSchema.pre('save', async function (next){
-  try{
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(this.password, salt)
-    this.password = hashedPassword
-    next()
-  }catch(error){
-    next(error)
-  }
-})
+// userSchema.pre('save', async function (next){
+//   try{
+//     const salt = await bcrypt.genSalt(10)
+//     const hashedPassword = await bcrypt.hash(this.password, salt)
+//     this.password = hashedPassword
+//     next()
+//   }catch(error){
+//     next(error)
+//   }
+// })
 
 app.get('/thanks', function (req, res) {
   res.sendFile(__dirname + "/thanks.html")
