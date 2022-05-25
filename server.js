@@ -371,6 +371,7 @@ app.post('/changeUsername', function (req, res) {
       console.log("Error: " + err)
     } else {
       console.log("Data: " + data)
+      req.session.real_user[0].username = req.body.username
       res.send("Successfully updated.")
     }
   })
@@ -401,6 +402,7 @@ app.post('/changeEmail', function (req, res) {
       console.log("Error: " + err)
     } else {
       console.log("Data: " + data)
+      req.session.real_user[0].email = req.body.email
       res.send("Successfully updated.")
     }
   })
@@ -416,6 +418,7 @@ app.post('/changePhoneNumber', function (req, res) {
       console.log("Error: " + err)
     } else {
       console.log("Data: " + data)
+      req.session.real_user[0].phone = req.body.phone
       res.send("Successfully updated.")
     }
   })
