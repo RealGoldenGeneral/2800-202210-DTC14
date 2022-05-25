@@ -439,18 +439,30 @@ app.post('/changeEmail', function (req, res) {
 })
 
 app.post('/changePhoneNumber', function (req, res) {
-  userModel.updateOne({
-    name: req.session.real_user[0].name
-  }, {
-    $set: {'phone': req.body.phone}
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-      res.send("Successfully updated.")
-    }
+  const validatePhoneSchema = Joi.object().keys({
+    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required()
   })
+  updated_phone = {
+    "phone": req.body.phone
+  }
+  const {error, value} = validatePhoneSchema.validate(updated_phone)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    userModel.updateOne({
+      name: req.session.real_user[0].name
+    }, {
+      $set: {'phone': req.body.phone}
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+        res.send("Successfully updated.")
+      }
+    })
+  }
 })
 
 app.post('/changeQuizCategory', function (req, res) {
