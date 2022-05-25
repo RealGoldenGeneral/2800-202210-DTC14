@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const ejs = require('ejs');
+const bcrypt = require('bcrypt')
 app.set('view engine', 'ejs');
 
 const bodyparser = require("body-parser");
@@ -71,18 +72,23 @@ app.post("/login", function(req, res) {
     else {
       user = user.map(filter_password)
       console.log(user[0])
-      if (req.body.password == user[0]) {
-        id = full_info[0]._id
-        req.session.real_user = full_info
-        // console.log(req.session.real_user = full_info)
-        console.log(full_info) 
-        req.session.authenticated = true
-        res.send(req.session.real_user)
-      }
-      else {
-        req.session.authenticated = false
-        res.send("incorrect information")
-      }
+      bcrypt.compare(pass, user[0], function(err, result) {
+        if (err){
+          req.session.authenticated = false
+          res.send("error please try again")
+        }
+        else if (result) {
+          id = full_info[0]._id
+          req.session.real_user = full_info
+          // console.log(req.session.real_user = full_info)
+          console.log(full_info)
+          req.session.authenticated = true
+          res.send(req.session.real_user)
+        } else {
+          req.session.authenticated = false
+          res.send("incorrect information")
+        }
+    });
     }
   })
   // res.send({"stuff": username, "stuff2": pass})
@@ -475,6 +481,17 @@ app.put('/addNewUser', function (req, res) {
     }
     res.send("Data sent successfully.")
   })
+})
+
+userSchema.pre('save', async function (next){
+  try{
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(this.password, salt)
+    this.password = hashedPassword
+    next()
+  }catch(error){
+    next(error)
+  }
 })
 
 app.get('/thanks', function (req, res) {
