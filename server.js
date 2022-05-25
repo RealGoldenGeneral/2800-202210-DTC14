@@ -642,3 +642,7 @@ app.post("/updateUserInfo", function(req, res) {
     })
   }
 })
+
+app.get('/adminPanel', function (req, res) {
+  res.sendFile(__dirname + "/adminPanel.html")
+})
