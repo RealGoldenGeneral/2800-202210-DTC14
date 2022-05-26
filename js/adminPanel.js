@@ -126,15 +126,7 @@ function displayAllQuizScores() {
         type: "get",
         url: "/getRecords",
         success: (data) => {
-            if (data.length == 1) {
-                increment = 1
-            }
-            if (data.length == 2) {
-                increment = 2
-            }
-            if (data.length > 3) {
-                increment = 3
-            } for (p = (data.length - increment); p < data.length; p++) {
+             for (p = 0; p < data.length; p++) {
                 $("tbody").append(`<tr>
                 <td>${data[p].name}</td>
                 <td>game</td>
