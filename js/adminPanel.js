@@ -140,11 +140,11 @@ function displayAllQuizScores() {
             }
             if (data.length > 3) {
                 increment = 3
-            } for (i = (data.length - increment); i < data.length; i++) {
+            } for (p = (data.length - increment); p < data.length; p++) {
                 $("tbody").append(`<tr>
-                <td>${data[i].username}</td>
+                <td>${data[p].username}</td>
                 <td>game</td>
-                <td>${data[i].score}</td>
+                <td>${data[p].score}</td>
                 </tr>`)
             }
         }
@@ -269,11 +269,11 @@ function displayScores() {
             }
             if (data.length > 3) {
                 increment = 3
-            } for (i = (data.length - increment); i < data.length; i++) {
+            } for (o = (data.length - increment); o < data.length; o++) {
                 $("tbody").append(`<tr>
-                <td>${data[i].username}</td>
+                <td>${data[o].username}</td>
                 <td>game</td>
-                <td>${data[i].score}</td>
+                <td>${data[o].score}</td>
                 </tr>`)
             }
         }
