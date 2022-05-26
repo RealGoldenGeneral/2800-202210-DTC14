@@ -53,7 +53,7 @@ function modifyProfileInformation() {
 }
 
 function displayProfileModification() {
-    $("modifyProfile").empty()
+    $(".modifyProfile").empty()
     $("main").append(` <div class="modifyProfile">
     <div class="card">
     <div class="card-header">
@@ -79,8 +79,8 @@ function displayProfileModification() {
     </div>`)
 }
 
-function displayAllQuizScores() {
-    $.ajax({
+async function displayAllQuizScores() {
+    await $.ajax({
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
@@ -122,19 +122,11 @@ function displayAllQuizScores() {
             $("#scores").attr("class", "active")
         }
     })
-    $.ajax({
+     await $.ajax({
         type: "get",
         url: "/getRecords",
         success: (data) => {
-            if (data.length == 1) {
-                increment = 1
-            }
-            if (data.length == 2) {
-                increment = 2
-            }
-            if (data.length > 3) {
-                increment = 3
-            } for (p = (data.length - increment); p < data.length; p++) {
+             for (p = 0; p < data.length; p++) {
                 $("tbody").append(`<tr>
                 <td>${data[p].name}</td>
                 <td>game</td>
@@ -216,9 +208,9 @@ function displayUsers() {
     })
 }
 
-function displayScores() {
+async function displayScores() {
     q = 0
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
@@ -250,7 +242,7 @@ function displayScores() {
             }
         })
 
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getRecords",
         success: (data) => {
@@ -273,22 +265,23 @@ function displayScores() {
     })
 }
 
-function addRecords() {
+async function addRecords() {
     records = 0
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getQuizRecords",
         success: (data) =>{
             records += data.length * 2
         }
     })
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getRecords",
         success: (data) => {
-            records =+ data.length
+            records += data.length
         }
     })
+    $("#record").text(records)
 }
 
 
