@@ -109,7 +109,7 @@ async function displayAllQuizScores() {
                     for (n = 0; n < data[m].quiz_scores.length; n++) {
                         if (data[m].quiz_scores[n].tried_quiz == true) {
                             $("tbody").append(`<tr>
-                            <td>${data[m].name}</td>
+                            <td>${data[m].username}</td>
                             <td>${data[m].quiz_scores[n].category}</td>
                             <td>
                             ${data[m].quiz_scores[n].high_score}/10
