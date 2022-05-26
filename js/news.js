@@ -109,9 +109,18 @@ function process_news_response(data) {
 }
 
 function get_daily_news() {
+    year = date.getFullYear()
+    month = date.getMonth()
+    day = date.getDate()
+    if (month < 10) {
+        month = `0${month}`
+    }
+    if (day < 10) {
+        day = `0${day}`
+    }
     $.ajax(
         {
-            "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=relevancy&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
+            "url": `https://newsapi.org/v2/everything?q=covid&from=${year}-${month}-${day}&to=2022-05-10&sortBy=relevancy&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
             "type": "GET",
             "success": process_news_response,
         }
