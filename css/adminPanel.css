@@ -265,6 +265,11 @@ main {
     border: 1px solid var(--main-color);
 }
 
+.customer {
+    display: flex;
+    flex-direction: column;
+}
+
 table{
     border-collapse: collapse;
 }
@@ -315,7 +320,7 @@ tr td:last-child{
 }
 
 .customer{
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     padding: .5rem 1rem;
