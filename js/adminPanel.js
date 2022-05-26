@@ -1,3 +1,5 @@
+const req = require("express/lib/request")
+
 increment = 0
 clicks = 0
 
@@ -231,13 +233,15 @@ function displayScores() {
                 for (q = 0; q < increment; q++) {
                     for (i = 0; i < data.length; i++) {
                         for (j = 0; j < data[i].quiz_scores.length; j++) {
-                            $("tbody").append(`<tr>
-                            <td>${data[i].username}</td>
-                            <td>${data[i].quiz_scores[j].category}</td>
-                            <td>
-                            ${data[i].quiz_scores[j].high_score}/10
-                            </td>
-                            </tr>`)
+                            if (data[i].quiz_scores[j].tried_quiz == false) {
+                                $("tbody").append(`<tr>
+                                <td>${data[i].username}</td>
+                                <td>${data[i].quiz_scores[j].category}</td>
+                                <td>
+                                ${data[i].quiz_scores[j].high_score}/10
+                                </td>
+                                </tr>`)
+                            }
                         }
                     }
                 }
