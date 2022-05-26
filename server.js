@@ -20,8 +20,6 @@ app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 const cors = require('cors');
 app.use(cors())
 
-const Joi = require('joi');
-
 const loginValidator = function (req, res, next) {
   if (req.session.authenticated != true) {
     res.redirect("/")
