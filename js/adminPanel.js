@@ -38,6 +38,7 @@ function modifyProfileInformation() {
 }
 
 function displayProfileModification() {
+    $(".modifyProfile").empty()
     $("main").append(` <div class="modifyProfile">
     <div class="card">
     <div class="card-header">
