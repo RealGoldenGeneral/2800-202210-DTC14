@@ -20,20 +20,16 @@ app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 const cors = require('cors');
 app.use(cors())
 
-// const cors = require('cors');
-// app.use(cors())
+const Joi = require('joi');
 
-// const connection = mysql.createConnection({
-//   host:"localhost",
-//   user:"root",
-//   password:"yourpasswd",
-//   database:"nodejs"
-// });
-
-// connection.connect(function(error){
-//   if(error) throw error
-//   else console.log("connected to the database successfully!")
-// })
+const loginValidator = function (req, res, next) {
+  if (req.session.authenticated != true) {
+    res.redirect("/")
+  }
+  else {
+    next()
+  }
+}
 
 app.use("/css", express.static("./css"));
 app.use("/js", express.static("./js"));
@@ -97,12 +93,57 @@ app.post("/login", function(req, res) {
   }
 })
 
+app.post("/adminLogin", function (res, req) {
+  console.log("request recieved")
+  console.log(req.body.username, req.body.password)
+  username = req.body.username
+  password = req.body.password
+  const adminSchema = Joi.object().keys({
+    username: Joi.string().required(),
+    password: Joi.string().min(5).required()
+  })
+  admin_credentials = {
+    "username": req.body.username,
+    "password": req.body.password
+  }
+  const {error, value} = adminSchema.validate(admin_credentials)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    userModel.find({username: username}, function (err, user) {
+      console.log(`entered ${password} into db: ${user}.`)
+      var full_info = user
+      console.log("full info: ", full_info)
+      if (err) {
+        console.log(err)
+      } else {
+        if (req.body.password == user[0]) {
+          id = full_info[0]._id
+          req.session.full_user = full_info
+          console.log(full_info)
+          if (full_info[0].type == "admin") {
+            req.session.authenticated = true
+            res.send(req.session.real_user)
+          } else {
+            req.session.authenticated = false
+            res.send("access denied")
+          }
+        } else {
+          req.session.authenticated = false
+          res.send("incorrect information")
+        }
+      }
+    })
+  }
+})
+
 app.get("/signOut", function(req, res) {
   req.session.authenticated = false
   res.send("Signed out successfully!")
 })
 
-app.get("/welcome", function(req, res) {
+app.get("/welcome", loginValidator, function(req, res) {
   if (req.session.authenticated) {
     res.sendFile(__dirname + "/welcome.html")
   }
@@ -111,31 +152,31 @@ app.get("/welcome", function(req, res) {
   }
 })
 
-app.get("/leaderboard", function (req, res){
+app.get("/leaderboard", loginValidator, function(req, res){
   res.sendFile(__dirname + "/leaderboard.html")
 })
 
-app.get("/news", function(req, res) {
+app.get("/news", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/news.html")
 })
 
-app.get("/game", function (req, res){
+app.get("/game", loginValidator, function(req, res){
   res.sendFile(__dirname + "/game.html")
 })
 
-app.get("/quiz", function (req, res){
+app.get("/quiz", loginValidator, function(req, res){
   res.sendFile(__dirname + "/quiz.html")
 })
 
-app.get("/settings", function (req, res) {
+app.get("/settings", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/settings.html")
 })
 
-app.get("/gamePage", function (req, res) {
+app.get("/gamePage", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/gamePage.html")
 })
 
-app.get("/startQuiz/", function(req, res) {
+app.get("/startQuiz/", loginValidator, function(req, res) {
   res.sendFile(__dirname + "/play-quiz.html")
 })
 
@@ -268,7 +309,7 @@ app.get("/getQuizScores", function(req, res) {
 app.post("/updateUserQuizScore", function(req, res) {
   console.log("user score: ", req.body)
   console.log("/updateUserQuizScore", req.session.real_user)
-  userModel.updateOne({username: req.session.real_user[0].username, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
+  userModel.updateOne({username: req.session.real_user[0].username, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score), "quiz_scores.$.tried_quiz": true}}, function(err, data) {
     if (err) {
       console.log("Err" + err)
     }
@@ -295,6 +336,7 @@ const userSchema = new mongoose.Schema({
     _id:Object,
     name: String,
     password: String,
+    type: String,
     email: String,
     username: String,
     phone: String,
@@ -303,6 +345,7 @@ const userSchema = new mongoose.Schema({
     quiz_scores: [{
       category: String,
       high_score: Number,
+      tried_quiz: Boolean,
       _id: false}]
 });
 
@@ -369,66 +412,111 @@ app.get('/profile', (req,res) =>{
 })
 
 app.post('/changeUsername', function (req, res) {
-  userModel.updateOne({
-    name: req.session.real_user[0].name
-  }, {
-    $set: {'username': req.body.username}
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-      req.session.real_user[0].username = req.body.username
-      res.send("Successfully updated.")
-    }
+  const validateUsernameSchema = Joi.object().keys({
+    username: Joi.string().required()
   })
+  updated_username = {
+    "username": req.body.username
+  }
+  const {error, value} = validateUsernameSchema.validate(updated_username)
+  if (error) {
+    res.send(error.details[0].message) 
+  }
+  else {
+    userModel.updateOne({
+      name: req.session.real_user[0].name
+    }, {
+      $set: {'username': req.body.username}
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+        res.send("Successfully updated.")
+      }
+    }) 
+  }
 })
 
 app.post('/changePassword', function (req, res) {
-  userModel.updateOne({
-    name: req.session.real_user[0].name
-  }, {
-    $set: {'password': req.body.password}
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-      res.send("Successfully updated.")
-    }
+  const validatePasswordSchema = Joi.object().keys({
+    password: Joi.string().min(5).required()
   })
+  updated_password = {
+    "password": req.body.password
+  }
+  const {error, value} = validatePasswordSchema.validate(updated_password)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    userModel.updateOne({
+      name: req.session.real_user[0].name
+    }, {
+      $set: {'password': req.body.password}
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+        res.send("Successfully updated.")
+      }
+    })
+  }
 })
 
 app.post('/changeEmail', function (req, res) {
-  userModel.updateOne({
-    name: req.session.real_user[0].name
-  }, {
-    $set: {'email': req.body.email}
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-      req.session.real_user[0].email = req.body.email
-      res.send("Successfully updated.")
-    }
+  const validateEmailSchema = Joi.object().keys({
+    email: Joi.string().email({tlds: {allow: ["com"]}}).required()
   })
+  updated_email = {
+    "email": req.body.email
+  }
+  const {error, value} = validateEmailSchema.validate(updated_email)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    userModel.updateOne({
+      name: req.session.real_user[0].name
+    }, {
+      $set: {'email': req.body.email}
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+        res.send("Successfully updated.")
+      }
+    })
+  }
 })
 
 app.post('/changePhoneNumber', function (req, res) {
-  userModel.updateOne({
-    name: req.session.real_user[0].name
-  }, {
-    $set: {'phone': req.body.phone}
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-      req.session.real_user[0].phone = req.body.phone
-      res.send("Successfully updated.")
-    }
+  const validatePhoneSchema = Joi.object().keys({
+    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required()
   })
+  updated_phone = {
+    "phone": req.body.phone
+  }
+  const {error, value} = validatePhoneSchema.validate(updated_phone)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    userModel.updateOne({
+      name: req.session.real_user[0].name
+    }, {
+      $set: {'phone': req.body.phone}
+    }, function (err, data) {
+      if (err) {
+        console.log("Error: " + err)
+      } else {
+        console.log("Data: " + data)
+        res.send("Successfully updated.")
+      }
+    })
+  }
 })
 
 app.post('/changeQuizCategory', function (req, res) {
@@ -472,7 +560,27 @@ app.put('/addNewUser', function (req, res) {
     username: Joi.string().min(1).required(), // string, min of one char, required
     email: Joi.string().email({tlds: {allow: ["com"]}}).required(), // string, email, has to end with .com, required
     password: Joi.string().min(5).required(), // string, min of five chars, required
-    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required() // string, phone-format: XXX-XXX-XXXX, required
+    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required() 
+  })// string, phone-format: XXX-XXX-XXXX, required
+  userModel.create({
+    '_id': Object,
+    'name': req.body.name,
+    'password': req.body.password,
+    'type': 'user',
+    'email': req.body.email,
+    'username': req.body.username,
+    'phone': req.body.phone,
+    'img': './img/profileicon.png',
+    'category': "covid_safety",
+    'education': req.body.education,
+    'quiz_scores': [{'category': 'covid_safety', 'high_score': 0, tried_quiz: false}, {'category': 'covid_information', 'high_score': 0, tried_quiz: false}]
+  }, function (err, data) {
+    if (err) {
+      console.log("Error: " + err)
+    } else {
+      console.log("Data: " + data)
+    }
+    res.send("Data sent successfully.")
   })
   validated_fields = {
     "username": req.body.username,
@@ -561,43 +669,67 @@ app.get('/getQuizRecords', (req, res) => {
   })
 })
 
-//var session = require("express-session")
+app.get('/getUsers', function (req, res) {
+  userModel.find({type: 'user'}, function (err, data) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(data)
+    }
+    res.send(data)
+  })
+})
 
-//const bodyparser = require("body-parser");
-// app.use(bodyparser.urlencoded({
-//   extended: true
-// }));
+app.delete("/removeUser", function(req, res) {
+  // req.body.username subject to change, may be some other value being used for criteria
+  userModel.deleteOne({username: req.body.username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.send(`successful removal of ${req.body.username} from users collection.`)
+    }
+  })
+})
 
-// const cors = require('cors');
-// app.use(cors())
+app.post("/updateUserInfo", function(req, res) {
+  criteria = {username: req.body.old_username}
+  const validateUpdateSchema = Joi.object().keys({
+    new_username: Joi.string().required(),
+    password: Joi.string().min(5).required(),
+    email: Joi.string().email({tlds: {allow: ["com"]}}).required(),
+    phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required()
+  })
+  validate_updates = {
+    "new_username": req.body.new_username,
+    "password": req.body.password,
+    "email": req.body.email, 
+    "phone": req.body.phone
+  }
+  const {error, value} = validateUpdateSchema.validate(validate_updates)
+  if (error) {
+    res.send(error.details[0].message)
+  }
+  else {
+    updates = {$set: {
+      username: req.body.new_username,
+      password: req.body.password,
+      email: req.body.email, 
+      phone: req.body.phone}
+    }
+    userModel.updateOne(criteria, updates, function(err, data) {
+      if (err) {
+        console.log("Err" + err)
+      }
+      else {
+        console.log("Data" + data)
+        res.send("successful update")
+      }
+    })
+  }
+})
 
-// app.use(express.static("../public"));
-
-// app.post("/login", function (req, res) {
-//     console.log("recieved1")
-//     user_credential = {"username": req.body.name, "password": req.body.password}
-//     res.send(user_credential)
-// })
-
-// app.get('/', function (req, res) {
-//     if (req.session.authenticated) {
-//         res.send(`Hi ${req.session.user}`)
-//     } else {
-//         res.redirect('/login')
-//     }
-// })
-
-// app.get("/login", function (req, res, next) {
-//     res.send("Plesae provide the credentials through the URL")
-// })
-
-// app.get(`/login/:user/:pass`, function (req, res, next) {
-//     if (users[req.params.user] == req.params.pass) {
-//         req.session.authenticated = true
-//         req.sesssion.user = req.params.user
-//         res.send("Successful login!")
-//     } else {
-//         req.session.authenticated = false
-//         res.send("Failed login")
-//     }
-// })
+app.get('/adminPanel', function (req, res) {
+  res.sendFile(__dirname + "/adminPanel.html")
+})
