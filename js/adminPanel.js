@@ -228,19 +228,16 @@ function displayScores() {
             }
             if (data.length > 3) {
                 increment = 3
-            }
-                    for (i = 0; i < data.length; i++) {
-                        for (j = 0; j < data[i].quiz_scores.length; j++) {
-                            for (q = 0; q < increment; q++) {
-                                if (data[i].quiz_scores[j].tried_quiz == false) {
-                                    $("tbody").append(`<tr>
-                                    <td>${data[i].username}</td>
-                                    <td>${data[i].quiz_scores[j].category}</td>
-                                    <td>
-                                    ${data[i].quiz_scores[j].high_score}/10
-                                    </td>
-                                    </tr>`)
-                            }
+            } for (i = 0; i < data.length; i++) {
+                for (j = 0; j < data[i].quiz_scores.length; j++) {
+                    if (data[i].quiz_scores[j].tried_quiz == false) {
+                        to_add += `<tr>
+                        <td>${data[i].username}</td>
+                        <td>${data[i].quiz_scores[j].category}</td>
+                        <td>
+                        ${data[i].quiz_scores[j].high_score}/10
+                        </td>
+                        </tr>`
                         }
                     }
                 }
