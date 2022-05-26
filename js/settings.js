@@ -4,14 +4,16 @@ function processResponse() {
 }
 
 function changeCategory(category){
-    $.ajax({
-        type: "post",
-        data: {
-            category: category
-        },
-        url: "/changeQuizCategory",
-        success: processResponse
-    })
+    if (category == "covid_safety" || category == "covid_information") {
+        $.ajax({
+            type: "post",
+            data: {
+                category: category
+            },
+            url: "/changeQuizCategory",
+            success: processResponse
+        })
+    }
 }
 
 function registerNewPhoneNumber(newPhoneNumber) {
@@ -19,7 +21,7 @@ function registerNewPhoneNumber(newPhoneNumber) {
         type: "post",
         data: {
             phone: newPhoneNumber
-        },
+        }, 
         url: '/changePhoneNumber',
         success: processResponse
     })
@@ -59,7 +61,6 @@ function registerNewUsername(newUsername) {
     })
 }
 
-
 function setup() {
     $("#usernameSubmit").click(() => {
         newUsername = $("#username").val();
@@ -97,6 +98,5 @@ function setup() {
         changeCategory($("#categories").val())
     })
 }
-
 
 $(document).ready(setup)

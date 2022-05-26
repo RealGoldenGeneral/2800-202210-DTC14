@@ -560,26 +560,6 @@ app.put('/addNewUser', function (req, res) {
     password: Joi.string().min(5).required(), // string, min of five chars, required
     phone: Joi.string().regex(/^\d{3}-\d{3}-\d{4}$/).required() 
   })// string, phone-format: XXX-XXX-XXXX, required
-  userModel.create({
-    '_id': Object,
-    'name': req.body.name,
-    'password': req.body.password,
-    'type': 'user',
-    'email': req.body.email,
-    'username': req.body.username,
-    'phone': req.body.phone,
-    'img': './img/profileicon.png',
-    'category': "covid_safety",
-    'education': req.body.education,
-    'quiz_scores': [{'category': 'covid_safety', 'high_score': 0, tried_quiz: false}, {'category': 'covid_information', 'high_score': 0, tried_quiz: false}]
-  }, function (err, data) {
-    if (err) {
-      console.log("Error: " + err)
-    } else {
-      console.log("Data: " + data)
-    }
-    res.send("Data sent successfully.")
-  })
   validated_fields = {
     "username": req.body.username,
     "email": req.body.email,
