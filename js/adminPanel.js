@@ -142,7 +142,7 @@ function displayAllQuizScores() {
                 increment = 3
             } for (p = (data.length - increment); p < data.length; p++) {
                 $("tbody").append(`<tr>
-                <td>${data[p].username}</td>
+                <td>${data[p].name}</td>
                 <td>game</td>
                 <td>${data[p].score}</td>
                 </tr>`)
@@ -271,7 +271,7 @@ function displayScores() {
                 increment = 3
             } for (o = (data.length - increment); o < data.length; o++) {
                 $("tbody").append(`<tr>
-                <td>${data[o].username}</td>
+                <td>${data[o].name}</td>
                 <td>game</td>
                 <td>${data[o].score}</td>
                 </tr>`)
