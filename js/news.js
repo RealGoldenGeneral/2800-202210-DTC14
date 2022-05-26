@@ -1,8 +1,10 @@
 const date = new Date()
 
 function close_article() {
+    // current_grid_size = $("#real-news-container").css()
+    // console.log(current_grid_size)
     $("#full-news-article-card").remove()
-    $("#real-news-container").css("grid-template-columns", "50% 50%")
+    // $("#real-news-container").css("grid-template-columns", `100%`)
     $(".news-card").show()
 }
 
@@ -22,9 +24,9 @@ function load_selected_article(data) {
     clone.querySelector("#full-article-content").innerHTML = full_article_content
     clone.querySelector("#full-article-link").href = full_article_link
     document.getElementById("real-news-container").appendChild(clone)
-    $("#real-news-container").css({"display": "grid", 
-                                   "grid-template-columns": "100%",
-                                   })
+    // $("#real-news-container").css({"display": "grid", 
+    //                                "grid-template-columns": "100%",
+    //                                })
 }
 
 function get_full_article_info() {
