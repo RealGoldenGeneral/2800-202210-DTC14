@@ -331,7 +331,7 @@ function setup() {
     $("#scores").click(() => {
         displayAllQuizScores()
     })
-    $("body").on("click", ".contact", displayProfileModification);
+    $("body").on("click", ".user", displayProfileModification);
     $("body").on("click", "#submit", modifyProfileInformation);
     $("body").on("click", "#delete", removeUser)
 }
