@@ -79,8 +79,8 @@ function displayProfileModification() {
     </div>`)
 }
 
-function displayAllQuizScores() {
-    $.ajax({
+async function displayAllQuizScores() {
+    await $.ajax({
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
@@ -122,7 +122,7 @@ function displayAllQuizScores() {
             $("#scores").attr("class", "active")
         }
     })
-    $.ajax({
+     await $.ajax({
         type: "get",
         url: "/getRecords",
         success: (data) => {
@@ -208,9 +208,9 @@ function displayUsers() {
     })
 }
 
-function displayScores() {
+async function displayScores() {
     q = 0
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
@@ -242,7 +242,7 @@ function displayScores() {
             }
         })
 
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getRecords",
         success: (data) => {
@@ -265,16 +265,16 @@ function displayScores() {
     })
 }
 
-function addRecords() {
+async function addRecords() {
     records = 0
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getQuizRecords",
         success: (data) =>{
             records += data.length * 2
         }
     })
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: "/getRecords",
         success: (data) => {
