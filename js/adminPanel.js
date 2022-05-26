@@ -53,11 +53,12 @@ function modifyProfileInformation() {
 }
 
 function displayProfileModification() {
+    adminPanelUsername = $(this).find(".info").find("div:nth-child(2) h4").text()
     $(".modifyProfile").empty()
     $("main").append(` <div class="modifyProfile">
     <div class="card">
     <div class="card-header">
-    <h3>Edit Profile</h3>
+    <h3>Edit Profile for ${adminPanelUsername}</h3>
     </div>
     <div class="card-body">
     <div class="form">
