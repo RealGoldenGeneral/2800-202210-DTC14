@@ -91,18 +91,34 @@ function update_days_in_collection(days_difference) {
 function process_news_response(data) {
     for (i = 0; i < data.articles.length; i++) {
         console.log(data.articles[i])
+        news_title = data.articles[i].title
         $.ajax(
             {
-                "url": `/add_article`,
-                "type": "POST",
-                "data": {
-                    "title": data.articles[i].title,
-                    "url": data.articles[i].url,
-                    "img_url": data.articles[i].urlToImage,
-                    "description": data.articles[i].description,
-                    "content": data.articles[i].content
-                },
-                "success": confirm_article_insertion 
+                "url": `/get_news_articles`,
+                "type": "GET",
+                "success": function(data) {
+                     duplicates = data.filter(function(article) {
+                         if (article.title == news_title) {
+                            return article   
+                         }
+                     })
+                     if (duplicates.length < 1) {
+                        $.ajax(
+                            {
+                                "url": `/add_article`,
+                                "type": "POST",
+                                "data": {
+                                    "title": data.articles[i].title,
+                                    "url": data.articles[i].url,
+                                    "img_url": data.articles[i].urlToImage,
+                                    "description": data.articles[i].description,
+                                    "content": data.articles[i].content
+                                },
+                                "success": confirm_article_insertion 
+                            }
+                        )
+                     }
+                }
             }
         )
     }
@@ -120,7 +136,7 @@ function get_daily_news() {
     }
     $.ajax(
         {
-            "url": `https://newsapi.org/v2/everything?q=covid&from=${year}-${month}-${day}&to=2022-05-10&sortBy=relevancy&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
+            "url": `https://newsapi.org/v2/everything?q=covid&from=${year}-${month}-${day}&to=2022-05-10&sortBy=relevancy&searchIn=title&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
             "type": "GET",
             "success": process_news_response,
         }
