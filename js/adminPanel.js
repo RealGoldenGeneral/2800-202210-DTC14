@@ -251,7 +251,7 @@ function displayScores() {
                         <td>${data[i].username}</td>
                         <td>${data[i].quiz_scores[j].category}</td>
                         <td>
-                        ${data[i].quiz_scores[j].high_score}
+                        ${data[i].quiz_scores[j].high_score}/10
                         </td>
                         </tr>`)
                     }
