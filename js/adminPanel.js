@@ -43,7 +43,7 @@ function modifyProfileInformation() {
             phone: $("#phone").val()
         },
         success: () => {
-            $(".card-body").append("<p>Successfully added information.</p>")
+            $(".buttons").append("<p>Successfully added information.</p>")
             $("#username").val("")
             $("#password").val("")
             $("#email").val("")
