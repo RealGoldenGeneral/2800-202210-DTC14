@@ -94,7 +94,7 @@ function displayAllQuizScores() {
             <tr>
             <td>Username</td>
             <td>Category</td>
-            <td>Status</td>
+            <td>Score</td>
             </tr>
             </thead>
             <tbody>
@@ -166,7 +166,8 @@ function displayAllUsers() {
             </div>
             </div>`)
             for (l = 0; l < data.length; l++) {
-                $(".customer").append(`<div class="info">
+                $(".customer").append(`<div class="user">
+                <div class="info">
                 <div>
                 <img src="${data[l].img}" width="40px" height="40px" alt="">
             </div>
@@ -177,6 +178,7 @@ function displayAllUsers() {
             </div>
             <div class="contact">
                 <span class="las la-user-circle"></span>
+            </div>
             </div>`)
             }
             $("#dashboard").removeAttr("class")
@@ -201,7 +203,7 @@ function displayUsers() {
                 increment = 3
             }
             for (k = (data.length - increment); k < data.length; k++) {
-                $(".customer").append(`
+                $(".customer").append(`<div class="user">
                 <div class="info">
                 <div>
                 <img src="${data[k].img}" width="40px" height="40px" alt="">
@@ -213,6 +215,7 @@ function displayUsers() {
             </div>
             <div class="contact">
                 <span class="las la-user-circle"></span>
+            </div>
             </div>`)
             }
         }
@@ -328,7 +331,7 @@ function setup() {
     $("#scores").click(() => {
         displayAllQuizScores()
     })
-    $("body").on("click", ".contact", displayProfileModification);
+    $("body").on("click", ".user", displayProfileModification);
     $("body").on("click", "#submit", modifyProfileInformation);
     $("body").on("click", "#delete", removeUser)
 }
