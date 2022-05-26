@@ -1,4 +1,4 @@
-
+adminPanelUsername = ""
 increment = 0
 clicks = 0
 to_add = ''
@@ -33,10 +33,13 @@ function removeUser() {
 }
 
 function modifyProfileInformation() {
+    console.log("old", adminPanelUsername)
+    console.log($("#password").val())
     $.ajax({
         type: "post",
         url: "/updateUserInfo",
         data: {
+            old_username: adminPanelUsername,
             new_username: $("#username").val(),
             password: $("#password").val(),
             email: $("#email").val(),
@@ -65,7 +68,7 @@ function displayProfileModification() {
     <label for="username">Edit Username:</label>
     <input type="text" id="username" name="username">
     <label for="password">Edit Password:</label>
-    <input type="password" id="password name="password">
+    <input type="password" id="password" name="password">
     <label for="email">Edit Email Address: </label>
     <input type="email" id="email" name="email">
     <label for="phone">Edit Phone Number: </label>

@@ -717,22 +717,39 @@ app.post("/updateUserInfo", function(req, res) {
   }
   const {error, value} = validateUpdateSchema.validate(validate_updates)
   if (error) {
+    console.log("Error" + error.details[0].message)
     res.send(error.details[0].message)
   }
   else {
-    updates = {$set: {
-      username: req.body.new_username,
-      password: req.body.password,
-      email: req.body.email, 
-      phone: req.body.phone}
-    }
-    userModel.updateOne(criteria, updates, function(err, data) {
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
         console.log("Err" + err)
       }
       else {
-        console.log("Data" + data)
-        res.send("successful update")
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.log("Err" + err)
+          }
+          else {
+            console.log("HASH", hash)
+            req.body.password = hash
+            updates = {$set: {
+              username: req.body.new_username,
+              password: req.body.password,
+              email: req.body.email, 
+              phone: req.body.phone}
+            }
+            userModel.updateOne(criteria, updates, function(err, data) {
+              if (err) {
+                console.log("Err" + err)
+              }
+              else {
+                console.log("Data" + data)
+                res.send("successful update")
+              }
+            })
+          }
+        })
       }
     })
   }
