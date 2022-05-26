@@ -599,7 +599,7 @@ app.put('/addNewUser', function (req, res) {
               'img': './img/profileicon.png',
               'category': "covid_safety",
               'education': req.body.education,
-              'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
+              'quiz_scores': [{'category': 'covid_safety', 'high_score': 0, 'tried_quiz': false}, {'category': 'covid_information', 'high_score': 0, "tried_quiz": false}]
             }, function (err, data) {
               if (err) {
                 console.log("Error: " + err)
