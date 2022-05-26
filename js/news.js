@@ -128,7 +128,7 @@ function process_news_response(data) {
 
 function get_daily_news() {
     year = date.getFullYear()
-    month = date.getMonth()
+    month = date.getMonth() + 1
     day = date.getDate()
     if (month < 10) {
         month = `0${month}`
