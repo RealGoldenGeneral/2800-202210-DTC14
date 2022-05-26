@@ -81,7 +81,7 @@ app.post("/login", function(req, res) {
           console.log(full_info)
           req.session.authenticated = true
           if (req.session.real_user[0].type == "admin") {
-            res.send("admin account detected")
+            res.send("admin detected")
           } else {
             res.send("success")
           }
@@ -593,6 +593,7 @@ app.put('/addNewUser', function (req, res) {
               'name': req.body.name,
               'password': req.body.password,
               'email': req.body.email,
+              'type': 'user',
               'username': req.body.username,
               'phone': req.body.phone,
               'img': './img/profileicon.png',

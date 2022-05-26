@@ -89,6 +89,8 @@ function process_response(data) {
     console.log(data)
     if (data == "success") {
         location.href = "/welcome"
+    } else if (data == "admin detected") {
+        location.href = "/adminPanel"
     } else {
         $("#incorrect-login").text(data)
     }
