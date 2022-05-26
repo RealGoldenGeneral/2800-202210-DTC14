@@ -142,13 +142,13 @@ function displayAllUsers() {
             </div>
             </div>`)
             for (l = 0; l < data.length; l++) {
-                $(".customer").append(`<<div class="info">
+                $(".customer").append(`<div class="info">
                 <div>
-                <img src="${data[k].img}" width="40px" height="40px" alt="">
+                <img src="${data[l].img}" width="40px" height="40px" alt="">
             </div>
             <div>
-                <h4>${data[k].username}</h4>
-                <small>${data[k].education}</small>
+                <h4>${data[l].username}</h4>
+                <small>${data[l].education}</small>
             </div>
             </div>
             <div class="contact">
