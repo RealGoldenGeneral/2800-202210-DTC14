@@ -702,6 +702,7 @@ app.delete("/removeUser", function(req, res) {
 })
 
 app.post("/updateUserInfo", function(req, res) {
+  console.log(req.body.password)
   criteria = {username: req.body.old_username}
   const validateUpdateSchema = Joi.object().keys({
     new_username: Joi.string().required(),
