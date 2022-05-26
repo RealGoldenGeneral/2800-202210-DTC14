@@ -78,6 +78,21 @@ function displayProfileModification() {
     </div>
     </div>
     </div>`)
+    $.ajax(
+        {
+            "url": "/findUser",
+            "type": "POST",
+            "data": {
+                "username": adminPanelUsername
+            },
+            "success": function(data) {
+                console.log(data)
+                $("#username").val(data[0].username)
+                $("#email").val(data[0].email)
+                $("#phone").val(data[0].phone)
+            }
+        }
+    )
 }
 
 async function displayAllQuizScores() {

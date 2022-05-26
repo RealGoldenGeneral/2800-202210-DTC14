@@ -194,6 +194,18 @@ app.get("/getUserInfo", function(req, res) {
   })
 })
 
+app.post("/findUser", function(req, res) {
+  userModel.find({username: req.body.username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.json(data)
+    }
+  })
+})
+
 app.get("/day", function(req, res) {
   console.log("request recieved to get the days")
   dayModel.find({}, function(err, total_days) {
@@ -453,16 +465,31 @@ app.post('/changePassword', function (req, res) {
     res.send(error.details[0].message)
   }
   else {
-    userModel.updateOne({
-      name: req.session.real_user[0].name
-    }, {
-      $set: {'password': req.body.password}
-    }, function (err, data) {
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
-        console.log("Error: " + err)
-      } else {
-        console.log("Data: " + data)
-        res.send("Successfully updated.")
+        console.log("Err" + err)
+      }
+      else {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.log("Err" + err)
+          }
+          else {
+            req.body.password = hash
+            userModel.updateOne({
+              name: req.session.real_user[0].name
+            }, {
+              $set: {'password': req.body.password}
+            }, function (err, data) {
+              if (err) {
+                console.log("Error: " + err)
+              } else {
+                console.log("Data: " + data)
+                res.send("Successfully updated.")
+              }
+            })
+          }
+        })
       }
     })
   }
