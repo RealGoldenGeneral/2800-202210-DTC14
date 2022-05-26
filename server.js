@@ -288,7 +288,7 @@ app.get("/getQuizScores", function(req, res) {
 app.post("/updateUserQuizScore", function(req, res) {
   console.log("user score: ", req.body)
   console.log("/updateUserQuizScore", req.session.real_user)
-  userModel.updateOne({username: req.session.real_user[0].username, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score)}}, function(err, data) {
+  userModel.updateOne({username: req.session.real_user[0].username, "quiz_scores.category": req.body.category}, {$set: {"quiz_scores.$.high_score": parseInt(req.body.score), "quiz_scores.$.tried_quiz": true}}, function(err, data) {
     if (err) {
       console.log("Err" + err)
     }
@@ -324,6 +324,7 @@ const userSchema = new mongoose.Schema({
     quiz_scores: [{
       category: String,
       high_score: Number,
+      tried_quiz: Boolean,
       _id: false}]
 });
 
@@ -545,7 +546,7 @@ app.put('/addNewUser', function (req, res) {
     'img': './img/profileicon.png',
     'category': "covid_safety",
     'education': req.body.education,
-    'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
+    'quiz_scores': [{'category': 'covid_safety', 'high_score': 0, tried_quiz: false}, {'category': 'covid_information', 'high_score': 0, tried_quiz: false}]
   }, function (err, data) {
     if (err) {
       console.log("Error: " + err)
@@ -583,7 +584,7 @@ app.get('/getQuizRecords', (req, res) => {
 })
 
 app.get('/getUsers', function (req, res) {
-  userModel.find({type: "user"}, function (err, data) {
+  userModel.find({type: 'user'}, function (err, data) {
     if (err) {
       console.log(err)
     } else {

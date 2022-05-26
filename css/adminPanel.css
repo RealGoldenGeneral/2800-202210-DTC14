@@ -247,6 +247,24 @@ main {
     border: 1px solid var(--main-color);
 }
 
+.card-body button{
+    background:red;
+    border-radius: 10px;
+    color:#fff;
+    font-size: .8rem;
+    padding:.5rem 1rem;
+    border: 1px solid red;
+}
+
+.card-body #submit{
+    background:var(--main-color);
+    border-radius: 10px;
+    color:#fff;
+    font-size: .8rem;
+    padding:.5rem 1rem;
+    border: 1px solid var(--main-color);
+}
+
 table{
     border-collapse: collapse;
 }
@@ -301,6 +319,16 @@ tr td:last-child{
     justify-content: space-between;
     align-items: center;
     padding: .5rem 1rem;
+}
+
+.modifyProfile{
+    margin-top: 5%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px
 }
 
 .info{

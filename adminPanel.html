@@ -20,15 +20,15 @@
         <div class="sidebar-menu">
             <ul>
                 <li>
-                    <a href="" class="active"><span class="las la-igloo"></span>
+                    <a href="" class="active" id="dashboard"><span class="las la-igloo"></span>
                         <span>Dashboard</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-users"></span>
+                    <a id="accounts"><span class="las la-users"></span>
                         <span>Accounts</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-database"></span>
+                    <a id="scores"><span class="las la-database"></span>
                         <span>Scores</span></a>
                 </li>
             </ul>
@@ -61,7 +61,7 @@
             <div class="cards">
                 <div class="card-single">
                     <div>
-                        <h1>54</h1>
+                        <h1 id="userCount">54</h1>
                         <span>Users</span>
                     </div>
                     <div>
@@ -70,7 +70,7 @@
                 </div>
                 <div class="card-single">
                     <div>
-                        <h1>72</h1>
+                        <h1 id="record">72</h1>
                         <span>Record</span>
                     </div>
                     <div>
@@ -84,7 +84,7 @@
                         <div class="card-header">
                             <h3>Recent Scores</h3>
 
-                            <button>See all<span class="las la-arrow-right">
+                            <button id="seeAllScores">See all<span class="las la-arrow-right">
                                 </span></button>
                         </div>
                         <div class="card-body">
@@ -98,54 +98,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>User1</td>
-                                            <td>Quiz1</td>
-                                            <td>
-                                                <span class="status green"></span>
-                                                Passed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>User1</td>
-                                            <td>Quiz2</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                Failed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>User2</td>
-                                            <td>Quiz1</td>
-                                            <td>
-                                                <span class="status yellow"></span>
-                                                In-Progress
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>User2</td>
-                                            <td>Quiz2</td>
-                                            <td>
-                                                <span class="status green"></span>
-                                                Passed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>User3</td>
-                                            <td>Quiz1</td>
-                                            <td>
-                                                <span class="status red"></span>
-                                                Failed
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>User3</td>
-                                            <td>Quiz2</td>
-                                            <td>
-                                                <span class="status yellow"></span>
-                                                In-Progress
-                                            </td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -158,23 +111,11 @@
                         <div class="card-header">
                             <h3>News customers</h3>
 
-                            <button>See all<span class="las la-arrow-right">
+                            <button id="seeAllUsers">See all<span class="las la-arrow-right">
                                 </span></button>
                         </div>
                         <div class="card-body">
                             <div class="customer">
-                                <div class="info">
-                                    <div>
-                                        <img src="./img/profileicon.png" width="40px" height="40px" alt="">
-                                    </div>
-                                    <div>
-                                        <h4>User4</h4>
-                                        <small>Student</small>
-                                    </div>
-                                </div>
-                                <div class="contact">
-                                    <span class="las la-user-circle"></span>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -182,6 +123,7 @@
             </div>
         </main>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./js/adminPanel.js"></script>
 </body>
 
