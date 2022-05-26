@@ -1,6 +1,7 @@
 
 increment = 0
 clicks = 0
+to_add = ''
 
 function changeUserInfo() {
     $.ajax({
