@@ -94,7 +94,7 @@ function displayAllQuizScores() {
             <tr>
             <td>Username</td>
             <td>Category</td>
-            <td>Status</td>
+            <td>Score</td>
             </tr>
             </thead>
             <tbody>
