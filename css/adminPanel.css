@@ -265,6 +265,11 @@ main {
     border: 1px solid var(--main-color);
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
 table{
     border-collapse: collapse;
 }
