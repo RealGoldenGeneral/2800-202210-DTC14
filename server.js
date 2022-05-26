@@ -720,3 +720,7 @@ app.get('/adminPanel', function (req, res) {
     res.redirect("/welcome")
   }
 })
+
+app.get('/getCurrentUser', function (req, res) {
+  res.send(req.session.real_user)
+})

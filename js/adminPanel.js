@@ -1,6 +1,19 @@
 increment = 0
 clicks = 0
 
+function changeUserInfo() {
+    $.ajax({
+        type: "get",
+        url: "/getCurrentUser",
+        success: (data) => {
+            $(".user-wrapper").append(`<div>
+            <h4>${data[0].username}</h4>
+            <small>${data[0].type}</small>
+            </div>`)
+        }
+    })
+}
+
 function removeUser() {
     if (clicks == 0) {
         $(".buttons").append("<p>Are you sure you want to delete this user? This action CANNOT be undone. Press Delete User again to confirm.</p>")
@@ -38,6 +51,7 @@ function modifyProfileInformation() {
 }
 
 function displayProfileModification() {
+    $("modifyProfile").empty()
     $("main").append(` <div class="modifyProfile">
     <div class="card">
     <div class="card-header">
@@ -90,16 +104,7 @@ function displayAllQuizScores() {
             </div>`)
             for (m = 0; m < data.length; m++) {
                 for (n = 0; n < data[m].quiz_scores.length; n++) {
-                    if (data[m].quiz_scores[n].high_score >= 5) {
-                        $("tbody").append(`<tr>
-                        <td>${data[m].name}</td>
-                        <td>${data[m].quiz_scores[n].category}</td>
-                        <td>
-                        <span class="status green"></span>
-                        Passed
-                        </td>
-                        </tr>`)
-                    } else if (data[m].quiz_scores[n].tried_quiz == false) {
+                    if (data[m].quiz_scores[n].tried_quiz == false) {
                         $("tbody").append(`<tr>
                         <td>${data[m].name}</td>
                         <td>${data[m].quiz_scores[n].category}</td>
@@ -107,14 +112,12 @@ function displayAllQuizScores() {
                         Incomplete
                         </td>
                         </tr>`)
-                    }
-                     else {
+                    } else {
                         $("tbody").append(`<tr>
                         <td>${data[m].name}</td>
                         <td>${data[m].quiz_scores[n].category}</td>
                         <td>
-                        <span class="status red"></span>
-                        Failed
+                        ${data[m].quiz_scores[n].high_score}/10
                         </td>
                         </tr>`)
                     }
@@ -123,6 +126,27 @@ function displayAllQuizScores() {
             $("#dashboard").removeAttr("class")
             $("#accounts").removeAttr("class")
             $("#scores").attr("class", "active")
+        }
+    })
+    $.ajax({
+        type: "get",
+        url: "/getRecords",
+        success: (data) => {
+            if (data.length == 1) {
+                increment = 1
+            }
+            if (data.length == 2) {
+                increment = 2
+            }
+            if (data.length > 3) {
+                increment = 3
+            } for (i = (data.length - increment); i < data.length; i++) {
+                $("tbody").append(`<tr>
+                <td>${data[i].username}</td>
+                <td>game</td>
+                <td>${data[i].score}</td>
+                </tr>`)
+            }
         }
     })
 }
@@ -211,31 +235,20 @@ function displayScores() {
             }
             for (i = (data.length - increment); i < data.length; i++) {
                 for (j = 0; j < data[i].quiz_scores.length; j++) {
-                    if (data[i].quiz_scores[j].high_score >= 5) {
+                  if (data[i].quiz_scores[j].tried_quiz == false) {
                         $("tbody").append(`<tr>
-                        <td>${data[i].name}</td>
-                        <td>${data[i].quiz_scores[j].category}</td>
-                        <td>
-                        <span class="status green"></span>
-                        Passed
-                        </td>
-                        </tr>`)
-                    } else if (data[i].quiz_scores[j].tried_quiz == false) {
-                        $("tbody").append(`<tr>
-                        <td>${data[i].name}</td>
+                        <td>${data[i].username}</td>
                         <td>${data[i].quiz_scores[j].category}</td>
                         <td>
                         Incomplete
                         </td>
                         </tr>`)
-                    }
-                     else {
+                    } else {
                         $("tbody").append(`<tr>
-                        <td>${data[i].name}</td>
+                        <td>${data[i].username}</td>
                         <td>${data[i].quiz_scores[j].category}</td>
                         <td>
-                        <span class="status red"></span>
-                        Failed
+                        ${data[i].quiz_scores[j].high_score}
                         </td>
                         </tr>`)
                     }
@@ -243,20 +256,44 @@ function displayScores() {
             }
         }
     })
-}
 
-function addRecords() {
     $.ajax({
         type: "get",
         url: "/getRecords",
-        success: (data) =>{
-            record = 0
-            for (i = 0; i < data.length; i++) {
-                if (data[i].score > record) {
-                    record = data[i].score
-                }
+        success: (data) => {
+            if (data.length == 1) {
+                increment = 1
             }
-            $("#record").text(record)
+            if (data.length == 2) {
+                increment = 2
+            }
+            if (data.length > 3) {
+                increment = 3
+            } for (i = (data.length - increment); i < data.length; i++) {
+                $("tbody").append(`<tr>
+                <td>${data[i].username}</td>
+                <td>game</td>
+                <td>${data[i].score}</td>
+                </tr>`)
+            }
+        }
+    })
+}
+
+function addRecords() {
+    records = 0
+    $.ajax({
+        type: "get",
+        url: "/getQuizRecords",
+        success: (data) =>{
+            records += data.length * 2
+        }
+    })
+    $.ajax({
+        type: "get",
+        url: "/getRecords",
+        success: (data) => {
+            records =+ data.length
         }
     })
 }
@@ -274,6 +311,7 @@ function addUsers() {
 
 
 function setup() {
+    changeUserInfo();
     addUsers();
     addRecords();
     displayScores();
