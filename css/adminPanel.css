@@ -326,6 +326,11 @@ tr td:last-child{
     padding: .5rem 1rem;
 }
 
+.user {
+    display: flex;
+    justify-content: space-between;
+}
+
 .modifyProfile{
     margin-top: 5%;
 }
