@@ -702,6 +702,7 @@ app.delete("/removeUser", function(req, res) {
 })
 
 app.post("/updateUserInfo", function(req, res) {
+  console.log(req.body.password)
   criteria = {username: req.body.old_username}
   const validateUpdateSchema = Joi.object().keys({
     new_username: Joi.string().required(),
@@ -717,6 +718,7 @@ app.post("/updateUserInfo", function(req, res) {
   }
   const {error, value} = validateUpdateSchema.validate(validate_updates)
   if (error) {
+    console.log(error.details[0].message)
     res.send(error.details[0].message)
   }
   else {
@@ -726,6 +728,7 @@ app.post("/updateUserInfo", function(req, res) {
       email: req.body.email, 
       phone: req.body.phone}
     }
+    console.log(req.body.old_username)
     userModel.updateOne(criteria, updates, function(err, data) {
       if (err) {
         console.log("Err" + err)
