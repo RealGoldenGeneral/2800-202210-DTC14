@@ -216,31 +216,36 @@ function displayUsers() {
 }
 
 function displayScores() {
+    q = 0
     $.ajax({
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
             if (data.length == 1) {
-                increment = 1
-            }
-            if (data.length == 2) {
                 increment = 2
             }
+            if (data.length == 2) {
+                increment = 4
+            }
             if (data.length > 3) {
-                increment = 3
+                increment = 6
             } for (i = 0; i < data.length; i++) {
                 for (j = 0; j < data[i].quiz_scores.length; j++) {
                     if (data[i].quiz_scores[j].tried_quiz == false) {
-                        to_add += `<tr>
-                        <td>${data[i].username}</td>
-                        <td>${data[i].quiz_scores[j].category}</td>
-                        <td>
-                        ${data[i].quiz_scores[j].high_score}/10
-                        </td>
-                        </tr>`
+                        if (q != increment) {
+                            to_add += `<tr>
+                            <td>${data[i].username}</td>
+                            <td>${data[i].quiz_scores[j].category}</td>
+                            <td>
+                            ${data[i].quiz_scores[j].high_score}/10
+                            </td>
+                            </tr>`
+                            q++
+                            }
                         }
                     }
                 }
+                $("tbody").append(to_add)
             }
         })
 
