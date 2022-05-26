@@ -219,38 +219,21 @@ function displayScores() {
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
-            if (data.length == 1) {
-                increment = 1
-            }
-            if (data.length == 2) {
-                increment = 2
-            }
-            if (data.length > 3) {
-                increment = 3
-            }
-            for (i = (data.length - increment); i < data.length; i++) {
-                for (j = 0; j < data[i].quiz_scores.length; j++) {
-                  if (data[i].quiz_scores[j].tried_quiz == false) {
-                        $("tbody").append(`<tr>
-                        <td>${data[i].username}</td>
-                        <td>${data[i].quiz_scores[j].category}</td>
-                        <td>
-                        Incomplete
-                        </td>
-                        </tr>`)
-                    } else {
-                        $("tbody").append(`<tr>
-                        <td>${data[i].username}</td>
-                        <td>${data[i].quiz_scores[j].category}</td>
-                        <td>
-                        ${data[i].quiz_scores[j].high_score}/10
-                        </td>
-                        </tr>`)
+                for (q = 0; q < 3; q++) {
+                    for (i = 0; i < data.length; i++) {
+                        for (j = 0; j < data[i].quiz_scores.length; j++) {
+                            $("tbody").append(`<tr>
+                            <td>${data[i].username}</td>
+                            <td>${data[i].quiz_scores[j].category}</td>
+                            <td>
+                            ${data[i].quiz_scores[j].high_score}/10
+                            </td>
+                            </tr>`)
+                        }
                     }
                 }
             }
-        }
-    })
+        })
 
     $.ajax({
         type: "get",
