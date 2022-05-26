@@ -232,7 +232,7 @@ function displayScores() {
                 increment = 6
             } for (i = 0; i < data.length; i++) {
                 for (j = 0; j < data[i].quiz_scores.length; j++) {
-                    if (data[i].quiz_scores[j].tried_quiz == false) {
+                    if (data[i].quiz_scores[j].tried_quiz == true) {
                         if (q != increment) {
                             to_add += `<tr>
                             <td>${data[i].username}</td>
