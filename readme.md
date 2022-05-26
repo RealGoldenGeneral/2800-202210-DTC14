@@ -34,6 +34,7 @@ Code snippets used and found online or from previous assignments
 * [Highlighting the current tab](https://www.w3schools.com/howto/howto_js_tabs.asp)
 * [Simulating a button pressed effect (The first example, "Add a pressed effect on click")](https://www.w3schools.com/howto/howto_css_animate_buttons.asp)
 * [Slideshow](https://www.w3schools.com/howto/howto_js_slideshow.asp)
+* [Responsive Web Design](https://www.w3schools.com/css/css_rwd_intro.asp)
 
 
 ## Content
