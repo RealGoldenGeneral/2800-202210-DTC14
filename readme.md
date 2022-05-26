@@ -2,20 +2,26 @@
 
 ## Table of Contents
 
-* [General Info](#general-info)
-* [Creators](#creators)
-* [Technologies](#technologies)
-* [Image Sources](#image-sources)
-* [References (Code Snippets)](#references)
-* [Content](#content)
+* [PROJECT TITLE](#project-title)
+* [CREATORS](#creators)
+* [PROJECT DESCRIPTION](#project-description)
+* [PROJECT TECHNOLOGIES](#project-technologies)
+* [LIST OF FILES](#list-of-files)
+* [INSTALLATION](#installation)
+* [FEATURES](#features)
+* [CREDITS](#credits)
 
-## General Info
+## Project-title
 'Co-Vention' is a web application designed to understand the importance of covid safety through a game.
 
 ## Creators
+[Alexander Liu]()
+[Nicky Cheng]()
+[Jack Berena]()
+[Arghavan Dor]()
+[Jack Luo](https://github.com/LzhJack)
 
-
-## Technologies
+## Project Technologies
 Technologies used for this project
 
 
