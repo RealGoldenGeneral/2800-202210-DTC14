@@ -219,7 +219,16 @@ function displayScores() {
         type: "get",
         url: "/getQuizRecords",
         success: (data) => {
-                for (q = 0; q < 3; q++) {
+            if (data.length == 1) {
+                increment = 1
+            }
+            if (data.length == 2) {
+                increment = 2
+            }
+            if (data.length > 3) {
+                increment = 3
+            }
+                for (q = 0; q < increment; q++) {
                     for (i = 0; i < data.length; i++) {
                         for (j = 0; j < data[i].quiz_scores.length; j++) {
                             $("tbody").append(`<tr>
