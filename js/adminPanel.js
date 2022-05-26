@@ -102,24 +102,16 @@ function displayAllQuizScores() {
             </table>
             </div>
             </div>`)
-            for (m = 0; m < data.length; m++) {
-                for (n = 0; n < data[m].quiz_scores.length; n++) {
-                    if (data[m].quiz_scores[n].tried_quiz == false) {
-                        $("tbody").append(`<tr>
-                        <td>${data[m].name}</td>
-                        <td>${data[m].quiz_scores[n].category}</td>
-                        <td>
-                        Incomplete
-                        </td>
-                        </tr>`)
-                    } else {
-                        $("tbody").append(`<tr>
-                        <td>${data[m].name}</td>
-                        <td>${data[m].quiz_scores[n].category}</td>
-                        <td>
-                        ${data[m].quiz_scores[n].high_score}/10
-                        </td>
-                        </tr>`)
+                for (m = 0; m < data.length; m++) {
+                    for (n = 0; n < data[m].quiz_scores.length; n++) {
+                        if (data[m].quiz_scores[n].tried_quiz == true) {
+                            $("tbody").append(`<tr>
+                            <td>${data[m].name}</td>
+                            <td>${data[m].quiz_scores[n].category}</td>
+                            <td>
+                            ${data[m].quiz_scores[n].high_score}/10
+                            </td>
+                            </tr>`)
                     }
                 }
             }
