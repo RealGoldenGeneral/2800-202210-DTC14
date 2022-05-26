@@ -194,6 +194,18 @@ app.get("/getUserInfo", function(req, res) {
   })
 })
 
+app.post("/findUser", function(req, res) {
+  userModel.find({username: req.body.username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.json(data)
+    }
+  })
+})
+
 app.get("/day", function(req, res) {
   console.log("request recieved to get the days")
   dayModel.find({}, function(err, total_days) {
