@@ -344,6 +344,7 @@ const userSchema = new mongoose.Schema({
     phone: String,
     img:String,
     category: String,
+    education: String, 
     quiz_scores: [{
       category: String,
       high_score: Number,
@@ -598,7 +599,7 @@ app.put('/addNewUser', function (req, res) {
               'phone': req.body.phone,
               'img': './img/profileicon.png',
               'category': "covid_safety",
-              'education': req.body.education,
+              'education': "student",
               'quiz_scores': [{'category': 'covid_safety', 'high_score': 0, 'tried_quiz': false}, {'category': 'covid_information', 'high_score': 0, "tried_quiz": false}]
             }, function (err, data) {
               if (err) {
