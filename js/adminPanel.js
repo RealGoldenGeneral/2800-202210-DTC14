@@ -278,9 +278,10 @@ function addRecords() {
         type: "get",
         url: "/getRecords",
         success: (data) => {
-            records =+ data.length
+            records += data.length
         }
     })
+    $("#record").text(records)
 }
 
 
