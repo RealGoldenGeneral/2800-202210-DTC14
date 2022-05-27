@@ -224,6 +224,12 @@ main {
 /*  */
 
   /* Media Queries */
+  @media screen and (min-width: 501px) {
+    #real-news-container {
+      grid-template-columns: 50% 50%;
+    }
+  }
+
   @media screen and (max-width: 500px) {
     #real-news-container {
       grid-template-columns: 100%;
