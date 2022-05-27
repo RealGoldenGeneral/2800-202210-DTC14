@@ -119,6 +119,37 @@ views
 ## Installation
 ---
 
+Required tools:
+- Microsoft Visual Studio Code
+- Node.JS
+
+To install this application onto your application:
+
+1. Accept the invite that we will send to your email to the database.
+
+This invite will look like this:
+![MongoDB Invite](./img/1.png)
+
+2. On Visual Studio Code, clone the repo onto your device.
+![Click on the git icon, then clone repository, then copy+paste the url in the box.](./img/2.png)
+
+3. Add a new branch by clicking on the 3 dots, then go on branch -> create branch and provide the name in the text box.
+![Click on the git icon, then click the 3 dots. On the menu hover on branch and click create branch. Then provide the name in the text box.](./img/6.png)
+
+4. Open a new terminal and enter these codes: ```npm install```, ```npm install heroku```, ```npm install nodemon```.
+![Enter npm install in the terminal](./img/3.png)
+![Enter npm install heroku in the terminal](./img/4.png)
+![Enter npm install nodemon in the terminal](./img/5.png)
+
+5. To test your edits, enter ```nodemon server.js``` into the terminal.
+![Enter nodemon server.js in the terminal](./img/7.png)
+
+6. Once the tests are working, merge your branch to dev by clicking on the branch, selecting dev, then clicking the 3 dots, then go on branch -> merge branch and select your feature branch
+![Click on the branch icon on the footer.](./img/10.png)
+![Click on dev](./img/11.png)
+![Click on the 3 dots, then, on the menu hover on the branch and click merge branch](./img/8.png)
+![Click on your own feature branch to merge with dev](./img/9.png)
+
 
 ## Features
 ---
