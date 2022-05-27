@@ -9,18 +9,18 @@ function loadSelectedArticle(data) {
     $("#real-news-container").css("grid-template-columns", "100%")
     console.log(data)
     $(".news-card").hide()
-    full_article_template = document.getElementById("full-news-article")
-    full_article_title = data[0].title
-    full_article_image = data[0].img_url
-    full_article_desc = data[0].description
-    full_article_content = data[0].content
-    full_article_link = data[0].url
-    var clone = full_article_template.content.cloneNode(true)
-    clone.querySelector("#full-article-title").innerHTML = full_article_title
-    clone.querySelector("#full-article-image").src = full_article_image
-    clone.querySelector("#full-article-desc").innerHTML = full_article_desc
-    clone.querySelector("#full-article-content").innerHTML = full_article_content
-    clone.querySelector("#full-article-link").href = full_article_link
+    fullArticleTemplate = document.getElementById("full-news-article")
+    fullArticleTitle = data[0].title
+    fullArticleImage = data[0].img_url
+    fullArticleDesc = data[0].description
+    fullArticleContent = data[0].content
+    fullArticleLink = data[0].url
+    var clone = fullArticleTemplate.content.cloneNode(true)
+    clone.querySelector("#full-article-title").innerHTML = fullArticleTitle
+    clone.querySelector("#full-article-image").src = fullArticleImage
+    clone.querySelector("#full-article-desc").innerHTML = fullArticleDesc
+    clone.querySelector("#full-article-content").innerHTML = fullArticleContent
+    clone.querySelector("#full-article-link").href = fullArticleLink
     document.getElementById("real-news-container").appendChild(clone)
 }
 
