@@ -32,6 +32,7 @@ const loginValidator = function (req, res, next) {
 app.use("/css", express.static("./css"));
 app.use("/js", express.static("./js"));
 app.use("/img", express.static("./img"))
+app.use("/common", express.static("./common"))
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html")
@@ -80,7 +81,11 @@ app.post("/login", function(req, res) {
           // console.log(req.session.real_user = full_info)
           console.log(full_info)
           req.session.authenticated = true
-          res.send("success")
+          if (req.session.real_user[0].type == "admin") {
+            res.send("admin detected")
+          } else {
+            res.send("success")
+          }
         } else {
           req.session.authenticated = false
           res.send("incorrect information")
@@ -143,7 +148,7 @@ app.get("/signOut", function(req, res) {
 
 app.get("/welcome", loginValidator, function(req, res) {
   if (req.session.authenticated) {
-    res.sendFile(__dirname + "/welcome.html")
+    res.sendFile(__dirname + "/common/welcome.html")
   }
   else {
     res.redirect("/")
@@ -151,35 +156,47 @@ app.get("/welcome", loginValidator, function(req, res) {
 })
 
 app.get("/leaderboard", loginValidator, function(req, res){
-  res.sendFile(__dirname + "/leaderboard.html")
+  res.sendFile(__dirname + "/common/leaderboard.html")
 })
 
 app.get("/news", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/news.html")
+  res.sendFile(__dirname + "/common/news.html")
 })
 
 app.get("/game", loginValidator, function(req, res){
-  res.sendFile(__dirname + "/game.html")
+  res.sendFile(__dirname + "/common/game.html")
 })
 
 app.get("/quiz", loginValidator, function(req, res){
-  res.sendFile(__dirname + "/quiz.html")
+  res.sendFile(__dirname + "/common/quiz.html")
 })
 
 app.get("/settings", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/settings.html")
+  res.sendFile(__dirname + "/common/settings.html")
 })
 
 app.get("/gamePage", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/gamePage.html")
+  res.sendFile(__dirname + "/common/gamePage.html")
 })
 
 app.get("/startQuiz/", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/play-quiz.html")
+  res.sendFile(__dirname + "/common/play-quiz.html")
 })
 
 app.get("/getUserInfo", function(req, res) {
   userModel.find({username: req.session.real_user[0].username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.json(data)
+    }
+  })
+})
+
+app.post("/findUser", function(req, res) {
+  userModel.find({username: req.body.username}, function(err, data) {
     if (err) {
       console.log("Err" + err)
     }
@@ -340,6 +357,7 @@ const userSchema = new mongoose.Schema({
     phone: String,
     img:String,
     category: String,
+    education: String, 
     quiz_scores: [{
       category: String,
       high_score: Number,
@@ -448,16 +466,31 @@ app.post('/changePassword', function (req, res) {
     res.send(error.details[0].message)
   }
   else {
-    userModel.updateOne({
-      name: req.session.real_user[0].name
-    }, {
-      $set: {'password': req.body.password}
-    }, function (err, data) {
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
-        console.log("Error: " + err)
-      } else {
-        console.log("Data: " + data)
-        res.send("Successfully updated.")
+        console.log("Err" + err)
+      }
+      else {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.log("Err" + err)
+          }
+          else {
+            req.body.password = hash
+            userModel.updateOne({
+              name: req.session.real_user[0].name
+            }, {
+              $set: {'password': req.body.password}
+            }, function (err, data) {
+              if (err) {
+                console.log("Error: " + err)
+              } else {
+                console.log("Data: " + data)
+                res.send("Successfully updated.")
+              }
+            })
+          }
+        })
       }
     })
   }
@@ -533,11 +566,8 @@ app.post('/changeQuizCategory', function (req, res) {
 })
 
 app.put('/insertRecord', (req, res) => {
-  userModel.find({name: req.session.real_user[0].name}, function (err, users) {
-    username = req.session.real_user[0].username
-  })
   scoresModel.create({
-    'name': username,
+    'name': req.session.real_user[0].username,
     'score': req.body.score
   }, function (err, data) {
     if (err) {
@@ -550,7 +580,7 @@ app.put('/insertRecord', (req, res) => {
 })
 
 app.get('/signup', function (req, res) {
-  res.sendFile(__dirname + "/signup.html")
+  res.sendFile(__dirname + "/common/signup.html")
 })
 
 app.put('/addNewUser', function (req, res) {
@@ -589,12 +619,13 @@ app.put('/addNewUser', function (req, res) {
               'name': req.body.name,
               'password': req.body.password,
               'email': req.body.email,
+              'type': 'user',
               'username': req.body.username,
               'phone': req.body.phone,
               'img': './img/profileicon.png',
               'category': "covid_safety",
-              'education': req.body.education,
-              'quiz_scores': [{'category': 'covid_safety', 'high_score': 0}, {'category': 'covid_information', 'high_score': 0}]
+              'education': "student",
+              'quiz_scores': [{'category': 'covid_safety', 'high_score': 0, 'tried_quiz': false}, {'category': 'covid_information', 'high_score': 0, "tried_quiz": false}]
             }, function (err, data) {
               if (err) {
                 console.log("Error: " + err)
@@ -622,7 +653,7 @@ app.put('/addNewUser', function (req, res) {
 // })
 
 app.get('/thanks', function (req, res) {
-  res.sendFile(__dirname + "/thanks.html")
+  res.sendFile(__dirname + "/common/thanks.html")
 })
 
 app.get('/getRecords', (req, res) => {
@@ -672,6 +703,7 @@ app.delete("/removeUser", function(req, res) {
 })
 
 app.post("/updateUserInfo", function(req, res) {
+  console.log(req.body.password)
   criteria = {username: req.body.old_username}
   const validateUpdateSchema = Joi.object().keys({
     new_username: Joi.string().required(),
@@ -687,27 +719,52 @@ app.post("/updateUserInfo", function(req, res) {
   }
   const {error, value} = validateUpdateSchema.validate(validate_updates)
   if (error) {
+    console.log("Error" + error.details[0].message)
     res.send(error.details[0].message)
   }
   else {
-    updates = {$set: {
-      username: req.body.new_username,
-      password: req.body.password,
-      email: req.body.email, 
-      phone: req.body.phone}
-    }
-    userModel.updateOne(criteria, updates, function(err, data) {
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
         console.log("Err" + err)
       }
       else {
-        console.log("Data" + data)
-        res.send("successful update")
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.log("Err" + err)
+          }
+          else {
+            console.log("HASH", hash)
+            req.body.password = hash
+            updates = {$set: {
+              username: req.body.new_username,
+              password: req.body.password,
+              email: req.body.email, 
+              phone: req.body.phone}
+            }
+            userModel.updateOne(criteria, updates, function(err, data) {
+              if (err) {
+                console.log("Err" + err)
+              }
+              else {
+                console.log("Data" + data)
+                res.send("successful update")
+              }
+            })
+          }
+        })
       }
     })
   }
 })
 
-app.get('/adminPanel', function (req, res) {
-  res.sendFile(__dirname + "/adminPanel.html")
+app.get('/adminPanel', loginValidator, function (req, res) {
+  if (req.session.real_user[0].type == "admin") {
+    res.sendFile(__dirname + "/common/adminPanel.html")
+  } else {
+    res.redirect("/welcome")
+  }
+})
+
+app.get('/getCurrentUser', function (req, res) {
+  res.send(req.session.real_user)
 })

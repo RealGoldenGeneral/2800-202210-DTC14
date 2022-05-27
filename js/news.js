@@ -1,12 +1,15 @@
 const date = new Date()
 
 function close_article() {
+    // current_grid_size = $("#real-news-container").css()
+    // console.log(current_grid_size)
     $("#full-news-article-card").remove()
-    $("#real-news-container").css("grid-template-columns", "50% 50%")
+    // $("#real-news-container").css("grid-template-columns", `100%`)
     $(".news-card").show()
 }
 
 function load_selected_article(data) {
+    $("#real-news-container").css("grid-template-columns", "100%")
     console.log(data)
     $(".news-card").hide()
     full_article_template = document.getElementById("full-news-article")
@@ -22,9 +25,9 @@ function load_selected_article(data) {
     clone.querySelector("#full-article-content").innerHTML = full_article_content
     clone.querySelector("#full-article-link").href = full_article_link
     document.getElementById("real-news-container").appendChild(clone)
-    $("#real-news-container").css({"display": "grid", 
-                                   "grid-template-columns": "100%",
-                                   })
+    // $("#real-news-container").css({"display": "grid", 
+    //                                "grid-template-columns": "100%",
+    //                                })
 }
 
 function get_full_article_info() {
@@ -91,27 +94,52 @@ function update_days_in_collection(days_difference) {
 function process_news_response(data) {
     for (i = 0; i < data.articles.length; i++) {
         console.log(data.articles[i])
+        news_title = data.articles[i].title
         $.ajax(
             {
-                "url": `/add_article`,
-                "type": "POST",
-                "data": {
-                    "title": data.articles[i].title,
-                    "url": data.articles[i].url,
-                    "img_url": data.articles[i].urlToImage,
-                    "description": data.articles[i].description,
-                    "content": data.articles[i].content
-                },
-                "success": confirm_article_insertion 
+                "url": `/get_news_articles`,
+                "type": "GET",
+                "success": function(data) {
+                     duplicates = data.filter(function(article) {
+                         if (article.title == news_title) {
+                            return article   
+                         }
+                     })
+                     if (duplicates.length < 1) {
+                        $.ajax(
+                            {
+                                "url": `/add_article`,
+                                "type": "POST",
+                                "data": {
+                                    "title": data.articles[i].title,
+                                    "url": data.articles[i].url,
+                                    "img_url": data.articles[i].urlToImage,
+                                    "description": data.articles[i].description,
+                                    "content": data.articles[i].content
+                                },
+                                "success": confirm_article_insertion 
+                            }
+                        )
+                     }
+                }
             }
         )
     }
 }
 
 function get_daily_news() {
+    year = date.getFullYear()
+    month = date.getMonth() + 1
+    day = date.getDate()
+    if (month < 10) {
+        month = `0${month}`
+    }
+    if (day < 10) {
+        day = `0${day}`
+    }
     $.ajax(
         {
-            "url": `https://newsapi.org/v2/everything?q=covid&from=2022-05-10&to=2022-05-10&sortBy=relevancy&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
+            "url": `https://newsapi.org/v2/everything?q=covid&from=${year}-${month}-${day}&to=2022-05-10&sortBy=relevancy&searchIn=title&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
             "type": "GET",
             "success": process_news_response,
         }
