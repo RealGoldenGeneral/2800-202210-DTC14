@@ -111,7 +111,7 @@ function welcome_the_user() {
     )
 }
 
-function listenToClick() {
+function setup() {
     welcome_the_user()
     $("#sign_out").click(sign_out_user)
     console.log("loaded")
@@ -136,4 +136,4 @@ function listenToClick() {
 }
 
 $("#full_menu").hide()
-$(document).ready(listenToClick)
+$(document).ready(setup)
