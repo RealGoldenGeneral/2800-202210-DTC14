@@ -132,18 +132,6 @@ views
 
 ## Installation
 ---
-1. npm install `<package name>`
-    - bcrypt
-    - body-parser
-    - cors
-    - ejs
-    - express
-    - express-session
-    - heroku
-    - joi
-    - mongoose
-    - nodemon
-
 
 Required tools:
 - Microsoft Visual Studio Code
@@ -162,7 +150,17 @@ This invite will look like this:
 3. Add a new branch by clicking on the 3 dots, then go on branch -> create branch and provide the name in the text box.
 ![Click on the git icon, then click the 3 dots. On the menu hover on branch and click create branch. Then provide the name in the text box.](./img/6.png)
 
-4. Open a new terminal and enter these codes: ```npm install```, ```npm install heroku```, ```npm install nodemon```.
+4. Open a new terminal and enter these codes: ```npm install```, ```npm install heroku```, ```npm install nodemon```, repeat this for all npms listed here:
+    - bcrypt
+    - body-parser
+    - cors
+    - ejs
+    - express
+    - express-session
+    - heroku
+    - joi
+    - mongoose
+    - nodemon
 ![Enter npm install in the terminal](./img/3.png)
 ![Enter npm install heroku in the terminal](./img/4.png)
 ![Enter npm install nodemon in the terminal](./img/5.png)
