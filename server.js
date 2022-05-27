@@ -32,6 +32,7 @@ const loginValidator = function (req, res, next) {
 app.use("/css", express.static("./css"));
 app.use("/js", express.static("./js"));
 app.use("/img", express.static("./img"))
+app.use("/common", express.static("./common"))
 
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html")
