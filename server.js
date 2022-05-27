@@ -148,7 +148,7 @@ app.get("/signOut", function(req, res) {
 
 app.get("/welcome", loginValidator, function(req, res) {
   if (req.session.authenticated) {
-    res.sendFile(__dirname + "/welcome.html")
+    res.sendFile(__dirname + "/common/welcome.html")
   }
   else {
     res.redirect("/")
@@ -156,31 +156,31 @@ app.get("/welcome", loginValidator, function(req, res) {
 })
 
 app.get("/leaderboard", loginValidator, function(req, res){
-  res.sendFile(__dirname + "/leaderboard.html")
+  res.sendFile(__dirname + "/common/leaderboard.html")
 })
 
 app.get("/news", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/news.html")
+  res.sendFile(__dirname + "/common/news.html")
 })
 
 app.get("/game", loginValidator, function(req, res){
-  res.sendFile(__dirname + "/game.html")
+  res.sendFile(__dirname + "/common/game.html")
 })
 
 app.get("/quiz", loginValidator, function(req, res){
-  res.sendFile(__dirname + "/quiz.html")
+  res.sendFile(__dirname + "/common/quiz.html")
 })
 
 app.get("/settings", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/settings.html")
+  res.sendFile(__dirname + "/common/settings.html")
 })
 
 app.get("/gamePage", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/gamePage.html")
+  res.sendFile(__dirname + "/common/gamePage.html")
 })
 
 app.get("/startQuiz/", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/play-quiz.html")
+  res.sendFile(__dirname + "/common/play-quiz.html")
 })
 
 app.get("/getUserInfo", function(req, res) {
@@ -580,7 +580,7 @@ app.put('/insertRecord', (req, res) => {
 })
 
 app.get('/signup', function (req, res) {
-  res.sendFile(__dirname + "/signup.html")
+  res.sendFile(__dirname + "/common/signup.html")
 })
 
 app.put('/addNewUser', function (req, res) {
@@ -653,7 +653,7 @@ app.put('/addNewUser', function (req, res) {
 // })
 
 app.get('/thanks', function (req, res) {
-  res.sendFile(__dirname + "/thanks.html")
+  res.sendFile(__dirname + "/common/thanks.html")
 })
 
 app.get('/getRecords', (req, res) => {
@@ -759,7 +759,7 @@ app.post("/updateUserInfo", function(req, res) {
 
 app.get('/adminPanel', loginValidator, function (req, res) {
   if (req.session.real_user[0].type == "admin") {
-    res.sendFile(__dirname + "/adminPanel.html")
+    res.sendFile(__dirname + "/common/adminPanel.html")
   } else {
     res.redirect("/welcome")
   }
