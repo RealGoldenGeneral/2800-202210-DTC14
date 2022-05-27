@@ -1,4 +1,4 @@
-
+adminPanelUsername = ""
 increment = 0
 clicks = 0
 to_add = ''
@@ -24,6 +24,9 @@ function removeUser() {
         $.ajax({
             type: "delete",
             url: "/removeUser",
+            data: {
+                username: adminPanelUsername
+            },
             success: () => {
                 clicks = 0
                 location.reload()
@@ -33,17 +36,20 @@ function removeUser() {
 }
 
 function modifyProfileInformation() {
+    console.log("old", adminPanelUsername)
+    console.log($("#password").val())
     $.ajax({
         type: "post",
         url: "/updateUserInfo",
         data: {
+            old_username: adminPanelUsername,
             new_username: $("#username").val(),
             password: $("#password").val(),
             email: $("#email").val(),
             phone: $("#phone").val()
         },
         success: () => {
-            $(".card-body").append("<p>Successfully added information.</p>")
+            $(".buttons").append("<p>Successfully added information.</p>")
             $("#username").val("")
             $("#password").val("")
             $("#email").val("")
@@ -53,18 +59,19 @@ function modifyProfileInformation() {
 }
 
 function displayProfileModification() {
-    $("modifyProfile").empty()
+    adminPanelUsername = $(this).find(".info").find("div:nth-child(2) h4").text()
+    $(".modifyProfile").empty()
     $("main").append(` <div class="modifyProfile">
     <div class="card">
     <div class="card-header">
-    <h3>Edit Profile</h3>
+    <h3>Edit Profile for ${adminPanelUsername}</h3>
     </div>
     <div class="card-body">
     <div class="form">
     <label for="username">Edit Username:</label>
     <input type="text" id="username" name="username">
     <label for="password">Edit Password:</label>
-    <input type="password" id="password name="password">
+    <input type="password" id="password" name="password">
     <label for="email">Edit Email Address: </label>
     <input type="email" id="email" name="email">
     <label for="phone">Edit Phone Number: </label>
@@ -77,6 +84,21 @@ function displayProfileModification() {
     </div>
     </div>
     </div>`)
+    $.ajax(
+        {
+            "url": "/findUser",
+            "type": "POST",
+            "data": {
+                "username": adminPanelUsername
+            },
+            "success": function(data) {
+                console.log(data)
+                $("#username").val(data[0].username)
+                $("#email").val(data[0].email)
+                $("#phone").val(data[0].phone)
+            }
+        }
+    )
 }
 
 async function displayAllQuizScores() {
@@ -108,7 +130,7 @@ async function displayAllQuizScores() {
                     for (n = 0; n < data[m].quiz_scores.length; n++) {
                         if (data[m].quiz_scores[n].tried_quiz == true) {
                             $("tbody").append(`<tr>
-                            <td>${data[m].name}</td>
+                            <td>${data[m].username}</td>
                             <td>${data[m].quiz_scores[n].category}</td>
                             <td>
                             ${data[m].quiz_scores[n].high_score}/10

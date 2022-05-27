@@ -195,6 +195,18 @@ app.get("/getUserInfo", function(req, res) {
   })
 })
 
+app.post("/findUser", function(req, res) {
+  userModel.find({username: req.body.username}, function(err, data) {
+    if (err) {
+      console.log("Err" + err)
+    }
+    else {
+      console.log("Data" + data)
+      res.json(data)
+    }
+  })
+})
+
 app.get("/day", function(req, res) {
   console.log("request recieved to get the days")
   dayModel.find({}, function(err, total_days) {
@@ -454,16 +466,31 @@ app.post('/changePassword', function (req, res) {
     res.send(error.details[0].message)
   }
   else {
-    userModel.updateOne({
-      name: req.session.real_user[0].name
-    }, {
-      $set: {'password': req.body.password}
-    }, function (err, data) {
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
-        console.log("Error: " + err)
-      } else {
-        console.log("Data: " + data)
-        res.send("Successfully updated.")
+        console.log("Err" + err)
+      }
+      else {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.log("Err" + err)
+          }
+          else {
+            req.body.password = hash
+            userModel.updateOne({
+              name: req.session.real_user[0].name
+            }, {
+              $set: {'password': req.body.password}
+            }, function (err, data) {
+              if (err) {
+                console.log("Error: " + err)
+              } else {
+                console.log("Data: " + data)
+                res.send("Successfully updated.")
+              }
+            })
+          }
+        })
       }
     })
   }
@@ -676,6 +703,7 @@ app.delete("/removeUser", function(req, res) {
 })
 
 app.post("/updateUserInfo", function(req, res) {
+  console.log(req.body.password)
   criteria = {username: req.body.old_username}
   const validateUpdateSchema = Joi.object().keys({
     new_username: Joi.string().required(),
@@ -691,28 +719,45 @@ app.post("/updateUserInfo", function(req, res) {
   }
   const {error, value} = validateUpdateSchema.validate(validate_updates)
   if (error) {
+    console.log("Error" + error.details[0].message)
     res.send(error.details[0].message)
   }
   else {
-    updates = {$set: {
-      username: req.body.new_username,
-      password: req.body.password,
-      email: req.body.email, 
-      phone: req.body.phone}
-    }
-    userModel.updateOne(criteria, updates, function(err, data) {
+    bcrypt.genSalt(10, function(err, salt) {
       if (err) {
         console.log("Err" + err)
       }
       else {
-        console.log("Data" + data)
-        res.send("successful update")
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+          if (err) {
+            console.log("Err" + err)
+          }
+          else {
+            console.log("HASH", hash)
+            req.body.password = hash
+            updates = {$set: {
+              username: req.body.new_username,
+              password: req.body.password,
+              email: req.body.email, 
+              phone: req.body.phone}
+            }
+            userModel.updateOne(criteria, updates, function(err, data) {
+              if (err) {
+                console.log("Err" + err)
+              }
+              else {
+                console.log("Data" + data)
+                res.send("successful update")
+              }
+            })
+          }
+        })
       }
     })
   }
 })
 
-app.get('/adminPanel', function (req, res) {
+app.get('/adminPanel', loginValidator, function (req, res) {
   if (req.session.real_user[0].type == "admin") {
     res.sendFile(__dirname + "/adminPanel.html")
   } else {

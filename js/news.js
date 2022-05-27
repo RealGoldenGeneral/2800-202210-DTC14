@@ -9,6 +9,7 @@ function close_article() {
 }
 
 function load_selected_article(data) {
+    $("#real-news-container").css("grid-template-columns", "100%")
     console.log(data)
     $(".news-card").hide()
     full_article_template = document.getElementById("full-news-article")
