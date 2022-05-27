@@ -180,7 +180,7 @@ app.get("/gamePage", loginValidator, function(req, res) {
 })
 
 app.get("/startQuiz/", loginValidator, function(req, res) {
-  res.sendFile(__dirname + "/common/play-quiz.html")
+  res.sendFile(__dirname + "/common/playQuiz.html")
 })
 
 app.get("/getUserInfo", function(req, res) {

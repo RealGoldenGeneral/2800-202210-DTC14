@@ -22,10 +22,12 @@ h2{
 
 .sign_up_img_container {
     margin: auto;
+    width: 80%;
 }
 
 .sign_up_img_container img{
     margin: auto;
+    width: 100%;
 }
 
 form {
