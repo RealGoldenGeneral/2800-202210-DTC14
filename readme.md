@@ -63,7 +63,72 @@ We used all these frameworks/libraries for our application.
 
 ## List of files
 ---
+```
+common
+    adminPanel.html
+    game.html
+    gamePage.html
+    leaderboard.html
+    news.html
+    play-quiz.html
+    quiz.html
+    settings.html
+    signup.html
+    thanks.html
+    welcome.html
 
+css
+    adminPanel.css
+    game.css
+    gamePage.css
+    home.css
+    index.css
+    leaderboard.css
+    news.css
+    profile.css
+    quiz.css
+    settings.css
+    signup.css
+    thanks.css
+
+index.html
+
+img
+    co-vention-no-bg.png
+    co-vention.png
+    covention_icon.ico
+    covention_logo.png
+    covention_logov2.png
+    gameBackground.jpeg
+    gameboard.png
+    home.jpeg
+    profileicon.png
+    returnButton.png
+    sprite.png
+
+js
+    adminPanel.js
+    game.js
+    gamePage.js
+    index.js
+    leaderboard.js
+    news.js
+    play-quiz.js
+    profile.js
+    quiz.js
+    settings.js
+    signup.js
+    thanks.js
+
+package-lock.json
+package.json
+Procfile
+readme.md
+server.js
+
+views
+    profile.ejs
+```
 
 ## Installation
 ---
