@@ -3,25 +3,17 @@
 ### Table of Contents
 ---
 * [Project Title](#project-title)
-* [Creators](#creators)
 * [Project Description](#project-description)
 * [Technologies](#technologies)
 * [List of Files](#list-of-files)
 * [Installation](#installation)
 * [Features](#features)
 * [Credits](#credits)
+* [Creators](#creators)
 
 ## Project Title
 ---
 <h3>Co-Vention</h3>
-
-## Creators
----
-1. [Alexander Liu](https://github.com/A1exander-liU)
-2. [Nicky Cheng](https://github.com/RealGoldenGeneral)
-3. [Jack Berena](https://github.com/jackberena)
-4. [Arghavan Dor](https://github.com/ArghavanDor18)
-5. [Jack Luo](https://github.com/LzhJack)
 
 ## Project Description
 ---
@@ -56,7 +48,7 @@ We used all these frameworks/libraries for our application.
     - [Figma](https://www.figma.com/ui-design-tool/)
     - [VS Code](https://code.visualstudio.com/)
     - [Postman](https://www.postman.com/)
-- Icons
+    - [WHO](https://www.who.int/emergencies/diseases/novel-coronavirus-2019)
     - [Font Awesome](https://fontawesome.com/)
     - [Line Awesome](https://icons8.com/line-awesome)
 
@@ -158,6 +150,10 @@ Code snippets used and found online or from previous assignments
 * [Slideshow](https://www.w3schools.com/howto/howto_js_slideshow.asp)
 * [Responsive Web Design](https://www.w3schools.com/css/css_rwd_intro.asp)
 
-
-## Content
-Organization of project folders and files
+## Creators
+---
+1. [Alexander Liu](https://github.com/A1exander-liU)
+2. [Nicky Cheng](https://github.com/RealGoldenGeneral)
+3. [Jack Berena](https://github.com/jackberena)
+4. [Arghavan Dor](https://github.com/ArghavanDor18)
+5. [Jack Luo](https://github.com/LzhJack)
