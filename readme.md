@@ -38,7 +38,7 @@ We used all these frameworks/libraries for our application.
     - [Joi (v.17.6.0)](https://joi.dev/)
     - [Mongoose (v.6.3.2)](https://mongoosejs.com/docs/index.html)
     - [Nodejs (v.16.14.0)](https://nodejs.org/en/)
-    - [Nodemon (v.2.0.16)](https://www.npmjs.com/package/nodemon)
+    - [Nodemon (v.2.0.16)](https://nodemon.io/)
 - Database
     - [MongoDB](https://www.mongodb.com/)
     - [MongoDB Atlas](https://www.mongodb.com/atlas/database)
