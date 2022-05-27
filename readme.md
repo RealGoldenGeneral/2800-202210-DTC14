@@ -150,7 +150,7 @@ This invite will look like this:
 3. Add a new branch by clicking on the 3 dots, then go on branch -> create branch and provide the name in the text box.
 ![Click on the git icon, then click the 3 dots. On the menu hover on branch and click create branch. Then provide the name in the text box.](./img/6.png)
 
-4. Open a new terminal and enter these codes: ```npm install```, ```npm install heroku```, ```npm install nodemon```, repeat this for all npms listed here:
+4. Open a new terminal and enter these codes: ```npm install```, ```npm install heroku```, ```npm install nodemon```, repeat this for all npms listed here with  ```npm install <package-name>```:
     - bcrypt
     - body-parser
     - cors
