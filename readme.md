@@ -49,6 +49,7 @@ We used all these frameworks/libraries for our application.
 
 ## List of files
 ---
+```
 common
     adminPanel.html
     game.html
@@ -113,6 +114,7 @@ server.js
 
 views
     profile.ejs
+```
 
 ## Installation
 ---
