@@ -30,22 +30,36 @@
 ## Technologies
 ---
 We used all these frameworks/libraries for our application.
-- [**Bcrypt (v.5.0.1)**](https://www.npmjs.com/package/bcrypt)
-- [**Body-Parser (v.1.20.0)**](https://www.npmjs.com/package/body-parser)
-- [**Cors (v.2.8.5)**](https://www.npmjs.com/package/cors)
-- [**CSS**](https://www.w3.org/Style/CSS/Overview.en.html)
-- [**Ejs (v.3.1.8)**](https://ejs.co/)
-- [**Express (v.4.18.1)**]()
-- [**Express-Session (v.1.17.3)**]()
-- [**Heroku (v.7.60.2)**](https://www.heroku.com/)
-- [**HTML**](https://html.com/)
-- [**Javascript**](https://www.javascript.com/)
-- [**Joi (v.17.6.0)**](https://joi.dev/)
-- [**jQuery (v.3.6.0)**](https://api.jquery.com/)
-- [**MongoDB**](https://www.mongodb.com/)
-- [**Mongoose (v.6.3.2)**](https://mongoosejs.com/docs/index.html)
-- [**Nodejs (v.16.14.0)**](https://nodejs.org/en/)
-- [**Nodemon (v.2.0.16)**](https://www.npmjs.com/package/nodemon)
+- Front-End
+    - [HTML](https://html.com/)
+    - [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+    - [Javascript](https://www.javascript.com/)
+    - [jQuery (v.3.5.1)](https://api.jquery.com/)
+- Back-End
+    - [Bcrypt (v.5.0.1)](https://www.npmjs.com/package/bcrypt)
+    - [Body-Parser (v.1.20.0)](https://www.npmjs.com/package/body-parser)
+    - [Cors (v.2.8.5)](https://www.npmjs.com/package/cors)
+    - [Ejs (v.3.1.8)](https://ejs.co/)
+    - [Express (v.4.18.1)](http://expressjs.com/)
+    - [Express-Session (v.1.17.3)](http://expressjs.com/en/resources/middleware/session.html)
+    - [Heroku (v.7.60.2)](https://www.heroku.com/)
+    - [Joi (v.17.6.0)](https://joi.dev/)
+    - [Mongoose (v.6.3.2)](https://mongoosejs.com/docs/index.html)
+    - [Nodejs (v.16.14.0)](https://nodejs.org/en/)
+    - [Nodemon (v.2.0.16)](https://www.npmjs.com/package/nodemon)
+- Database
+    - [MongoDB](https://www.mongodb.com/)
+    - [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+- API
+    - [NewsAPI](https://newsapi.org/)
+- Other Tools   
+    - [Figma](https://www.figma.com/ui-design-tool/)
+    - [VS Code](https://code.visualstudio.com/)
+    - [Postman](https://www.postman.com/)
+- Icons
+    - [Font Awesome](https://fontawesome.com/)
+    - [Line Awesome](https://icons8.com/line-awesome)
+
 
 ## List of files
 ---
@@ -118,6 +132,18 @@ views
 
 ## Installation
 ---
+1. npm install `<package name>`
+    - bcrypt
+    - body-parser
+    - cors
+    - ejs
+    - express
+    - express-session
+    - heroku
+    - joi
+    - mongoose
+    - nodemon
+
 
 Required tools:
 - Microsoft Visual Studio Code
