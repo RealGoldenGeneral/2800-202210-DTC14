@@ -1,14 +1,11 @@
 const date = new Date()
 
-function close_article() {
-    // current_grid_size = $("#real-news-container").css()
-    // console.log(current_grid_size)
+function closeArticle() {
     $("#full-news-article-card").remove()
-    // $("#real-news-container").css("grid-template-columns", `100%`)
     $(".news-card").show()
 }
 
-function load_selected_article(data) {
+function loadSelectedArticle(data) {
     $("#real-news-container").css("grid-template-columns", "100%")
     console.log(data)
     $(".news-card").hide()
@@ -25,12 +22,9 @@ function load_selected_article(data) {
     clone.querySelector("#full-article-content").innerHTML = full_article_content
     clone.querySelector("#full-article-link").href = full_article_link
     document.getElementById("real-news-container").appendChild(clone)
-    // $("#real-news-container").css({"display": "grid", 
-    //                                "grid-template-columns": "100%",
-    //                                })
 }
 
-function get_full_article_info() {
+function getFullArticleInfo() {
     title = $(this).find("h5").text()
     console.log(title)
     $.ajax(
@@ -40,12 +34,12 @@ function get_full_article_info() {
             "data": {
                 "title": title
             },
-            "success": load_selected_article,
+            "success": loadSelectedArticle,
         }
     )
 }
 
-function load_news_cards(data) {
+function loadNewsCards(data) {
     // defining a template
     console.log(data)
     template = document.getElementById("news-article");
@@ -60,48 +54,48 @@ function load_news_cards(data) {
     }
 }
 
-function get_news_data() {
+function getNewsData() {
     $.ajax(
         {
             "url": `/get_news_articles`,
             "type": "GET",
-            "success": load_news_cards
+            "success": loadNewsCards
         }
     )
 }
 
-function confirm_article_insertion(data) {
+function confirmArticleInsertion(data) {
     console.log(data)
 }
 
-function confirm_days_update(data) {
+function confirmDaysUpdate(data) {
     console.log(data)
 }
 
-function update_days_in_collection(days_difference) {
+function updateDaysCollection(daysDifference) {
     $.ajax(
         {
             "url": `/updateDaysCollection`,
             "type": "POST",
-            "success": confirm_days_update,
+            "success": confirmDaysUpdate,
             "data": {
-                "days_difference": days_difference
+                "days_difference": daysDifference
             }
         }
     )
 }
 
-function process_news_response(data) {
+function processNewsResponse(data) {
     for (i = 0; i < data.articles.length; i++) {
         console.log(data.articles[i])
-        news_title = data.articles[i].title
+        newsTitle = data.articles[i].title
         $.ajax(
             {
                 "url": `/get_news_articles`,
                 "type": "GET",
                 "success": function(data) {
                      duplicates = data.filter(function(article) {
-                         if (article.title == news_title) {
+                         if (article.title == newsTitle) {
                             return article   
                          }
                      })
@@ -117,7 +111,7 @@ function process_news_response(data) {
                                     "description": data.articles[i].description,
                                     "content": data.articles[i].content
                                 },
-                                "success": confirm_article_insertion 
+                                "success": confirmArticleInsertion
                             }
                         )
                      }
@@ -127,7 +121,7 @@ function process_news_response(data) {
     }
 }
 
-function get_daily_news() {
+function getDailyNews() {
     year = date.getFullYear()
     month = date.getMonth() + 1
     day = date.getDate()
@@ -141,27 +135,27 @@ function get_daily_news() {
         {
             "url": `https://newsapi.org/v2/everything?q=covid&from=${year}-${month}-${day}&to=2022-05-10&sortBy=relevancy&searchIn=title&apiKey=739c4c9ed94b4c0a9075ff4924b682b3`,
             "type": "GET",
-            "success": process_news_response,
+            "success": processNewsResponse,
         }
     )
 }
 
-function determine_daily_update(data) {
+function determineDailyUpdate(data) {
     console.log(data[0])
-    current_days = Math.floor(date.getTime() / 86400000)
+    currentDays = Math.floor(date.getTime() / 86400000)
     console.log("exact days", date.getTime() / 86400000)
-    console.log("Current total days", current_days)
-    if (current_days > data[0].days_since_1970) {
-        days_difference = current_days - data[0].days_since_1970
-        get_daily_news()
-        update_days_in_collection(days_difference)
-    }else {
+    console.log("Current total days", currentDays)
+    if (currentDays > data[0].days_since_1970) {
+        daysDifference = currentDays - data[0].days_since_1970
+        getDailyNews()
+        update_days_in_collection(daysDifference)
+    }
+    else {
         console.log("24 hours have not passed yet")
-
     }
 }
 
-async function determine_new_day() {
+async function determineNewDay() {
     // how to determine if a day has passed 
     // store the current amount of days in db so it can always be referenced
     // send get request to retrieve the days back
@@ -170,23 +164,23 @@ async function determine_new_day() {
     // if it is bigger send a put or post back to update the value with the new value
     // at the same time also send a get request to the news api to get back the covid news
     // else if the days was not greater than the one in the db, don't do anything
-    milliseconds_per_day = 86400000
-    current_time = date.getTime() / milliseconds_per_day
+    millisecondsPerDay = 86400000
+    current_time = date.getTime() / millisecondsPerDay
     $.ajax(
         {
             "url": `/day`,
             "type": "GET",
-            "success": determine_daily_update
+            "success": determineDailyUpdate
         }
     )
 
 }
 
 function setup() {
-    determine_new_day()
-    get_news_data()
-    $("body").on("click", ".news-card", get_full_article_info)
-    $("body").on("click", ".article-close", close_article)
+    determineNewDay()
+    getNewsData()
+    $("body").on("click", ".news-card", getFullArticleInfo)
+    $("body").on("click", ".article-close", closeArticle)
 }
 
 $(document).ready(setup)
