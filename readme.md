@@ -180,19 +180,19 @@ This invite will look like this:
 To use the features, go to [co-vention.herokuapp.com](https://co-vention.herokuapp.com) and create a new account in the login page.
 
 #### Game Page
-![Game Feature](/gifs/gameFeature.gif)
+![Game Feature](/gifs/gameFeature.gif)<br>
 The game page holds the game that we have for our application. The game is controlled by moving the mouse and clicking. Clicking on the screen will fire a projectile outwards from the syringe. The goal of the game is to destroy as many bacteria as possible before they get to the planet. Once they get to the planet, the game is over. Your score is the amount of bacteria destroyed.
 
 #### Quiz Page
-![Quiz Feature](/gifs/quizFeature.gif)
+![Quiz Feature](/gifs/quizFeature.gif)<br>
 The quiz page hold the quiz. The quiz is a multiple choice question quiz that is based on COVID-19 information and safety. One point will be given when the question is correct. At the end, the answers you got wrong a reviewable.
 
 #### Admin Panel
-![Admin Feature](/gifs/adminFeature.gif)
+![Admin Feature](/gifs/adminFeature.gif)<br>
 For admins only. The panel allows you access admin data and modify/delete user data. You can also see all scores and all users in the different pages. The dashboard only shows the 6 most recent quiz scores and the 3 most recent game scores. It also allows you to see the 3 most recent accounts.
 
 #### News Page
-![News Feature](/gifs/newsFeature.gif)
+![News Feature](/gifs/newsFeature.gif)<br>
 Fetches the news from News API. The news are filtered for covid specific new using a filter. Clicking a news article leads to a preview of the article which will eventually lead to the real article.
 
 ### Credits
