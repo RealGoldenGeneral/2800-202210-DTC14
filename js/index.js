@@ -5,7 +5,7 @@ function redirect_to_settings() {
 }
 
 function redirect_to_signup() {
-    location.href = "/signup"
+    location.href = "/signUp"
 }
 
 function show_full_menu() {
@@ -85,18 +85,14 @@ function sign_out_user() {
     )
 }
 
-function hide_error_message() {
-    $("#incorrect-login").hide()
-}
-
 function process_response(data) {
-    $("#incorrect-login").hide()
     console.log(data)
-    if (data != "incorrect information") {
+    if (data == "success") {
         location.href = "/welcome"
+    } else if (data == "admin detected") {
+        location.href = "/adminPanel"
     } else {
-        $("#incorrect-login").show()
-        setTimeout(hide_error_message, 3000)
+        $("#incorrect-login").text(data)
     }
 }
 
@@ -115,10 +111,9 @@ function welcome_the_user() {
     )
 }
 
-function listenToClick() {
+function setup() {
     welcome_the_user()
     $("#sign_out").click(sign_out_user)
-    $("#incorrect-login").hide()
     console.log("loaded")
     $("body").on("click", ".news-card", show_click_effect)
     $(".navbar-item").click(redirect_to_page)
@@ -130,7 +125,7 @@ function listenToClick() {
             type: "POST",
             url: "/login",
             data: {
-                name: $("#username").val(),
+                username: $("#username").val(),
                 password: $("#password").val()
             },
             success: process_response
@@ -141,4 +136,4 @@ function listenToClick() {
 }
 
 $("#full_menu").hide()
-$(document).ready(listenToClick)
+$(document).ready(setup)

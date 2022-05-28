@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./img/covention_icon.ico">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/news.css">
-    <title>Co-Vention</title>
     <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/quiz.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <title>Quiz</title>
 </head>
 
 <body>
@@ -16,7 +19,7 @@
                 <i class="fa-solid fa-arrow-left back-button"></i>
             </div>
             <div>
-                <h2>Latest News</h2>
+                <h2>Quizzes</h2>
             </div>
             <div>
                 <i class="fa-solid fa-bars profile-icon"></i>
@@ -34,55 +37,36 @@
                 </div>
             </div>
         </div>
-        <div class="news-container">
-            <div id="real-news-container">
-                <template id="news-article">
-                    <div class="news-card">
-                        <img src="" width="150px" height="100px" id="news-image">
-                        <h5 id="news-title">Title</h5>
-                    </div>
-                </template>
-                <template id="full-news-article">
-                    <div id="full-news-article-card">
-                        <i class="fa-solid fa-xmark article-close"></i>
-                        <h3 id="full-article-title"></h3>
-                        <img src="" id="full-article-image">
-                        <h5 id="full-article-desc"></h5>
-                        <p id="full-article-content"></p>
-                        <a href="" id="full-article-link">Read more on this article</a>
-                    </div>
-                </template>
+        <div class="quiz_container">
+            <div class="play_quiz_container">
+                <div class="play_quiz_question">
+                    <p></p>
+                </div>
+                <div class="play_quiz_answer_container">
+                </div>
             </div>
         </div>
         <div class="navbar">
-
             <div class="navbar-item" id="home-tab">
                 <i class="fa-solid fa-house"></i>
                 <p>Home</p>
             </div>
-
             <div class="navbar-item" id="news-tab">
                 <i class="fa-solid fa-newspaper"></i>
                 <p>News</p>
             </div>
-
-
             <div class="navbar-item" id="scores-tab">
                 <i class="fa-solid fa-trophy"></i>
-                <p>Scores</p>
+                <p>Scoreboard</p>
             </div>
-
-
             <div class="navbar-item" id="profile-tab">
                 <i class="fa-solid fa-user"></i>
                 <p>Profile</p>
             </div>
         </div>
     </main>
-    <!-- <img src="./img/covention_logov2.png" id="home_img"> -->
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./js/index.js"></script>
-<script src="./js/news.js"></script>
-
+<script src="../js/index.js"></script>
+<script src="../js/playQuiz.js"></script>
 </html>

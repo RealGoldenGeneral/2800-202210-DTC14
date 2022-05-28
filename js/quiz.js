@@ -1,4 +1,4 @@
-function move_to_quiz_screen() {
+function moveToQuizScreen() {
     location.href = `/startQuiz`
 }
 
@@ -8,9 +8,9 @@ function move_to_quiz_screen() {
 // Code was divided into two functions, one for clicking previous and one for clicking next
 
 // defaulting current slide to 0, which is start of array
-current_slide = 0
+currentSlide = 0
 
-function show_prev_quiz_info() {
+function showPrevQuizInfo() {
     // hide all intitally
     $(".quiz_score_info").hide()
     // removeClass and addClass for css animations
@@ -19,19 +19,19 @@ function show_prev_quiz_info() {
     // gets array of child elemenents of class quiz_info_slideshow_container who have class, quiz_score_info
     slides = $(".quiz_info_slideshow_container").children(".quiz_score_info")
     // to make sure you don't go to index, -1 and below
-    if (current_slide <= 0) {
-        current_slide = slides.length - 1
+    if (currentSlide <= 0) {
+        currentSlide = slides.length - 1
         // display HTML of the child at index X of the array
-        $(slides[current_slide]).show()
+        $(slides[currentSlide]).show()
     }
     else {
         // subtract indexing value since it is previous 
-        current_slide -= 1
-        $(slides[current_slide]).show()
+        currentSlide -= 1
+        $(slides[currentSlide]).show()
     }
 }
 
-function show_next_quiz_info() {
+function showNextQuizInfo() {
     slides = $(".quiz_info_slideshow_container").children(".quiz_score_info")
     console.log($(".quiz_info_slideshow_container").children(".quiz_score_info"))
     console.log(slides[0])
@@ -40,71 +40,69 @@ function show_next_quiz_info() {
     $(".quiz_score_info").removeClass("slide_left")
     $(".quiz_score_info").addClass("slide_right")
     // to make sure you don't go above max index of the array
-    if (current_slide >= (slides.length - 1)) {
+    if (currentSlide >= (slides.length - 1)) {
         // return to first slide if press next at last slide
-        current_slide = 0
+        currentSlide = 0
         console.log("at highest slide")
-        $(slides[current_slide]).show()
+        $(slides[currentSlide]).show()
     }
     else {
         // add 1 to indexing value since it is next
-        current_slide += 1
-        $(slides[current_slide]).show()
+        currentSlide += 1
+        $(slides[currentSlide]).show()
     }
 }
 ////
 
-function covid_safety_quiz_scores(quiz) {
+function covidSafetyQuizScores(quiz) {
     if (quiz.category == "covid_safety") {
         return quiz
     }
 }
 
-function covid_info_quiz_scores(quiz) {
+function covidInfoQuizScores(quiz) {
     if (quiz.category == "covid_information") {
         return quiz
     }
 }
 
-function load_high_and_previous_scores(data) {
+function loadHighScores(data) {
     console.log(data)
-    quiz_scores = data[0].quiz_scores
-    console.log(quiz_scores)
-    covid_safety = quiz_scores.filter(covid_safety_quiz_scores) 
-    covid_info = quiz_scores.filter(covid_info_quiz_scores)
-    console.log(covid_safety, covid_info)
-    $("#covid_safety .quiz_high_score").text(covid_safety[0].high_score)
-    $("#covid_safety .quiz_prev_score").text(covid_safety[0].previous_score)
-    $("#covid_virus .quiz_high_score").text(covid_info[0].high_score)
-    $("#covid_virus .quiz_prev_score").text(covid_info[0].previous_score)
+    quizScores = data[0].quiz_scores
+    console.log(quizScores)
+    covidSafety = quizScores.filter(covidSafetyQuizScores) 
+    covidInfo = quizScores.filter(covidInfoQuizScores)
+    console.log(covidSafety, covidInfo)
+    $("#covid_safety .quiz_high_score").text(covidSafety[0].high_score)
+    $("#covid_virus .quiz_high_score").text(covidInfo[0].high_score)
 }
 
-function grab_high_and_previous_score() {
+function grabHighScore() {
     $.ajax(
         {
             "url": "/getQuizScores",
             "type": "GET",
-            "success": load_high_and_previous_scores
+            "success": loadHighScores
         }
     )
 }
 
-function reformat_title(data) {
+function reformatTitle(data) {
     console.log(data)
-    split_category_title = data[0].category.split("_")
-    console.log(split_category_title)
-    for (i = 0; i < split_category_title.length; i++) {
-        split_category_title[i] = split_category_title[i].slice(0, 1).toUpperCase() + split_category_title[i].slice(1)
+    categoryTitle = data[0].category.split("_")
+    console.log(categoryTitle)
+    for (i = 0; i < categoryTitle.length; i++) {
+        categoryTitle[i] = categoryTitle[i].slice(0, 1).toUpperCase() + categoryTitle[i].slice(1)
     }
-    $(".quiz_start_container .quiz_category").text(split_category_title.join(" "))
+    $(".quiz_start_container .quiz_category").text(categoryTitle.join(" "))
 }
 
-function change_quiz_category_title() {
+function changeQuizCategoryTitle() {
     $.ajax(
         {
             "url": "/getUserInfo",
             "type": "GET",
-            "success": reformat_title
+            "success": reformatTitle
         }
     )
 }
@@ -113,11 +111,11 @@ function setup() {
     // hiding and showing defaulted quiz info section
     $(".quiz_score_info").hide()
     $("#covid_safety").show()
-    grab_high_and_previous_score()
-    change_quiz_category_title()
-    $(".next").click(show_next_quiz_info)
-    $(".prev").click(show_prev_quiz_info)
-    $(".quiz_start_button").click(move_to_quiz_screen)
+    grabHighScore()
+    changeQuizCategoryTitle()
+    $(".next").click(showNextQuizInfo)
+    $(".prev").click(showPrevQuizInfo)
+    $(".quiz_start_button").click(moveToQuizScreen)
 }
 
 $(document).ready(setup)

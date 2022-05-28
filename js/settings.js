@@ -1,11 +1,19 @@
+function processResponse() {
+    alert("Successfully updated information.")
+    location.reload()
+}
+
 function changeCategory(category){
-    $.ajax({
-        type: "post",
-        data: {
-            category: category
-        },
-        url: "/changeQuizCategory"
-    })
+    if (category == "covid_safety" || category == "covid_information") {
+        $.ajax({
+            type: "post",
+            data: {
+                category: category
+            },
+            url: "/changeQuizCategory",
+            success: processResponse
+        })
+    }
 }
 
 function registerNewPhoneNumber(newPhoneNumber) {
@@ -13,8 +21,9 @@ function registerNewPhoneNumber(newPhoneNumber) {
         type: "post",
         data: {
             phone: newPhoneNumber
-        },
-        url: '/changePhoneNumber'
+        }, 
+        url: '/changePhoneNumber',
+        success: processResponse
     })
 }
 
@@ -24,7 +33,8 @@ function registerNewEmail(newEmail) {
         data: {
             email: newEmail
         },
-        url: '/changeEmail'
+        url: '/changeEmail',
+        success: processResponse
     })
 }
 
@@ -35,7 +45,8 @@ function registerNewPassword(newPassword) {
         data: {
             password: newPassword
         },
-        url: '/changePassword'
+        url: '/changePassword',
+        success: processResponse
     })
 }
 
@@ -45,10 +56,10 @@ function registerNewUsername(newUsername) {
         data: {
             username: newUsername
         },
-        url: '/changeUsername'
+        url: '/changeUsername',
+        success: processResponse
     })
 }
-
 
 function setup() {
     $("#usernameSubmit").click(() => {
@@ -87,6 +98,5 @@ function setup() {
         changeCategory($("#categories").val())
     })
 }
-
 
 $(document).ready(setup)

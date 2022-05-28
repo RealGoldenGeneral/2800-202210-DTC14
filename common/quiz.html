@@ -3,11 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./img/covention_icon.ico">
     <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/quiz.css">
-    <link rel="stylesheet" href="../css/index.css">
-    <title>Co-Vention</title>
+    <link rel="stylesheet" href="./css/quiz.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <title>Quiz Home</title>
 </head>
 
 <body>
@@ -36,13 +38,29 @@
             </div>
         </div>
         <div class="quiz_container">
-            <div class="play_quiz_container">
-                <div class="play_quiz_question">
-                    <p></p>
+                <div class="quiz_start_container">
+                    <span>What's the current quiz? <span class="quiz_category">Covid Safety</span>!</span>
+                    <button class="quiz_start_button">
+                        <p>
+                            START
+                        </p>
+                    </button>
+                    <div class="quiz_info_slideshow_container">
+                        <a class="prev"><i class="fa-solid fa-angle-left"></i></a>
+                        <div class="quiz_score_info slide_right" id="covid_safety">
+                            <!-- Placeholder score -->
+                            <h4>Covid Safety</h4>
+                            <p>Highest Score <i class="fa-solid fa-trophy"></i></p>
+                            <p class="quiz_high_score">100P</p>
+                        </div>
+                        <div class="quiz_score_info slide_right" id="covid_virus">
+                            <h4>Covid Information</h4>
+                            <p>Highest Score <i class="fa-solid fa-trophy"></i></p>        
+                            <p class="quiz_high_score">200P</p>
+                        </div>
+                        <a class="next"><i class="fa-solid fa-angle-right"></i></a>
+                    </div>
                 </div>
-                <div class="play_quiz_answer_container">
-                </div>
-            </div>
         </div>
         <div class="navbar">
             <div class="navbar-item" id="home-tab">
@@ -66,5 +84,5 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="../js/index.js"></script>
-<script src="../js/play-quiz.js"></script>
+<script src="../js/quiz.js"></script>
 </html>

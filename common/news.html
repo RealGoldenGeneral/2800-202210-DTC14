@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
     <link rel="icon" type="image/x-icon" href="./img/covention_icon.ico">
-    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/news.css">
+    <title>News</title>
+    <script src="https://kit.fontawesome.com/eb31ef5eb4.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <main>
         <div class="title">
             <div>
+                
             </div>
             <div>
-                <h2>Welcome <span class="logged_in_username">User</span></h2>
+                <h2>Latest News</h2>
             </div>
             <div>
                 <i class="fa-solid fa-bars profile-icon"></i>
@@ -36,18 +36,26 @@
                 </div>
             </div>
         </div>
-        <div style="background-color: rgb(221, 221, 221); height:100%; border-radius: 50px 50px 0 0;">
-            <div style="width:100%">
-                <br>
-                <br>
-                <br>
-                <br>
-                <button class="button-item" id="button1" >GAMES</button>
-                <br>
-                <br>
-                <br>
-                <br>
-                <button class="button-item" id="button2">QUIZ</button>
+        <div class="news-container">
+            <div id="real-news-container">
+                <template id="news-article">
+                    <div class="news-card">
+                        <img src="" width="150px" height="100px" id="news-image">
+                        <h5 id="news-title">Title</h5>
+                    </div>
+                </template>
+                <template id="full-news-article">
+                    <div class="outer-container">
+                        <div id="full-news-article-card">
+                            <i class="fa-solid fa-xmark article-close"></i>
+                            <h3 id="full-article-title"></h3>
+                            <img src="" id="full-article-image">
+                            <h5 id="full-article-desc"></h5>
+                            <p id="full-article-content"></p>
+                            <a href="" id="full-article-link">Read more on this article</a>
+                        </div>
+                    </div>
+                </template>
             </div>
         </div>
         <div class="navbar">
@@ -75,8 +83,10 @@
             </div>
         </div>
     </main>
+    <!-- <img src="./img/covention_logov2.png" id="home_img"> -->
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./js/index.js"></script>
-<!-- <script src="./news.js"></script> -->
+<script src="./js/news.js"></script>
+
 </html>

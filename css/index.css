@@ -16,8 +16,6 @@ body{
   min-height:100vh;
   background:linear-gradient(-50deg,#2c6d52,#8dc1ac);
   font-size: 100%;
-  /* background-color: #8dc1ac; */
-  /* background:linear-gradient(-45deg,#d7eee4,#449372); */
 }
 
 .box{
@@ -121,9 +119,18 @@ body{
 .input-field:placeholder{
   color:#303030;
 }
+
+.button-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 .btn{
+  
   width:70%;
-  height:40px;
+  height: 40px;
   background-color:#449372;
   color:#fff;
   letter-spacing: 1px;
@@ -131,8 +138,7 @@ body{
   border-radius: 5px;
   display: block;
   text-align: center;
-  margin-left: 11%;
-  margin-top: 2%;
+  align-items: center;
 
 
 }
@@ -364,9 +370,11 @@ from regular navbar background colour */
 }
 /*  */
 
-#button1 {
+#button3 {
   display: inline-block;
   padding: 15px 25px;
+  width: 70%;
+  height: 30%;
   font-size: 24px;
   cursor: pointer;
   text-align: center;
@@ -380,9 +388,9 @@ from regular navbar background colour */
   margin:auto;
 }
 
-#button1:hover {background-color: #42A0E9}
+#button3:hover {background-color: #42A0E9}
 
-#button1:active {
+#button3:active {
   background-color: #1173BF;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
@@ -390,7 +398,8 @@ from regular navbar background colour */
 
 #button2 {
   display: inline-block;
-  padding: 15px 25px;
+  width: 70%;
+  height: 30%;
   font-size: 24px;
   cursor: pointer;
   text-align: center;
@@ -402,7 +411,6 @@ from regular navbar background colour */
   border-radius: 15px;
   box-shadow: 0 9px #999;
   margin:auto;
-  width:131.38px;
 }
 
 #button2:hover {background-color: #9BB291}
